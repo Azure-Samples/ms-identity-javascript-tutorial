@@ -23,19 +23,21 @@ Summary
 
 ## Contents
 
-| Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
-|----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | pkce-grant | N/A      |
-| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | AnyOrg     | pkce-grant | N/A      |
-| `Authentication`     | [ms-identity-b2c-javascript-signin]() | JavaScript | B2C      | pkce-grant | N/A      |
-| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | MyOrg    | implicit-grant | N/A |
-| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | AnyOrg   | implicit-grant | N/A |
-| `Authentication`     | [ms-identity-b2c-javascript-angular-signin]() | Angular | B2C    | implicit-grant | N/A |
-| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | MyOrg    | auth-code-grant | N/A  |
-| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | AnyOrg   | auth-code-grant | N/A  |
-| `Authentication`     | [ms-identity-b2c-javascript-nodejs-signin]() | NodeJS | B2C    | auth-code-grant | N/A  |
+### Chapter I: Authentication
 
----
+| Chapter              | Sample                            | Platform     | Audience   | Using     |
+|----------------------|-----------------------------------|--------------|------------|-----------|
+| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | pkce-grant |
+| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | AnyOrg     | pkce-grant |
+| `Authentication`     | [ms-identity-b2c-javascript-signin]() | JavaScript | B2C      | pkce-grant |
+| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | MyOrg    | implicit-grant |
+| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | AnyOrg   | implicit-grant |
+| `Authentication`     | [ms-identity-b2c-javascript-angular-signin]() | Angular | B2C    | implicit-grant |
+| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | MyOrg    | auth-code-grant |
+| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | AnyOrg   | auth-code-grant |
+| `Authentication`     | [ms-identity-b2c-javascript-nodejs-signin]() | NodeJS | B2C    | auth-code-grant |
+
+### Chapter II: Scopes & Resources I
 
 | Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
 |----------------------|-----------------------------------|--------------|------------|-----------|----------|
@@ -52,7 +54,7 @@ Summary
 | `Scopes & Resources I` | [ms-identity-b2c-javascript-nodejs-graphapi]() | NodeJS | B2C  | auth-code-grant | MS Graph API |
 | `Scopes & Resources I` | [ms-identity-javascript-nodejs-armapi]() | NodeJS | AnyOrg  | auth-code-grant | ARM Rest API |
 
----
+### Chapter III: Scopes & Resources II
 
 | Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
 |----------------------|-----------------------------------|--------------|------------|-----------|----------|
@@ -63,34 +65,34 @@ Summary
 | `Scopes & Resources II` | [ms-identity-javascript-angular-nodejs-webapi]() | Angular & NodeJS | AnyOrg | implicit-grant  | Custom Web API |
 | `Scopes & Resources II` | [ms-identity-b2c-javascript-angular-nodejs-webapi]() | Angular & NodeJS | B2C | implicit-grant  | Custom Web API |
 
----
+### Chapter IV: Advanced Grants
 
 | Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
 |----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Advanced Grants` | [ms-identity-javascript-nodejs-webapi-obo]() | JavaScript & NodeJS | AnyOrg | obo-grant  | Custom Web API -> MS Graph API |
-| `Advanced Grants` | [ms-identity-javascript-angular-nodejs-webapi-obo]() | Angular & NodeJS | MyOrg | obo-grant  | Custom Web API -> MS Graph API |
+| `Advanced Grants` | [ms-identity-javascript-nodejs-webapi-obo]() | JavaScript & NodeJS | AnyOrg | obo-grant  | Custom Web API <> MS Graph API |
+| `Advanced Grants` | [ms-identity-javascript-angular-nodejs-webapi-obo]() | Angular & NodeJS | MyOrg | obo-grant  | Custom Web API <> MS Graph API |
 | `Advanced Grants` | [ms-identity-javascript-nodejs-webapp-cc]() | NodeJS | MyOrg | client-credentials-grant  | MS Graph API |
 | `Advanced Grants` | [ms-identity-javascript-nodejs-deamon-cc]() | NodeJS | MyOrg | client-credentials-grant   | MS Graph API |
 | `Advanced Grants` | [ms-identity-javascript-nodejs-deamon-device]() | NodeJS | MyOrg | device-code-grant   | MS Graph API |
 
----
+### Chapter V: Authorization
 
-| Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
-|----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Authorization`      | [ms-identity-javascript-security-groups]() | JavaScript | MyOrg | pkce-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-security-groups]() | JavaScript | AnyOrg | pkce-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-app-roles]() | JavaScript | MyOrg | pkce-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-app-roles]() | JavaScript | AnyOrg | pkce-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-angular-security-groups]() | Angular | MyOrg | implicit-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-angular-security-groups]() | Angular | AnyOrg | implicit-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-angular-app-roles]() | Angular | MyOrg | implicit-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-angular-app-roles]() | Angular | AnyOrg | implicit-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-nodejs-security-groups]() | Angular | MyOrg | implicit-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-nodejs-security-groups]() | Angular | MyOrg | implicit-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-nodejs-app-roles]() | NodeJS | MyOrg | auth-code-grant  | N/A  |
-| `Authorization`      | [ms-identity-javascript-nodejs-app-roles]() | NodeJS | AnyOrg | auth-code-grant  | N/A  |
+| Chapter              | Sample                            | Platform     | Audience   | Using     |
+|----------------------|-----------------------------------|--------------|------------|-----------|
+| `Authorization`      | [ms-identity-javascript-security-groups]() | JavaScript | MyOrg | pkce-grant  |
+| `Authorization`      | [ms-identity-javascript-security-groups]() | JavaScript | AnyOrg | pkce-grant  |
+| `Authorization`      | [ms-identity-javascript-app-roles]() | JavaScript | MyOrg | pkce-grant  |
+| `Authorization`      | [ms-identity-javascript-app-roles]() | JavaScript | AnyOrg | pkce-grant  |
+| `Authorization`      | [ms-identity-javascript-angular-security-groups]() | Angular | MyOrg | implicit-grant  |
+| `Authorization`      | [ms-identity-javascript-angular-security-groups]() | Angular | AnyOrg | implicit-grant  |
+| `Authorization`      | [ms-identity-javascript-angular-app-roles]() | Angular | MyOrg | implicit-grant  |
+| `Authorization`      | [ms-identity-javascript-angular-app-roles]() | Angular | AnyOrg | implicit-grant  |
+| `Authorization`      | [ms-identity-javascript-nodejs-security-groups]() | Angular | MyOrg | implicit-grant  |
+| `Authorization`      | [ms-identity-javascript-nodejs-security-groups]() | Angular | MyOrg | implicit-grant  |
+| `Authorization`      | [ms-identity-javascript-nodejs-app-roles]() | NodeJS | MyOrg | auth-code-grant  |
+| `Authorization`      | [ms-identity-javascript-nodejs-app-roles]() | NodeJS | AnyOrg | auth-code-grant  |
 
----
+### Chapter VI: Deployment
 
 | Chapter              | Sample                            | Platform     | Audience   | Using     | Service  |
 |----------------------|-----------------------------------|--------------|------------|-----------|----------|
@@ -99,7 +101,7 @@ Summary
 | `Deployment`         | [ms-identity-javascript-nodejs-webapp-deployment]() | NodeJS | AnyOrg | auth-code-grant  | Azure App Services  |
 | `Deployment`         | [ms-identity-javascript-nodejs-webapi-deployment]() | NodeJS | AnyOrg | auth-code-grant  | Azure App Services  |
 
----
+### Chapter VII: Migration
 
 | Chapter              | Sample                            | Platform     | Audience   | Using     |
 |----------------------|-----------------------------------|--------------|------------|-----------|
