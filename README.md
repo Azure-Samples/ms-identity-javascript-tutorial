@@ -13,137 +13,147 @@ products:
 - azure-active-directory-b2c
 - azure-app-services
 - azure-storage
-description: "Microsoft Identity Platform & Microsoft Authentication Library for JavaScript Incremental Tutorial"
+description: "Microsoft Identity Platform & Microsoft Authentication Library for JavaScript Tutorial"
 urlFragment: "ms-identity-javascript-incremental-tutorial"
 ---
 
-# Microsoft Identity Platform & Microsoft Authentication Library for JavaScript Incremental Tutorial
+# Microsoft Identity Platform & Microsoft Authentication Library for JavaScript Tutorial
 
-Summary
+## Overview
 
-NOTE: Azure functions
+Identity is central to modern web applications. [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory Azure AD](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) and [Azure Azure Active Directory Business to Consumers (Azure AD B2C)](https://docs.microsoft.com/azure/active-directory-b2c/overview) are central to **Azure** cloud ecosystem, underlying all interactions between applications that are using various **Azure** services and services of other providers. This tutorial aims to take you through the fundamentals of modern authentication with JavaScript, using the [Microsoft Authentication Library for JavaScript (MSAL.js)](https://github.com/AzureAD/microsoft-authentication-library-for-js). We recommend following the chapters in successive fashion, in your platform of choice (**Vanilla JavaScript**, **Angular**, **React** (*coming soon*)) but code samples are self contained so feel free to pick samples by topics that you may need at the moment.
 
-NOTE: Legend // types of each category
-
-NOTE: Database, MongoDb, Azure
-
-## Contents
-
-### Chapter I: Authentication
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     |
-|----------------------|-----------------------------------|--------------|------------|-----------|
-| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | pkce-grant | <!-- code -->
-| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | AnyOrg     | pkce-grant | <!-- docs -->
-| `Authentication`     | [ms-identity-javascript-signin]() | JavaScript   | MSA     | pkce-grant | <!-- docs -->
-| `Authentication`     | [ms-identity-b2c-javascript-signin]() | JavaScript | B2C      | pkce-grant | <!-- code -->
-| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | MyOrg    | implicit-grant | <!-- code -->
-| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | AnyOrg   | implicit-grant | <!-- docs -->
-| `Authentication`     | [ms-identity-javascript-angular-signin]() | Angular   | MSA   | implicit-grant | <!-- docs -->
-| `Authentication`     | [ms-identity-b2c-javascript-angular-signin]() | Angular | B2C    | implicit-grant | <!-- code -->
-| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | MyOrg    | auth-code-grant | <!-- code -->
-| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | AnyOrg   | auth-code-grant | <!-- docs -->
-| `Authentication`     | [ms-identity-javascript-nodejs-signin]() | NodeJS   | MSA   | auth-code-grant | <!-- docs -->
-| `Authentication`     | [ms-identity-b2c-javascript-nodejs-signin]() | NodeJS | B2C    | auth-code-grant | <!-- doc -->
-
-### Chapter II: Scopes & Resources I
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
-|----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Scopes & Resources I` | [ms-identity-javascript-graphapi]() | JavaScript | MyOrg  | pkce-grant | MS Graph API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-graphapi]() | JavaScript | AnyOrg  | pkce-grant | MS Graph API | <!-- docs -->
-| `Scopes & Resources I` | [ms-identity-b2c-javascript-graphapi]() | JavaScript | B2C  | pkce-grant | MS Graph API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-b2c-javascript-armapi]() | JavaScript | AnyOrg  | pkce-grant | ARM Rest API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-angular-graphapi]() | Angular | MyOrg  | implicit-grant | MS Graph API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-angular-graphapi]() | Angular | AnyOrg  | implicit-grant | MS Graph API | <!-- docs -->
-| `Scopes & Resources I` | [ms-identity-b2c-javascript-angular-graphapi]() | Angular | B2C  | implicit-grant | MS Graph API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-angular-armapi]() | Angular | AnyOrg  | implicit-grant | ARM Rest API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-nodejs-graphapi]() | NodeJS | MyOrg  | auth-code-grant | MS Graph API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-nodejs-graphapi]() | NodeJS | AnyOrg  | auth-code-grant | MS Graph API | <!-- docs -->
-| `Scopes & Resources I` | [ms-identity-b2c-javascript-nodejs-graphapi]() | NodeJS | B2C  | auth-code-grant | MS Graph API | <!-- code -->
-| `Scopes & Resources I` | [ms-identity-javascript-nodejs-armapi]() | NodeJS | AnyOrg  | auth-code-grant | ARM Rest API | <!-- code -->
-
-### Chapter III: Scopes & Resources II
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
-|----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Scopes & Resources II` | [ms-identity-javascript-nodejs-webapi]() | JavaScript & NodeJS | MyOrg | pkce-grant | Custom Web API | <!-- code -->
-| `Scopes & Resources II` | [ms-identity-javascript-nodejs-webapi]() | JavaScript & NodeJS | AnyOrg | pkce-grant | Custom Web API | <!-- docs -->
-| `Scopes & Resources II` | [ms-identity-b2c-javascript-nodejs-webapi]() | JavaScript & NodeJS | B2C | pkce-grant | Custom Web API | <!-- code -->
-| `Scopes & Resources II` | [ms-identity-javascript-angular-nodejs-webapi]() | Angular & NodeJS | MyOrg | implicit-grant | Custom Web API | <!-- code -->
-| `Scopes & Resources II` | [ms-identity-javascript-angular-nodejs-webapi]() | Angular & NodeJS | AnyOrg | implicit-grant | Custom Web API | <!-- docs -->
-| `Scopes & Resources II` | [ms-identity-b2c-javascript-angular-nodejs-webapi]() | Angular & NodeJS | B2C | implicit-grant | Custom Web API | <!-- code -->
-
-### Chapter IV: Advanced Grants
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     | Calling  |
-|----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Advanced Grants` | [ms-identity-javascript-nodejs-webapi-obo]() | JavaScript & NodeJS | AnyOrg | obo-grant  | Custom Web API <> MS Graph API | <!-- code -->
-| `Advanced Grants` | [ms-identity-javascript-angular-nodejs-webapi-obo]() | Angular & NodeJS | MyOrg | obo-grant  | Custom Web API <> MS Graph API | <!-- code -->
-| `Advanced Grants` | [ms-identity-javascript-nodejs-webapp-cc]() | NodeJS | MyOrg | client-credentials-grant  | MS Graph API | <!-- code -->
-| `Advanced Grants` | [ms-identity-javascript-nodejs-deamon-cc]() | NodeJS | MyOrg | client-credentials-grant   | MS Graph API | <!-- code -->
-| `Advanced Grants` | [ms-identity-javascript-nodejs-deamon-device]() | NodeJS | AnyOrg | device-code-grant   | MS Graph API | <!-- code -->
-
-### Chapter V: Authorization
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     |
-|----------------------|-----------------------------------|--------------|------------|-----------|
-| `Authorization`      | [ms-identity-javascript-security-groups]() | JavaScript | MyOrg | pkce-grant  | <!-- code -->
-| `Authorization`      | [ms-identity-javascript-security-groups]() | JavaScript | AnyOrg | pkce-grant  | <!-- docs -->
-| `Authorization`      | [ms-identity-javascript-app-roles]() | JavaScript | MyOrg | pkce-grant  | <!-- code -->
-| `Authorization`      | [ms-identity-javascript-app-roles]() | JavaScript | AnyOrg | pkce-grant  | <!-- docs -->
-| `Authorization`      | [ms-identity-javascript-angular-security-groups]() | Angular | MyOrg | implicit-grant  | <!-- code -->
-| `Authorization`      | [ms-identity-javascript-angular-security-groups]() | Angular | AnyOrg | implicit-grant  | <!-- docs -->
-| `Authorization`      | [ms-identity-javascript-angular-app-roles]() | Angular | MyOrg | implicit-grant  | <!-- code -->
-| `Authorization`      | [ms-identity-javascript-angular-app-roles]() | Angular | AnyOrg | implicit-grant  | <!-- docs -->
-| `Authorization`      | [ms-identity-javascript-nodejs-security-groups]() | Angular | MyOrg | implicit-grant  | <!-- code -->
-| `Authorization`      | [ms-identity-javascript-nodejs-security-groups]() | Angular | AnyOrg | implicit-grant  | <!-- docs -->
-| `Authorization`      | [ms-identity-javascript-nodejs-app-roles]() | NodeJS | MyOrg | auth-code-grant  | <!-- code -->
-| `Authorization`      | [ms-identity-javascript-nodejs-app-roles]() | NodeJS | AnyOrg | auth-code-grant  | <!-- docs -->
-
-### Chapter VI: Deployment
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     | Service  |
-|----------------------|-----------------------------------|--------------|------------|-----------|----------|
-| `Deployment`         | [ms-identity-javascript-spa-deployment]() | JavaScript | AnyOrg | pkce-grant  | Azure Storage | <!-- docs -->
-| `Deployment`         | [ms-identity-javascript-angular-spa-deployment]() | Angular | AnyOrg | implicit-grant  | Azure Storage  | <!-- docs -->
-| `Deployment`         | [ms-identity-javascript-nodejs-webapp-deployment]() | NodeJS | AnyOrg | auth-code-grant  | Azure App Services  | <!-- docs -->
-| `Deployment`         | [ms-identity-javascript-nodejs-webapi-deployment]() | NodeJS | AnyOrg | auth-code-grant  | Azure App Services  | <!-- docs -->
-
-### Chapter VII: Migration
-
-| Chapter              | Sample                            | Platform     | Audience   | Using     |
-|----------------------|-----------------------------------|--------------|------------|-----------|
-| `Migration`          | [ms-identity-javascript-adfs-migration]() | JavaScript | MyOrg | pkce-grant | <!-- code -->
-| `Migration`          | [ms-identity-javascript-angular-adfs-migration]() | JavaScript | MyOrg | implicit-grant | <!-- code -->
-| `Migration`          | [ms-identity-javascript-nodejs-adfs-migration]() | JavaScript | MyOrg | auth-code-grant | <!-- code -->
+> :warning: This is a work in progress. Come back frequently to discover more samples.
 
 ## Prerequisites
 
+- [Node.js](https://nodejs.org/en/download/) must be installed.
+- [Visual Studio Code](https://code.visualstudio.com/download) for running and editing.
+- [VS Code Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) extension for interacting with Azure through **VS Code** Interface.
+- A modern web browser. While **MSAL.js** fully supports **IE11**, samples use **ES6** conventions and will not run on **Internet Explorer**.
+
 Please refer to each chapter's sub-folder for sample-specific prerequisites.
+
+## Recommendations
+
+- We recommend [jwt.ms](https://jwt.ms) for inspecting your tokens.
+- We recommend [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting.
+- We recommend following [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) for keeping up-to-date with the latest developments.
+
+Please refer to each chapter's sub-folder for sample-specific recommendations.
+
+## Contents
+
+| Chapter              | Covers                            |
+|----------------------|-----------------------------------|
+| `Authentication`     | id tokens, sign-in, sign-out, single sign-on, national clouds |
+| `Authorization I`     | access tokens, acquiring a token, working with scopes and resources, MS Graph API  |
+| `Authorization II`     | protecting a web API, calling a web API |
+| `Advanced Grants`     | on-behalf-of flow, device code flow, client credentials flow |
+| `Access Control`     | roles, groups, conditional access, overage scenarios |
+| `Deployment`     | multi-tenant (SaaS) applications, managed identity, key vaults, hosting |
+| `Hybrid Identity`     | ADFS, on-prem authentication, migration scenarios, Azure AD Connect |
+
+### Authentication
+
+| Chapter              | Sample                            | Platform     | Library   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Authentication`     | [Vanilla JavaScript SPA that signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) | JavaScript   | MSAL.js 2.x      |
+| `Authentication`     | [Vanilla JavaScript SPA that signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) | JavaScript   | MSAL.js 2.x     |
+
+| Chapter              | Sample                            | Platform     | Library   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Authentication`     | [Angular SPA that signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-angular-signin) | Angular   | MSAL-Angular   |
+| `Authentication`     | [Angular SPA that signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-angular-signin) | Angular | MSAL-Angular   |
+
+### Authorization I
+
+<!-- | Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+
+| Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+
+### Authorization II
+
+<!-- | Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+
+| Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+
+### Advanced Grants
+
+<!-- | Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+
+### Access Control
+
+<!-- | Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+
+### Deployment
+
+<!-- | Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+
+### Hybrid Identity
+
+<!-- | Chapter              | Sample                            | Platform     | Audience   |
+|----------------------|-----------------------------------|--------------|------------|
+| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
 
 ## More information
 
 - [Microsoft identity platform (Azure Active Directory for developers)](https://docs.microsoft.com/azure/active-directory/develop/)
 - [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
-- [Quickstart: Register an application with the Microsoft identity platform (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app)
-- [Quickstart: Configure a client application to access web APIs (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-configure-app-access-web-apis)
+- [Application types for Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-app-types)
 - [Understanding Azure AD application consent experiences](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)
 - [Understand user and admin consent](https://docs.microsoft.com/azure/active-directory/develop/howto-convert-app-to-be-multi-tenant#understand-user-and-admin-consent)
 - [Application and service principal objects in Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
-- [National Clouds](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud#app-registration-endpoints)
+- [Microsoft identity platform best practices and recommendations](https://docs.microsoft.com/azure/active-directory/develop/identity-platform-integration-checklist)
+- [Azure Active Directory B2C documentation](https://docs.microsoft.com/azure/active-directory-b2c/)
 - [MSAL code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code)
-- [Initialize client applications using MSAL.js](https://docs.microsoft.com/azure/active-directory/develop/msal-js-initializing-client-applications)
-- [Single sign-on with MSAL.js](https://docs.microsoft.com/azure/active-directory/develop/msal-js-sso)
-- [Handle MSAL.js exceptions and errors](https://docs.microsoft.com/azure/active-directory/develop/msal-handling-exceptions?tabs=javascript)
-- [Logging in MSAL.js applications](https://docs.microsoft.com/azure/active-directory/develop/msal-logging?tabs=javascript)
-- [Use MSAL.js to work with Azure AD B2C](https://docs.microsoft.com/azure/active-directory/develop/msal-b2c-overview)
+- [MSAL B2C code samples](https://docs.microsoft.com/azure/active-directory-b2c/code-samples)
 
 ## Community Help and Support
 
 Use [Stack Overgrant](http://stackovergrant.com/questions/tagged/msal) to get support from the community.
-Ask your questions on Stack Overgrant first and browse existing issues to see if someone has asked your question before.
-Make sure that your questions or comments are tagged with [`msal` `javascript` `angular` `azure-active-directory`].
+Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
+Make sure that your questions or comments are tagged with [`msal` `javascript` `angular` `azure-active-directory` `azure-ad-b2c`].
 
 If you find a bug in the sample, please raise the issue on [GitHub Issues](../../issues).
 
