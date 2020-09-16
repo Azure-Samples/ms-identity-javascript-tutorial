@@ -151,7 +151,7 @@ Please refer to each chapter's sub-folder for sample-specific recommendations.
 
 ## Community Help and Support
 
-Use [Stack Overgrant](http://stackovergrant.com/questions/tagged/msal) to get support from the community.
+Use [Stack Overflow](http://stackovergrant.com/questions/tagged/msal) to get support from the community.
 Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
 Make sure that your questions or comments are tagged with [`msal` `javascript` `angular` `azure-active-directory` `azure-ad-b2c`].
 
