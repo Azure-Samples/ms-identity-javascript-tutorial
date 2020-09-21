@@ -5,6 +5,7 @@ languages:
 - typescript
 products:
 - angular
+- react
 - nodejs
 - ms-graph
 - microsoft-authentication-library
@@ -13,32 +14,31 @@ products:
 - azure-active-directory-b2c
 - azure-app-services
 - azure-storage
-description: "Microsoft Identity Platform & Microsoft Authentication Library for JavaScript Tutorial"
+- azure-key-vault
+description: "Microsoft identity platform & Microsoft Authentication Library for JavaScript Tutorial"
 urlFragment: "ms-identity-javascript-incremental-tutorial"
 ---
 
-# Microsoft Identity Platform & Microsoft Authentication Library for JavaScript Tutorial
+# Microsoft identity platform & Microsoft Authentication Library for JavaScript Tutorial
 
-## Overview
+[Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory Azure AD](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) and [Azure Azure Active Directory B2C (Azure AD B2C)](https://docs.microsoft.com/azure/active-directory-b2c/overview) are central to **Azure** cloud ecosystem, underlying all interactions between applications that are using various **Azure** services and services of other providers. This tutorial aims to take you through the fundamentals of modern authentication with JavaScript, using the [Microsoft Authentication Library for JavaScript (MSAL.js)](https://github.com/AzureAD/microsoft-authentication-library-for-js). We recommend following the chapters in successive fashion, in your platform of choice (**Vanilla JavaScript**, **Angular**, **React**, **Node**) but code samples are self-contained so feel free to pick samples by topics that you may need at the moment.
 
-Identity is central to modern web applications. [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory Azure AD](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) and [Azure Azure Active Directory Business to Consumers (Azure AD B2C)](https://docs.microsoft.com/azure/active-directory-b2c/overview) are central to **Azure** cloud ecosystem, underlying all interactions between applications that are using various **Azure** services and services of other providers. This tutorial aims to take you through the fundamentals of modern authentication with JavaScript, using the [Microsoft Authentication Library for JavaScript (MSAL.js)](https://github.com/AzureAD/microsoft-authentication-library-for-js). We recommend following the chapters in successive fashion, in your platform of choice (**Vanilla JavaScript**, **Angular**, **React** (*coming soon*)) but code samples are self contained so feel free to pick samples by topics that you may need at the moment.
-
-> :warning: This is a work in progress. Come back frequently to discover more samples.
+> :warning: This is a *work in progress*. Come back frequently to discover more samples.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/en/download/) must be installed.
-- [Visual Studio Code](https://code.visualstudio.com/download) for running and editing.
-- [VS Code Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) extension for interacting with Azure through **VS Code** Interface.
-- A modern web browser. While **MSAL.js** fully supports **IE11**, samples use **ES6** conventions and will not run on **Internet Explorer**.
+- [Node.js](https://nodejs.org/en/download/).
+- [Visual Studio Code](https://code.visualstudio.com/download).
+- [VS Code Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack).
+- A modern web browser. While **MSAL.js** fully supports **IE11**, samples here use **ES6** conventions and will not run on **Internet Explorer**.
 
 Please refer to each chapter's sub-folder for sample-specific prerequisites.
 
 ## Recommendations
 
-- We recommend [jwt.ms](https://jwt.ms) for inspecting your tokens.
-- We recommend [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting.
-- We recommend following [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) for keeping up-to-date with the latest developments.
+- [jwt.ms](https://jwt.ms) for inspecting your tokens.
+- [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting.
+- Following the [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) for keeping up-to-date with the latest developments.
 
 Please refer to each chapter's sub-folder for sample-specific recommendations.
 
@@ -47,12 +47,12 @@ Please refer to each chapter's sub-folder for sample-specific recommendations.
 | Chapter              | Covers                            |
 |----------------------|-----------------------------------|
 | `Authentication`     | id tokens, sign-in, sign-out, single sign-on, national clouds |
-| `Authorization I`     | access tokens, acquiring a token, working with scopes and resources, MS Graph API  |
-| `Authorization II`     | protecting a web API, calling a web API |
-| `Advanced Grants`     | on-behalf-of flow, device code flow, client credentials flow |
+| `Authorization I`    | access tokens, acquiring a token, working with scopes and resources, MS Graph API  |
+| `Authorization II`   | protecting a web API, calling a web API |
+| `Advanced Grants`    | on-behalf-of flow, device code flow, client credentials flow |
 | `Access Control`     | roles, groups, conditional access, overage scenarios |
-| `Deployment`     | multi-tenant (SaaS) applications, managed identity, key vaults, hosting |
-| `Hybrid Identity`     | ADFS, on-prem authentication, migration scenarios, Azure AD Connect |
+| `Deployment`         | multi-tenant (SaaS) applications, managed identity, key vaults, hosting |
+| `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect |
 
 ### Authentication
 
