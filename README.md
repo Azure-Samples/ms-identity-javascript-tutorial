@@ -60,63 +60,43 @@ Please refer to each sample's readme for sample-specific recommendations.
 
 ### Vanilla JavaScript
 
-#### Authenticate your users with Azure AD
+#### Azure AD
 
 | Chapter              | Library       | Sample             |
 |------------------------|---------------|--------------------|
-| `Authentication`             | MSAL.js 2.x   | [Signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) |
-| `Authorization I`            | MSAL.js 2.x   | [Authorize users with Azure AD to call Microsoft Graph API]() |
-| `Authorization II`             | MSAL.js 2.x   | [Authorize users with Azure AD to call a protected Web API]() |
+| `Authentication`             | MSAL.js 2.x   | [Signs-in users](https://github.com/Azure-Samples/ms-identity-javascript-signin) |
+| `Authorization I`            | MSAL.js 2.x   | [Call Microsoft Graph API]() |
+| `Authorization II`   | Passport.js | [Protect your Web API]() |
+| `Authorization II`   | Passport.js | [Protect your Azure Function]() |
+| `Authorization II`             | MSAL.js 2.x   | [Call a protected resource]() |
 
-#### Protect your resources with Azure AD
-
-| Chapter              | Library | Sample                            |
-|----------------------|-|----------------------------------|--------------|
-| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD]() |
-| `Authorization II`   | Passport.js | [Protect your Azure Function with Azure AD]() |
-
-#### Authenticate your users with Azure AD B2C
+#### Azure AD B2C
 
 | Chapter              | Library       | Sample             |
 |------------------------|---------------|--------------------|
-| `Authentication`             | MSAL.js 2.x   | [Signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) |
-| `Authorization II`             | MSAL.js 2.x   | [Authorize users with Azure AD B2C to call a protected Web API]() |
-
-#### Protect your resources with Azure AD B2C
-
-| Chapter              | Library | Sample                            |
-|----------------------|-|----------------------------------|--------------|
-| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD B2C]() |
+| `Authentication`             | MSAL.js 2.x   | [Signs-in users](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) |
+| `Authorization II`   | Passport.js | [Protect your Web API]() |
+| `Authorization II`             | MSAL.js 2.x   | [Call a protected resource]() |
 
 ### Angular
 
-#### Authenticate your users with Azure AD
+#### Azure AD
 
 | Chapter              | Library       | Sample             |
 |------------------------|---------------|--------------------|
-| `Authentication`             | MSAL-Angular   | [Signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-angular-signin) |
-| `Authorization I`             | MSAL-Angular   | [Authorize users with Azure AD to call Microsoft Graph API]() |
-| `Authorization II`             | MSAL-Angular   | [Authorize users with Azure AD to call a protected Web API]() |
+| `Authentication`             | MSAL-Angular   | [Signs-in users](https://github.com/Azure-Samples/ms-identity-javascript-angular-signin) |
+| `Authorization I`             | MSAL-Angular   | [Call Microsoft Graph API]() |
+| `Authorization II`   | Passport.js | [Protect your Web API]() |
+| `Authorization II`   | Passport.js | [Protect your Azure Function]() |
+| `Authorization II`             | MSAL-Angular   | [Call a protected resource]() |
 
-#### Protect your resources with Azure AD
-
-| Chapter              | Library | Sample                            |
-|----------------------|-|----------------------------------|--------------|
-| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD]() |
-| `Authorization II`   | Passport.js | [Protect your Azure Function with Azure AD]() |
-
-#### Authenticate your users with Azure AD B2C
+#### Azure AD B2C
 
 | Chapter              | Library       | Sample             |
 |------------------------|---------------|--------------------|
-| `Authentication`             | MSAL-Angular   | [Signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-angular-signin) |
-| `Authorization II`             | MSAL-Angular  | [Authorize users with Azure AD B2C to call a protected Web API]() |
-
-#### Protect your resources with Azure AD B2C
-
-| Chapter              | Library | Sample                            |
-|----------------------|-|----------------------------------|--------------|
-| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD B2C]() |
+| `Authentication`             | MSAL-Angular   | [Signs-in users](https://github.com/Azure-Samples/ms-identity-b2c-javascript-angular-signin) |
+| `Authorization II`   | Passport.js | [Protect your Web API]() |
+| `Authorization II`             | MSAL-Angular  | [Call a protected resource]() |
 
 ## More information
 
