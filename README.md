@@ -8,7 +8,6 @@ products:
 - react
 - nodejs
 - ms-graph
-- microsoft-authentication-library
 - microsoft-identity-platform
 - azure-active-directory
 - azure-active-directory-b2c
@@ -16,12 +15,14 @@ products:
 - azure-storage
 - azure-key-vault
 description: "Microsoft identity platform & Microsoft Authentication Library for JavaScript Tutorial"
-urlFragment: "ms-identity-javascript-incremental-tutorial"
+urlFragment: "ms-identity-javascript-tutorial"
 ---
 
 # Microsoft identity platform & Microsoft Authentication Library for JavaScript Tutorial
 
-[Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory Azure AD](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) and [Azure Azure Active Directory B2C (Azure AD B2C)](https://docs.microsoft.com/azure/active-directory-b2c/overview) are central to **Azure** cloud ecosystem, underlying all interactions between applications that are using various **Azure** services and services of other providers. This tutorial aims to take you through the fundamentals of modern authentication with JavaScript, using the [Microsoft Authentication Library for JavaScript (MSAL.js)](https://github.com/AzureAD/microsoft-authentication-library-for-js). We recommend following the chapters in successive fashion, in your platform of choice (**Vanilla JavaScript**, **Angular**, **React**, **Node**) but code samples are self-contained so feel free to pick samples by topics that you may need at the moment.
+[Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory Azure AD](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) and [Azure Azure Active Directory B2C (Azure AD B2C)](https://docs.microsoft.com/azure/active-directory-b2c/overview) are central to **Azure** cloud ecosystem. This tutorial aims to take you through the fundamentals of modern authentication with JavaScript, using the [Microsoft Authentication Library for JavaScript (MSAL.js)](https://github.com/AzureAD/microsoft-authentication-library-for-js).
+
+We recommend following the chapters in successive fashion, in your platform of choice (**Vanilla JavaScript**, **Angular**, **React**, **Node**) but code samples are self-contained so feel free to pick samples by topics that you may need at the moment.
 
 > :warning: This is a *work in progress*. Come back frequently to discover more samples.
 
@@ -32,7 +33,7 @@ urlFragment: "ms-identity-javascript-incremental-tutorial"
 - [VS Code Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack).
 - A modern web browser. While **MSAL.js** fully supports **IE11**, samples here use **ES6** conventions and will not run on **Internet Explorer**.
 
-Please refer to each chapter's sub-folder for sample-specific prerequisites.
+Please refer to each sample's readme for sample-specific prerequisites.
 
 ## Recommendations
 
@@ -40,7 +41,7 @@ Please refer to each chapter's sub-folder for sample-specific prerequisites.
 - [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting.
 - Following the [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) for keeping up-to-date with the latest developments.
 
-Please refer to each chapter's sub-folder for sample-specific recommendations.
+Please refer to each sample's readme for sample-specific recommendations.
 
 ## Contents
 
@@ -48,104 +49,87 @@ Please refer to each chapter's sub-folder for sample-specific recommendations.
 |----------------------|-----------------------------------|
 | `Authentication`     | id tokens, sign-in, sign-out, single sign-on, national clouds |
 | `Authorization I`    | access tokens, acquiring a token, working with scopes and resources, MS Graph API  |
-| `Authorization II`   | protecting a web API, calling a web API |
-| `Advanced Grants`    | on-behalf-of flow, device code flow, client credentials flow |
+| `Authorization II`   | protecting a web API, authorizing users to call a web API, token validation |
+
+<!-- | `Advanced Grants`    | on-behalf-of flow, device code flow, client credentials flow |
 | `Access Control`     | roles, groups, conditional access, overage scenarios |
 | `Deployment`         | multi-tenant (SaaS) applications, managed identity, key vaults, hosting |
-| `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect |
+| `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect | -->
 
-### Authentication
+## Learning Tracks
 
-| Chapter              | Sample                            | Platform     | Library   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Authentication`     | [Vanilla JavaScript SPA that signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) | JavaScript   | MSAL.js 2.x      |
-| `Authentication`     | [Vanilla JavaScript SPA that signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) | JavaScript   | MSAL.js 2.x     |
+### Vanilla JavaScript
 
-| Chapter              | Sample                            | Platform     | Library   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Authentication`     | [Angular SPA that signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-angular-signin) | Angular   | MSAL-Angular   |
-| `Authentication`     | [Angular SPA that signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-angular-signin) | Angular | MSAL-Angular   |
+#### Authenticate your users with Azure AD
 
-### Authorization I
+| Chapter              | Library       | Sample             |
+|------------------------|---------------|--------------------|
+| `Authentication`             | MSAL.js 2.x   | [Signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) |
+| `Authorization I`            | MSAL.js 2.x   | [Authorize users with Azure AD to call Microsoft Graph API]() |
+| `Authorization II`             | MSAL.js 2.x   | [Authorize users with Azure AD to call a protected Web API]() |
 
-<!-- | Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+#### Protect your resources with Azure AD
 
-| Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization I`     | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+| Chapter              | Library | Sample                            |
+|----------------------|-|----------------------------------|--------------|
+| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD]() |
+| `Authorization II`   | Passport.js | [Protect your Azure Function with Azure AD]() |
 
-### Authorization II
+#### Authenticate your users with Azure AD B2C
 
-<!-- | Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
+| Chapter              | Library       | Sample             |
+|------------------------|---------------|--------------------|
+| `Authentication`             | MSAL.js 2.x   | [Signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) |
+| `Authorization II`             | MSAL.js 2.x   | [Authorize users with Azure AD B2C to call a protected Web API]() |
 
-| Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Authorization II`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+#### Protect your resources with Azure AD B2C
 
-### Advanced Grants
+| Chapter              | Library | Sample                            |
+|----------------------|-|----------------------------------|--------------|
+| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD B2C]() |
 
-<!-- | Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Advanced Grants`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+### Angular
 
-### Access Control
+#### Authenticate your users with Azure AD
 
-<!-- | Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Access Control`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+| Chapter              | Library       | Sample             |
+|------------------------|---------------|--------------------|
+| `Authentication`             | MSAL-Angular   | [Signs-in users with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-angular-signin) |
+| `Authorization I`             | MSAL-Angular   | [Authorize users with Azure AD to call Microsoft Graph API]() |
+| `Authorization II`             | MSAL-Angular   | [Authorize users with Azure AD to call a protected Web API]() |
 
-### Deployment
+#### Protect your resources with Azure AD
 
-<!-- | Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Deployment`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+| Chapter              | Library | Sample                            |
+|----------------------|-|----------------------------------|--------------|
+| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD]() |
+| `Authorization II`   | Passport.js | [Protect your Azure Function with Azure AD]() |
 
-### Hybrid Identity
+#### Authenticate your users with Azure AD B2C
 
-<!-- | Chapter              | Sample                            | Platform     | Audience   |
-|----------------------|-----------------------------------|--------------|------------|
-| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      |
-| `Hybrid Identity`   | [ms-identity-javascript-signin]() | JavaScript   | MyOrg      | -->
+| Chapter              | Library       | Sample             |
+|------------------------|---------------|--------------------|
+| `Authentication`             | MSAL-Angular   | [Signs-in users with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-angular-signin) |
+| `Authorization II`             | MSAL-Angular  | [Authorize users with Azure AD B2C to call a protected Web API]() |
+
+#### Protect your resources with Azure AD B2C
+
+| Chapter              | Library | Sample                            |
+|----------------------|-|----------------------------------|--------------|
+| `Authorization II`   | Passport.js | [Protect your Web API with Azure AD B2C]() |
 
 ## More information
 
 - [Microsoft identity platform (Azure Active Directory for developers)](https://docs.microsoft.com/azure/active-directory/develop/)
 - [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
+
 - [Application types for Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-app-types)
 - [Understanding Azure AD application consent experiences](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)
 - [Understand user and admin consent](https://docs.microsoft.com/azure/active-directory/develop/howto-convert-app-to-be-multi-tenant#understand-user-and-admin-consent)
 - [Application and service principal objects in Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
 - [Microsoft identity platform best practices and recommendations](https://docs.microsoft.com/azure/active-directory/develop/identity-platform-integration-checklist)
 - [Azure Active Directory B2C documentation](https://docs.microsoft.com/azure/active-directory-b2c/)
+
 - [MSAL code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code)
 - [MSAL B2C code samples](https://docs.microsoft.com/azure/active-directory-b2c/code-samples)
 
@@ -153,7 +137,7 @@ Please refer to each chapter's sub-folder for sample-specific recommendations.
 
 Use [Stack Overflow](http://stackovergrant.com/questions/tagged/msal) to get support from the community.
 Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
-Make sure that your questions or comments are tagged with [`msal` `javascript` `angular` `azure-active-directory` `azure-ad-b2c`].
+Make sure that your questions or comments are tagged with [`msal` `javascript` `angular` `azure-ad` `azure-ad-b2c`].
 
 If you find a bug in the sample, please raise the issue on [GitHub Issues](../../issues).
 
