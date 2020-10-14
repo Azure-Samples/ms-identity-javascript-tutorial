@@ -1,0 +1,76 @@
+{
+    "Sample": {
+      "Title": "Vanilla JavaScript Single-page Application with MSAL.js 2.x using Authorization Code Flow (w/ PKCE) to authorize users to call a Web API protected by Azure Active Directory B2C (Azure AD B2C)",
+      "Level": 200,
+      "Client": "Vanilla JavaScript SPA",
+      "Service": "Node web API",
+      "RepositoryUrl": "ms-identity-b2c-javascript-callapi",
+      "Endpoint": "AAD v2.0",
+      "Provider": "B2C"
+    },
+
+    "AADApps": [
+      {
+        "Id": "spa",
+        "Name": "ms-identity-b2c-javascript-callapi",
+        "Kind" :  "SinglePageApplication",
+        "Audience": "AzureADandPersonalMicrosoftAccount",
+        "HomePage": "http://localhost:6420",
+        "ReplyUrls":"http://localhost:6420",
+        "RequiredResourcesAccess": [
+            {
+              "Resource": "service",
+              "DelegatedPermissions": [ "demo.read" ]
+            }
+          ]
+      },
+      {
+        "Id": "service",
+        "Name": "active-directory-b2c-javascript-nodejs-webapi",
+        "Kind": "WebApi",
+        "HomePage": "http://localhost:5000/hello",
+        "Audience": "AzureADAnyOrgandPersonalMicrosoftAccount"
+      }
+    ],
+  
+    "CodeConfiguration": [
+      {
+        "App": "spa",
+        "SettingKind": "Replace",
+        "SettingFile": "\\..\\App\\authConfig.js",
+        "Mappings": [
+          {
+            "key": "Enter_the_Application_Id_Here",
+            "value": ".AppId"
+          },
+          {
+            "key": "Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here",
+            "value": "\"https://login.microsoftonline.com/\"+$tenantName"
+          },
+          {
+            "key": "Enter_the_Redirect_Uri_Here",
+            "value": ".HomePage"
+          }
+        ]
+      },
+      {
+        "App": "service",
+        "SettingKind": "JSON",
+        "SettingFile": "\\..\\config.json",
+        "Mappings": [
+          {
+            "key": "clientID",
+            "value": ".AppId"
+          },
+          {
+            "key": "tenantID",
+            "value": "$tenantId"
+          },
+          {
+            "key": "audience",
+            "value": ".AppId"
+          }
+        ]
+      }
+    ]
+  }

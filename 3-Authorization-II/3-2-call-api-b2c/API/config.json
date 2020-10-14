@@ -1,0 +1,25 @@
+{
+    "credentials": {
+        "tenantID": "Enter_the_Tenant_ID",
+        "clientID": "93733604-cc77-4a3c-a604-87084dd55348",
+        "audience": "93733604-cc77-4a3c-a604-87084dd55348"
+    },
+    "policies": {
+        "policyName": "B2C_1_SUSI"
+    },
+    "resource": {
+        "scope": ["demo.read"]
+    },
+    "metadata": {
+        "b2cDomain": "fabrikamb2c.b2clogin.com",
+        "authority": "login.microsoftonline.com",
+        "discovery": ".well-known/openid-configuration",
+        "version": "v2.0"
+    },
+    "settings": {
+        "isB2C": true,
+        "validateIssuer": false,
+        "passReqToCallback": false,
+        "loggingLevel": "info"
+    }
+}

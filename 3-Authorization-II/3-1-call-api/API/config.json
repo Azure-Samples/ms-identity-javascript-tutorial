@@ -1,0 +1,20 @@
+{
+    "credentials": {
+        "tenantID": "Enter_the_Tenant_ID",
+        "clientID": "Enter_the_Client_ID",
+        "audience": "Enter_the_Client_ID"
+    },
+    "resource": {
+        "scope": ["access_as_user"]
+    },
+    "metadata": {
+        "authority": "login.microsoftonline.com",
+        "discovery": ".well-known/openid-configuration",
+        "version": "v2.0"
+    },
+    "settings": {
+        "validateIssuer": true,
+        "passReqToCallback": false,
+        "loggingLevel": "info"
+    }
+}

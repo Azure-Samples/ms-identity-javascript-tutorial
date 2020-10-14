@@ -1,0 +1,100 @@
+{
+    "Sample": {
+      "Title": "Vanilla JavaScript Single-page Application secured with MSAL.js 2.x using Authorization Code Flow (w/ PKCE) to call a custom web API protected by Azure Active Directory",
+      "Level": 200,
+      "Client": "JavaScript SPA",
+      "Service": "Node.js Web Api",
+      "RepositoryUrl": "ms-identity-javascript-tutorial",
+      "Endpoint": "AAD v2.0"
+    },
+
+    "AADApps": [
+      {
+        "Id": "spa",
+        "Name": "ms-identity-javascript-callapi",
+        "Kind" :  "SinglePageApplication",
+        "Audience": "AzureADMyOrg",
+        "HomePage": "http://localhost:3000/",
+        "ReplyUrls":"http://localhost:3000/",
+        "RequiredResourcesAccess": [
+          {
+            "Resource": "Microsoft Graph",
+            "DelegatedPermissions": [ "User.Read" ]
+          }
+        ],
+        "ManualSteps": [
+            {
+              "Comment": "Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'Spa'"
+            }
+        ]
+      },
+      {
+        "Id": "service",
+        "Name": "ms-identity-javascript-api",
+        "Kind": "WebApi",
+        "HomePage": "http://localhost:5000/",
+        "Audience": "AzureADMyOrg",
+        "ManualSteps": [
+          {
+            "Comment": "Navigate to the Manifest page, find the property 'accessTokenAcceptedVersion' and set it to '2'"
+          }
+        ]
+      }
+    ],
+  
+    "CodeConfiguration": [
+      {
+        "App": "spa",
+        "SettingKind": "Replace",
+        "SettingFile": "\\..\\SPA\\App\\authConfig.js",
+        "Mappings": [
+          {
+            "key": "Enter_the_Application_Id_Here",
+            "value": ".AppId"
+          },
+          {
+            "key": "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
+            "value": "\"https://login.microsoftonline.com/\"+$tenantId"
+          },
+          {
+            "key": "Enter_the_Redirect_Uri_Here",
+            "value": ".ReplyUrls"
+          }
+        ]
+      },
+      {
+        "App": "spa",
+        "SettingKind": "Replace",
+        "SettingFile": "\\..\\SPA\\App\\apiConfig.js",
+        "Mappings": [
+          {
+            "key": "Enter_the_Application_Id_Here",
+            "value": ".AppId"
+          },
+          {
+            "key": "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
+            "value": "\"https://login.microsoftonline.com/\"+$tenantId"
+          }
+        ]
+      },
+      {
+        "App": "service",
+        "SettingKind": "JSON",
+        "SettingFile": "\\..\\API\\config.json",
+        "Mappings": [
+          {
+            "key": "clientID",
+            "value": ".AppId"
+          },
+          {
+            "key": "tenantID",
+            "value": "$tenantId"
+          },
+          {
+            "key": "audience",
+            "value": ".AppId"
+          }
+        ]
+      }
+    ]
+  }
