@@ -11,11 +11,11 @@ products:
 - microsoft-identity-platform
 - azure-active-directory
 - azure-active-directory-b2c
-description: "Tutorial: Microsoft identity platform & Microsoft Authentication Library for JavaScript"
+description: "Tutorial: Enable your JavaScript Single-page Application (SPA) to sign-in users and call APIs with the Microsoft identity platform"
 urlFragment: "ms-identity-javascript-tutorial"
 ---
 
-# Tutorial: Microsoft identity platform & Microsoft Authentication Library for JavaScript
+# Tutorial: Enable your JavaScript Single-page Application (SPA) to sign-in users and call APIs with the Microsoft identity platform
 
 [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) and [Azure Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/overview) (Azure AD B2C) are central to the **Azure** cloud ecosystem. This tutorial aims to take you through the fundamentals of modern authentication with JavaScript, using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js).
 
@@ -27,7 +27,7 @@ We recommend following the chapters in successive order. However, the code sampl
 
 - [Node.js](https://nodejs.org/en/download/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
-- [VS Code Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
+- [VS Code Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 - A modern web browser. While **MSAL.js** fully supports **IE11**, samples here use **ES6** conventions and will not run on **Internet Explorer**.
 
 Please refer to each sample's README for sample-specific prerequisites.
@@ -48,28 +48,25 @@ Please refer to each sample's README for sample-specific recommendations.
 | `Authorization I`    | Access tokens, acquiring a token, scopes and resources, MS Graph API        |
 | `Authorization II`   | Protecting a web API, authorizing users to call a web API, token validation |
 
-<!-- | `Advanced Grants`    | On-behalf-of flow, device code flow, client credentials flow |
-| `Access Control`     | Roles (RBAC), groups, conditional access, overage scenarios |
-| `Deployment`         | Multi-tenant (SaaS) applications, managed identity, key vaults, hosting |
-| `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect | -->
+<!-- | `Advanced Grants`    | On-behalf-of flow, device code flow, client credentials flow                |
+| `Access Control`     | Roles (RBAC), groups, conditional access, overage scenarios                 |
+| `Deployment`         | Multi-tenant (SaaS) applications, managed identity, key vaults, hosting     |
+| `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect         | -->
 
 ### Azure AD
 
-| Chapter              | Library       | Sample             |
-|------------------------|---------------|--------------------|
-| `Authentication`             | MSAL.js 2.x   | [Signs-in users](https://github.com/Azure-Samples/ms-identity-javascript-signin) |
-| `Authorization I`            | MSAL.js 2.x   | [Call Microsoft Graph API]() |
-| `Authorization II`   | Passport.js | [Protect your web API]() |
-| `Authorization II`   | Passport.js | [Protect your Azure Function]() |
-| `Authorization II`             | MSAL.js 2.x   | [Call a protected resource]() |
+| Chapter              | Library       | Sample                                 |
+|----------------------|---------------|----------------------------------------|
+| `Authentication`     | MSAL.js 2.x   | [Signs-in users]()                     |
+| `Authorization I`    | MSAL.js 2.x   | [Call Microsoft Graph API]()           |
+| `Authorization II`   | Passport.js   | [Protect and call a web API]()         |
 
 ### Azure AD B2C
 
-| Chapter              | Library       | Sample             |
-|------------------------|---------------|--------------------|
-| `Authentication`             | MSAL.js 2.x   | [Signs-in users](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) |
-| `Authorization II`   | Passport.js | [Protect your web API]() |
-| `Authorization II`             | MSAL.js 2.x   | [Call a protected resource]() |
+| Chapter              | Library       | Sample                                 |
+|----------------------|---------------|----------------------------------------|
+| `Authentication`     | MSAL.js 2.x   | [Signs-in users]()                     |
+| `Authorization II`   | Passport.js   | [Protect and call a web API]()         |
 
 ## More information
 
@@ -90,7 +87,7 @@ Please refer to each sample's README for sample-specific recommendations.
 
 Use [Stack Overflow](http://stackovergrant.com/questions/tagged/msal) to get support from the community.
 Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
-Make sure that your questions or comments are tagged with [`ms-identity` `msal` `javascript` `azure-ad` `azure-ad-b2c`].
+Make sure that your questions or comments are tagged with [`ms-identity` `azure-ad` `azure-ad-b2c` `msal` `javascript`].
 
 If you find a bug in the sample, please raise the issue on [GitHub Issues](../../issues).
 

@@ -1,0 +1,48 @@
+{
+    "Sample": {
+      "Title": "Vanilla JavaScript Single-page Application with MSAL.js 2.x using Authorization Code Flow (w/ PKCE) to authenticate users into Azure Active Directory (Azure AD)",
+      "Level": 100,
+      "Client": "Vanilla JavaScript SPA",
+      "Service": "Microsoft Graph API",
+      "RepositoryUrl": "ms-identity-javascript-signin",
+      "Endpoint": "AAD v2.0"
+    },
+
+    "AADApps": [
+      {
+        "Id": "spa",
+        "Name": "ms-identity-javascript-signin",
+        "Kind" :  "SinglePageApplication",
+        "Audience": "AzureADMyOrg",
+        "HomePage": "http://localhost:3000",
+        "ReplyUrls":"http://localhost:3000",
+        "ManualSteps": [
+            {
+              "Comment": "Navigate to the Manifest page, find the entry for 'replyUrlsWithType' and change the value to 'Spa'"
+            }
+        ]
+      }
+    ],
+  
+    "CodeConfiguration": [
+      {
+        "App": "spa",
+        "SettingKind": "Replace",
+        "SettingFile": "\\..\\App\\authConfig.js",
+        "Mappings": [
+          {
+            "key": "Enter_the_Application_Id_Here",
+            "value": ".AppId"
+          },
+          {
+            "key": "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
+            "value": "\"https://login.microsoftonline.com/\"+$tenantName"
+          },
+          {
+            "key": "Enter_the_Redirect_Uri_Here",
+            "value": ".ReplyUrls"
+          }
+        ]
+      }
+    ]
+  }
