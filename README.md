@@ -72,11 +72,17 @@ Please refer to each sample's README for sample-specific recommendations.
 | <img src="./3-Authorization-II/3-1-call-api/ReadmeFiles/topology_callapi.png" width="200"> | [**Protect and call a web API on Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-1-call-api) </br> Protect your web API. Acquire access tokens. Validate Tokens. Call a protected resource on Azure AD. |
 | <img src="./3-Authorization-II/3-2-call-api-b2c/ReadmeFiles/topology_b2c_callapi.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-2-call-api-b2c) </br> Protect your web API. Acquire access tokens. Validate Tokens. Call a protected resource on Azure AD B2C. |
 
+### Chapter 4: Deployment
+
+|                 |               |
+|-----------------|---------------|
+| <img src="./4-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Services**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/4-Deployment) </br> Prepare your app for deployment. Upload your files. Configure authentication parameters. Use Azure services for managing your operations. |
+
 > :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## More information
 
-Learn more about the Microsoft identity platform:
+Learn more about the **Microsoft identity platform**:
 
 - [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/)
 - [Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/)

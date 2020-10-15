@@ -1,4 +1,4 @@
-| In this Tutorial |Previous Tutorial | Next Tutorial |
+| In this Tutorial | Previous Tutorial | Next Tutorial |
 |------------------|------------------|----------------|
 | authentication, id tokens, single sign-on |  | [Sign-in with B2C](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-2-sign-in-b2c) |
 
