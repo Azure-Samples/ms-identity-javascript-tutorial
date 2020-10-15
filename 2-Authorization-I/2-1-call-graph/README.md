@@ -36,7 +36,6 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 | File/folder           | Description                                |
 |-----------------------|--------------------------------------------|
 | `AppCreationScripts/` | Contains Powershell scripts to automate app registration. |
-| `App/`                | Contains sample source code.                |
 | `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |

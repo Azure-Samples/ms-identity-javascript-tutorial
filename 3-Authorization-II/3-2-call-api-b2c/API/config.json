@@ -1,6 +1,6 @@
 {
     "credentials": {
-        "tenantID": "Enter_the_Tenant_ID",
+        "tenantName": "fabrikamb2c.onmicrosoft.com",
         "clientID": "93733604-cc77-4a3c-a604-87084dd55348",
         "audience": "93733604-cc77-4a3c-a604-87084dd55348"
     },

@@ -76,6 +76,42 @@ Function GetRequiredPermissions([string] $applicationDisplayName, [string] $requ
 }
 
 
+Function UpdateLine([string] $line, [string] $value)
+{
+    $index = $line.IndexOf('=')
+    $delimiter = ';'
+    if ($index -eq -1)
+    {
+        $index = $line.IndexOf(':')
+        $delimiter = ','
+    }
+    if ($index -ige 0)
+    {
+        $line = $line.Substring(0, $index+1) + " "+'"'+$value+'"'+$delimiter
+    }
+    return $line
+}
+
+Function UpdateTextFile([string] $configFilePath, [System.Collections.HashTable] $dictionary)
+{
+    $lines = Get-Content $configFilePath
+    $index = 0
+    while($index -lt $lines.Length)
+    {
+        $line = $lines[$index]
+        foreach($key in $dictionary.Keys)
+        {
+            if ($line.Contains($key))
+            {
+                $lines[$index] = UpdateLine $line $dictionary[$key]
+            }
+        }
+        $index++
+    }
+
+    Set-Content -Path $configFilePath -Value $lines -Force
+}
+
 Function ReplaceInLine([string] $line, [string] $key, [string] $value)
 {
     $index = $line.IndexOf($key)
@@ -105,6 +141,42 @@ Function ReplaceInTextFile([string] $configFilePath, [System.Collections.HashTab
     }
 
     Set-Content -Path $configFilePath -Value $lines -Force
+}
+<#.Description
+   This function creates a new Azure AD scope (OAuth2Permission) with default and provided values
+#>  
+Function CreateScope( [string] $value, [string] $userConsentDisplayName, [string] $userConsentDescription, [string] $adminConsentDisplayName, [string] $adminConsentDescription)
+{
+    $scope = New-Object Microsoft.Open.AzureAD.Model.OAuth2Permission
+    $scope.Id = New-Guid
+    $scope.Value = $value
+    $scope.UserConsentDisplayName = $userConsentDisplayName
+    $scope.UserConsentDescription = $userConsentDescription
+    $scope.AdminConsentDisplayName = $adminConsentDisplayName
+    $scope.AdminConsentDescription = $adminConsentDescription
+    $scope.IsEnabled = $true
+    $scope.Type = "User"
+    return $scope
+}
+
+<#.Description
+   This function creates a new Azure AD AppRole with default and provided values
+#>  
+Function CreateAppRole([string] $types, [string] $name, [string] $description)
+{
+    $appRole = New-Object Microsoft.Open.AzureAD.Model.AppRole
+    $appRole.AllowedMemberTypes = New-Object System.Collections.Generic.List[string]
+    $typesArr = $types.Split(',')
+    foreach($type in $typesArr)
+    {
+        $appRole.AllowedMemberTypes.Add($type);
+    }
+    $appRole.DisplayName = $name
+    $appRole.Id = New-Guid
+    $appRole.IsEnabled = $true
+    $appRole.Description = $description
+    $appRole.Value = $name;
+    return $appRole
 }
 
 Set-Content -Value "<html><body><table>" -Path createdApps.html
@@ -161,13 +233,12 @@ Function ConfigureApplications
     $user = Get-AzureADUser -ObjectId $creds.Account.Id
 
    # Create the spa AAD application
-   Write-Host "Creating the AAD application (ms-identity-javascript-v2)"
+   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-ch3-s1-client)"
    # create the application 
-   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-v2" `
+   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-ch3-s1-client" `
                                                -HomePage "http://localhost:3000/" `
                                                -ReplyUrls "http://localhost:3000/" `
-                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-v2" `
-                                               -AvailableToOtherTenants $True `
+                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-tutorial-ch3-s1-client" `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -183,12 +254,12 @@ Function ConfigureApplications
    }
 
 
-   Write-Host "Done creating the spa application (ms-identity-javascript-v2)"
+   Write-Host "Done creating the spa application (ms-identity-javascript-tutorial-ch3-s1-client)"
 
    # URL of the AAD application in the Azure portal
    # Future? $spaPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
    $spaPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-javascript-v2</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-javascript-tutorial-ch3-s1-client</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 
@@ -203,18 +274,92 @@ Function ConfigureApplications
    Set-AzureADApplication -ObjectId $spaAadApplication.ObjectId -RequiredResourceAccess $requiredResourcesAccess
    Write-Host "Granted permissions."
 
+   # Create the service AAD application
+   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-ch3-s1-service)"
+   # create the application 
+   $serviceAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-ch3-s1-service" `
+                                                   -HomePage "http://localhost:5000/api" `
+                                                   -PublicClient $False
+
+   $serviceIdentifierUri = 'api://'+$serviceAadApplication.AppId
+   Set-AzureADApplication -ObjectId $serviceAadApplication.ObjectId -IdentifierUris $serviceIdentifierUri
+
+   # create the service principal of the newly created application 
+   $currentAppId = $serviceAadApplication.AppId
+   $serviceServicePrincipal = New-AzureADServicePrincipal -AppId $currentAppId -Tags {WindowsAzureActiveDirectoryIntegratedApp}
+
+   # add the user running the script as an app owner if needed
+   $owner = Get-AzureADApplicationOwner -ObjectId $serviceAadApplication.ObjectId
+   if ($owner -eq $null)
+   { 
+        Add-AzureADApplicationOwner -ObjectId $serviceAadApplication.ObjectId -RefObjectId $user.ObjectId
+        Write-Host "'$($user.UserPrincipalName)' added as an application owner to app '$($serviceServicePrincipal.DisplayName)'"
+   }
+
+    # rename the user_impersonation scope if it exists to match the readme steps or add a new scope
+    $scopes = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.OAuth2Permission]
+   
+    if ($scopes.Count -ge 0) 
+    {
+        # add all existing scopes first
+        $serviceAadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
+
+        $scope = $serviceAadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
+
+        if ($scope -ne $null) 
+        {
+            $scope.Value = "access_as_user"
+        }
+        else 
+        {
+            # Add scope
+            $scope = CreateScope -value "access_as_user"  `
+                -userConsentDisplayName "Access ms-identity-javascript-tutorial-ch3-s1-service"  `
+                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-ch3-s1-service on your behalf."  `
+                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-ch3-s1-service"  `
+                -adminConsentDescription "Allows the app to have the same access to information in the directory on behalf of the signed-in user."
+            
+            $scopes.Add($scope)
+        }        
+    }
+     
+    # add/update scopes
+    Set-AzureADApplication -ObjectId $serviceAadApplication.ObjectId -OAuth2Permission $scopes
+
+   Write-Host "Done creating the service application (ms-identity-javascript-tutorial-ch3-s1-service)"
+
+   # URL of the AAD application in the Azure portal
+   # Future? $servicePortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$serviceAadApplication.AppId+"/objectId/"+$serviceAadApplication.ObjectId+"/isMSAApp/"
+   $servicePortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$serviceAadApplication.AppId+"/objectId/"+$serviceAadApplication.ObjectId+"/isMSAApp/"
+   Add-Content -Value "<tr><td>service</td><td>$currentAppId</td><td><a href='$servicePortalUrl'>ms-identity-javascript-tutorial-ch3-s1-service</a></td></tr>" -Path createdApps.html
+
+
    # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\app\authConfig.js"
+   $configFile = $pwd.Path + "\..\SPA\App\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantId;"Enter_the_Redirect_Uri_Here" = $spaAadApplication.ReplyUrls };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
+
+   # Update config file for 'spa'
+   $configFile = $pwd.Path + "\..\SPA\App\apiConfig.js"
+   Write-Host "Updating the sample code ($configFile)"
+   $dictionary = @{ "Enter_the_Web_Api_Uri_Here" = $serviceAadApplication.HomePage;"Enter_the_Web_Api_Scope_Here" = ("api://"+$serviceAadApplication.AppId+"/access_as_user") };
+   ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
+
+   # Update config file for 'service'
+   $configFile = $pwd.Path + "\..\API\config.json"
+   Write-Host "Updating the sample code ($configFile)"
+   $dictionary = @{ "clientID" = $serviceAadApplication.AppId;"tenantID" = $tenantId;"audience" = $serviceAadApplication.AppId };
+   UpdateTextFile -configFilePath $configFile -dictionary $dictionary
    Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":
    Write-Host "- For 'spa'"
    Write-Host "  - Navigate to '$spaPortalUrl'"
    Write-Host "  - Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'Spa'" -ForegroundColor Red 
-   Write-Host "  - This sample needs to be coupled with a Web API and as such, you'll need to manually add the necessary API permissions and update the configuration files accordingly." -ForegroundColor Red 
+   Write-Host "- For 'service'"
+   Write-Host "  - Navigate to '$servicePortalUrl'"
+   Write-Host "  - Navigate to the Manifest page, find the property 'accessTokenAcceptedVersion' and set it to '2'" -ForegroundColor Red 
 
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
      

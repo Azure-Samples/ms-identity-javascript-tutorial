@@ -138,7 +138,7 @@ function passTokenToApi() {
    getTokenRedirect(tokenRequest);
    if (accessToken) {
         try {
-            callApi(apiConfig.webApi, accessToken);
+            callApi(apiConfig.uri, accessToken);
         } catch(error) {
             console.warn(error); 
         }

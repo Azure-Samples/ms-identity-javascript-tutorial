@@ -1,6 +1,6 @@
 | In this Tutorial | Previous Tutorial | Next Tutorial |
 |------------------|------------------|----------------|
-| authorization, access tokens, dynamic scopes | [Sign-in with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) | |
+| authorization, access tokens, user-flows | [Sign-in with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) | |
 
 # Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD B2C
 
@@ -21,7 +21,7 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application that lets users authenticate against [Azure Active Directory B2C](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript \(MSAL\.js\)](https://github.com/AzureAD/microsoft-authentication-library-for-js) and authorize them to call a web API that is also protected by **Azure AD B2C**. In doing so, it also illustrates various authorization and B2C concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Refresh Tokens](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#token-types), [Token Lifetimes and Configuration](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#configuration), [Authorization Code Grant](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
+This sample demonstrates a Vanilla JavaScript single-page application that lets users authenticate against [Azure Active Directory B2C](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js) and authorize them to call a web API that is also protected by **Azure AD B2C**. In doing so, it also illustrates various authorization and B2C concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Refresh Tokens](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#token-types), [Token Lifetimes and Configuration](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#configuration), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
 
 ## Scenario
 
@@ -29,18 +29,20 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 1. The **Access Token** is used as a **bearer** to *authorize* the user to call a protected web API.
 1. The protected web API responds with the claims in the **Access Token**.
 
-![Overview](./ReadmeFiles/topology.png)
+![Overview](./ReadmeFiles/topology_b2c_callapi.png)
 
 ## Contents
 
 | File/folder           | Description                                |
 |-----------------------|--------------------------------------------|
-| `App/`                | Contains sample source code.               |
-| `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
-| `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
-| `App/authConfig.js`   | Contains configuration parameters for the sample. |
-| `App/apiConfig.js`   | Contains Web API scopes and coordinates. |
-| `App/policies.js`     | Contains B2C custom policies and user-flows.  |
+| `SPA/App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
+| `SPA/App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
+| `SPA/App/authConfig.js`   | Contains configuration parameters for the sample. |
+| `SPA/App/apiConfig.js`   | Contains Web API scopes and coordinates. |
+| `SPA/App/policies.js`     | Contains B2C custom policies and user-flows.  |
+| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
+| `API/index.js`   | Main application logic resides here.                     |
+| `API/config.json`   | Contains authentication parameters for the sample. |
 
 ## Prerequisites
 
@@ -58,7 +60,7 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 From your shell or command line:
 
 ```console
-git clone https://github.com/Azure-Samples/ms-identity-b2c-javascript-callapi.git
+    git clone https://github.com/Azure-Samples/ms-identity-b2c-javascript-callapi.git
 ```
 
 or download and extract the repository .zip file.
@@ -68,7 +70,12 @@ or download and extract the repository .zip file.
 ### Step 2: Install project dependencies
 
 ```console
-    cd ms-identity-b2c-javascript-callapi
+    cd ms-identity-javascript-tutorial
+    cd 3-Authorization-II-3-2-call-api-b2c
+    cd API
+    npm install
+    cd..
+    cd SPA
     npm install
 ```
 
@@ -124,7 +131,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `active-directory-b2c-javascript-nodejs-webapi` application copied from the Azure portal.
 
-#### Register the app (ms-identity-b2c-javascript-callapi)
+#### Register the client app (ms-identity-b2c-javascript-callapi)
 
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
@@ -136,7 +143,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
 1. Select **Save** to save your changes.
 
-#### Configure the app (ms-identity-b2c-javascript-callapi) to use your app registration
+#### Configure the client app (ms-identity-b2c-javascript-callapi) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
@@ -152,13 +159,18 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `policies.authorityDomain` abd replace it with the domain of your authority e.g. `fabrikamb2c.b2clogin.com`.
 
 1. Open the `App\apiConfig.js` file.
-1. Find the key `b2cScopes` and replace the existing value with the scope of your web API.
-1. Find the key `webAPI` and replace the existing value with the coordinates of your web API.
+1. Find the key `scopes` and replace the existing value with the scope of your web API.
+1. Find the key `uri` and replace the existing value with the coordinates of your web API.
 
 ## Running the sample
 
 ```console
-    cd ms-identity-b2c-javascript-callapi
+    cd ms-identity-javascript-tutorial
+    cd 3-Authorization-II-3-2-call-api-b2c
+    cd API
+    npm start
+    cd..
+    cd SPA
     npm start
 ```
 
@@ -166,23 +178,24 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 1. Open your browser and navigate to `http://localhost:6420`.
 1. Click on the **sign-in** button on the top right corner.
+1. Once you authenticate, click the **Call API** button at the center.
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../../issues) page.
+> :information_source: Consider taking a moment [share your experience with us]().
 
 ## About the code
 
 ### Acquire a Token
 
-Access Token requests in **MSAL.js** are meant to be *per-resource-per-scope(s)*. This means that an Access Token requested for resource A with scope scp1:
+**Access Token** requests in **MSAL.js** are meant to be *per-resource-per-scope(s)*. This means that an **Access Token** requested for resource **A** with scope `scp1`:
 
-- cannot be used for accessing resource A with scope scp2, and,
-- cannot be used for accessing resource B of any scope.
+- cannot be used for accessing resource **A** with scope `scp2`, and,
+- cannot be used for accessing resource **B** of any scope.
 
-The intended recipient of an Access Token is represented by the aud claim; in case the value for the `aud` claim does not mach the resource APP ID URI, the token should be considered invalid. Likewise, the permissions that an Access Token grants is represented by the `scp` claim. See [Access Token claims](https://docs.microsoft.com/azure/active-directory/develop/access-tokens#payload-claims) for more information.
+The intended recipient of an **Access Token** is represented by the `aud` claim; in case the value for the `aud` claim does not mach the resource APP ID URI, the token should be considered invalid. Likewise, the permissions that an Access Token grants is represented by the `scp` claim. See [Access Token claims](https://docs.microsoft.com/azure/active-directory/develop/access-tokens#payload-claims) for more information.
 
-MSAL.js exposes 3 APIs for acquiring a token: `acquireTokenPopup()`, `acquireTokenRedirect()` and `acquireTokenSilent()`:
+**MSAL.js** exposes 3 APIs for acquiring a token: `acquireTokenPopup()`, `acquireTokenRedirect()` and `acquireTokenSilent()`:
 
 ```javascript
     myMSALObj.acquireTokenPopup(request)
@@ -210,7 +223,7 @@ For `acquireTokenRedirect()`, you must register a redirect promise handler:
 
 ### Dynamic Scopes and Incremental Consent
 
-In Azure AD, the scopes (permissions) set directly on the application registration are called static scopes. Other scopes that are only defined within the code are called dynamic scopes. This has implications on the login (i.e. loginPopup, loginRedirect) and acquireToken (i.e. acquireTokenPopup, acquireTokenRedirect, acquireTokenSilent) methods of **MSAL.js**. Consider:
+In **Azure AD B2C**, the scopes (permissions) set directly on the application registration are called static scopes. Other scopes that are only defined within the code are called dynamic scopes. This has implications on the **login** (i.e. loginPopup, loginRedirect) and **acquireToken** (i.e. `acquireTokenPopup`, `acquireTokenRedirect`, `acquireTokenSilent`) methods of **MSAL.js**. Consider:
 
 ```javascript
      const loginRequest = {
@@ -241,28 +254,27 @@ In the code snippet above, the user will be prompted for consent once they authe
     );
 ```
 
-Clients should treat access tokens as opaque strings, as the contents of the token are intended for the resource only (such as a web API or Microsoft Graph). For validation and debugging purposes, developers can decode **JWT**s (*JSON Web Tokens*) using a site like [jwt.ms](https://jwt.ms).
-
-### Refresh Tokens and token lifetimes
-
-Access tokens in the browser have a default recommended expiration of 1 hour. After this 1 hour, any bearer calls with the expired token will be rejected. This token can be refreshed silently using the refresh token retrieved with this token. For more information, see: [Configurable token lifetimes in Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/active-directory-configurable-token-lifetimes)
-
-Refresh tokens given to Single-Page Applications are limited-time refresh tokens (usually 24 hours from the time of retrieval). This is a non-adjustable lifetime. Whenever a refresh token is used to renew an access token, a new refresh token is fetched with the renewed access token.
-
-The **MSAL.js** exposes the `acquireTokenSilent()` API which is meant to retrieve non-expired token silently.
+On the web API side, [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) validates the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
 
 ```javascript
-    msalInstance.acquireTokenSilent(request)
-        .then(tokenResponse => {
-        // Do something with the tokenResponse
-        }).catch(async (error) => {
-            if (error instanceof InteractionRequiredAuthError) {
-                // fallback to interaction when silent call fails
-                return myMSALObj.acquireTokenPopup(request);
-            }
-        }).catch(error => {
-            handleError(error);
-        });
+    app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
+        (req, res) => {
+            console.log('Validated claims: ', req.authInfo);
+    );
+```
+
+Clients should treat access tokens as opaque strings, as the contents of the token are intended for the resource only (such as a web API or Microsoft Graph). For validation and debugging purposes, developers can decode **JWT**s (*JSON Web Tokens*) using a site like [jwt.ms](https://jwt.ms).
+
+### CORS Settings
+
+For the purpose of the sample, **cross-origin resource sharing** is enabled for **all** domains. This is insecure. In production, you should modify this as to allow only the domains that you designate.
+
+```javascript
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
 ```
 
 ## More information

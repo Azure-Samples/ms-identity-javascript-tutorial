@@ -29,7 +29,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 1. The **Access Token** is used as a **bearer** token to *authorize* the user to call the protected Web API.
 1. The protected web API responds with the claims in the **Access Token**.
 
-![Overview](./ReadmeFiles/topology.png)
+![Overview](./ReadmeFiles/topology_callapi.png)
 
 ## Contents
 
@@ -39,11 +39,10 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 | `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
-| `App/ui.js`           | Contains UI logic.                         |
-| `server.js`           | Simple Node server for `index.html`.        |
-| `process.json`   | Contains configuration parameters for logging via Bunyan.  |
-| `index.js`   | Main application logic resides here.                     |
-| `config.json`   | Contains configuration parameters for the sample. |
+| `SPA/server.js`           | Simple Node server for `index.html`.        |
+| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
+| `API/index.js`   | Main application logic resides here.                     |
+| `API/config.json`   | Contains authentication parameters for the sample. |
 
 ## Prerequisites
 
@@ -61,7 +60,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 From your shell or command line:
 
 ```console
-git clone https://github.com/Azure-Samples/ms-identity-javascript-callapi.git
+    git clone https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
 ```
 
 or download and extract the repository .zip file.
@@ -71,7 +70,12 @@ or download and extract the repository .zip file.
 ### Step 2: Install project dependencies
 
 ```console
-    cd ms-identity-javascript-callapi
+    cd ms-identity-javascript-tutorial
+    cd 3-Authorization-II-3-1-call-api
+    cd API
+    npm install
+    cd..
+    cd SPA
     npm install
 ```
 
@@ -159,7 +163,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `active-directory-javascript-nodejs-webapi-v2` application copied from the Azure portal.
 
-#### Register the app (ms-identity-javascript-callapi)
+#### Register the client app (ms-identity-javascript-callapi)
 
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
@@ -177,7 +181,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
     - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
     - Click on the **Add permissions** button at the bottom.
 
-#### Configure the app (ms-identity-javascript-callapi) to use your app registration
+#### Configure the client app (ms-identity-javascript-callapi) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
@@ -192,18 +196,21 @@ Open the `App\authConfig.js` file. Then:
 After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the coordinates of your web API.
-1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scopes for your web API, like `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`. You can copy this from the **Expose an API** blade of the Web APIs registration
+1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scopes for your web API, like `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`. You can copy this from the **Expose an API** blade of the web APIs registration.
 
 ## Running the sample
 
 ```console
-    cd ms-identity-javascript-callapi
+    cd ms-identity-javascript-tutorial
+    cd 3-Authorization-II-3-1-call-api
+    cd API
+    npm start
+    cd..
+    cd SPA
     npm start
 ```
 
 ## Explore the sample
-
-> :warning: You'll need to couple this client sample with a Web API. Check out the Web API samples [here](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code).
 
 1. Open your browser and navigate to `http://localhost:3000`.
 1. Click the **sign-in** button on the top right corner.
@@ -211,7 +218,7 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../../issues) page.
+> :information_source: Consider taking a moment [share your experience with us]().
 
 ## About the code
 
@@ -290,7 +297,7 @@ In the code snippet above, the user will be prompted for consent once they authe
 
 ### Token Validation
 
-[passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) validates the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
+On the web API side, [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) validates the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
 
 ```javascript
     app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
@@ -300,6 +307,18 @@ In the code snippet above, the user will be prompted for consent once they authe
 ```
 
 Clients should treat access tokens as opaque strings, as the contents of the token are intended for the resource only (such as a web API or Microsoft Graph). For validation and debugging purposes, developers can decode **JWT**s (*JSON Web Tokens*) using a site like [jwt.ms](https://jwt.ms).
+
+### CORS Settings
+
+For the purpose of the sample, **cross-origin resource sharing** is enabled for **all** domains. This is insecure. In production, you should modify this as to allow only the domains that you designate.
+
+```javascript
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+```
 
 ## More information
 

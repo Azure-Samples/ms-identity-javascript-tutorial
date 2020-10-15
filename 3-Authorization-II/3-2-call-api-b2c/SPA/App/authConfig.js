@@ -35,6 +35,6 @@ const loginRequest = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 const tokenRequest = {
-  scopes: [...apiConfig.b2cScopes, "offline_access"],  // e.g. ["https://fabrikamb2c.onmicrosoft.com/helloapi/demo.read"]
+  scopes: [...apiConfig.scopes, "offline_access"],  // e.g. ["https://fabrikamb2c.onmicrosoft.com/helloapi/demo.read"]
   forceRefresh: false // Set this to "true" to skip a cached token and go to the server to get a new token
 };
