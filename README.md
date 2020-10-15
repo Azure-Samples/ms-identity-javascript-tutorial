@@ -42,43 +42,52 @@ Please refer to each sample's README for sample-specific recommendations.
 
 ## Contents
 
-| Chapter              | Covers                                                                      |
+<!-- | Chapter              | Covers                                                                      |
 |----------------------|-----------------------------------------------------------------------------|
 | `Authentication`     | ID tokens, sign-in, sign-out, single sign-on (SSO), national clouds         |
 | `Authorization I`    | Access tokens, acquiring a token, scopes and resources, MS Graph API        |
 | `Authorization II`   | Protecting a web API, authorizing users to call a web API, token validation |
-
-<!-- | `Advanced Grants`    | On-behalf-of flow, device code flow, client credentials flow                |
+| `Advanced Grants`    | On-behalf-of flow, device code flow, client credentials flow                |
 | `Access Control`     | Roles (RBAC), groups, conditional access, overage scenarios                 |
 | `Deployment`         | Multi-tenant (SaaS) applications, managed identity, key vaults, hosting     |
 | `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect         | -->
 
-### Azure AD
+### Chapter 1: Authentication
 
-| Chapter              | Library       | Sample                                 |
-|----------------------|---------------|----------------------------------------|
-| `Authentication`     | MSAL.js 2.x   | [Signs-in users]()                     |
-| `Authorization I`    | MSAL.js 2.x   | [Call Microsoft Graph API]()           |
-| `Authorization II`   | Passport.js   | [Protect and call a web API]()         |
+|               |               |
+|---------------|---------------|
+| <img src="./1-Authentication/1-1-sign-in/ReadmeFiles/topology_signin.png" width="200"> | [**Sign-in with Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-1-sign-in) </br> Sign-in your users. Acquire ID tokens. Enable single sign-on (SSO). Operate in national clouds. |
+| <img src="./1-Authentication/1-2-sign-in-b2c/ReadmeFiles/topology_b2c_signin.png" width="200"> | [**Sign-in with Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-2-sign-in-b2c) </br> Sign-in your customers. Add external identity providers. Enable user-flows and custom policies. |
 
-### Azure AD B2C
+### Chapter 2: Authorization (I)
 
-| Chapter              | Library       | Sample                                 |
-|----------------------|---------------|----------------------------------------|
-| `Authentication`     | MSAL.js 2.x   | [Signs-in users]()                     |
-| `Authorization II`   | Passport.js   | [Protect and call a web API]()         |
+|                |               |
+|----------------|---------------|
+| <img src="./2-Authorization-I/2-1-call-graph/ReadmeFiles/topology_callgraph.png" width="200"> | [**Acquire an Access Token with Azure AD and call Microsoft Graph**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/2-Authorization-I/2-1-call-graph) </br> Grant access to your users. Acquire access tokens. Call Microsoft Graph API. |
+
+### Chapter 3: Authorization (II)
+
+|                 |               |
+|-----------------|---------------|
+| <img src="./3-Authorization-II/3-1-call-api/ReadmeFiles/topology_callapi.png" width="200"> | [**Protect and call a web API on Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-1-call-api) </br> Protect your web API. Acquire access tokens. Validate Tokens. Call a protected resource on Azure AD. |
+| <img src="./3-Authorization-II/3-2-call-api-b2c/ReadmeFiles/topology_b2c_callapi.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-2-call-api-b2c) </br> Protect your web API. Acquire access tokens. Validate Tokens. Call a protected resource on Azure AD B2C. |
+
+> :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## More information
 
-- [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/)
-- [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
+Learn more about the Microsoft identity platform:
 
+- [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/)
+- [Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/)
+- [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
 - [Application types for Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-app-types)
 - [Understanding Azure AD application consent experiences](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)
 - [Understand user and admin consent](https://docs.microsoft.com/azure/active-directory/develop/howto-convert-app-to-be-multi-tenant#understand-user-and-admin-consent)
 - [Application and service principal objects in Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
 - [Microsoft identity platform best practices and recommendations](https://docs.microsoft.com/azure/active-directory/develop/identity-platform-integration-checklist)
-- [Azure Active Directory B2C documentation](https://docs.microsoft.com/azure/active-directory-b2c/)
+
+See more code samples:
 
 - [MSAL code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code)
 - [MSAL B2C code samples](https://docs.microsoft.com/azure/active-directory-b2c/code-samples)

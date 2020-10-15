@@ -218,7 +218,7 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :information_source: Consider taking a moment [share your experience with us]().
+> :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 
