@@ -1,0 +1,15 @@
+{
+    "tenantName": "Enter_the_Tenant_Name",
+    "tenantID": "Enter_the_Tenant_ID",
+    "clientID": "Enter_the_Client_ID",
+    "clientSecret": "Enter_the_Client_Secret",
+    "audience": "Enter_the_Client_ID",
+    "resourceUri": "https://graph.microsoft.com/v1.0/me",
+    "resourceScope": ["user.read", "offline_access"],
+    "authority": "login.microsoftonline.com",
+    "version": "v2.0",
+    "discovery": ".well-known/openid-configuration",
+    "validateIssuer": true,
+    "passReqToCallback": false,
+    "loggingLevel": "info"
+}

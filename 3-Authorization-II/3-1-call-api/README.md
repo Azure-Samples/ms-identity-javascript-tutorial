@@ -205,7 +205,7 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
     cd 3-Authorization-II-3-1-call-api
     cd API
     npm start
-    cd..
+    cd ..
     cd SPA
     npm start
 ```
