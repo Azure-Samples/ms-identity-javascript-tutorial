@@ -2,7 +2,7 @@
 |------------------|-------------------|---------------|
 | deployment, storage accounts, app services | [Protect and call a web API](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-1-call-api) | |
 
-# Deploy your JavaScript Applications to Azure Cloud and use Azure Services to Manage your Operations
+# Deploy your JavaScript Applications to Azure Cloud and use Azure Services to manage your Operations
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)
@@ -175,7 +175,9 @@ Open `apiConfig.js`. Then:
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+## We'd love your feedback!
+
+Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## More information
 

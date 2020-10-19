@@ -20,7 +20,8 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory]() (Azure AD) using the [Microsoft Authentication Library for JavaScript]() (MSAL.js) and then call a protected Node.js web API. The web API then calls the [Microsoft Graph API]() (MS Graph) on user's behalf using the [on-behalf-of flow]().
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory]() (Azure AD) using the [Microsoft Authentication Library for JavaScript]() (MSAL.js) and then call a protected Node.js web API.
+The web API then calls the [Microsoft Graph API]() (MS Graph) on behalf of the user signed-in to the client app using the [on-behalf-of flow]().
 
 ## Scenario
 
@@ -241,7 +242,9 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+## We'd love your feedback!
+
+Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 
