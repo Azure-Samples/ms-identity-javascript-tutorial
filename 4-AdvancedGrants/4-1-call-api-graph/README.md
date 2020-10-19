@@ -20,24 +20,28 @@
 
 ## Overview
 
-This sample demonstrates a JavaScript SPA client application calling a Node.js web API that is secured using Azure AD.
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory]() (Azure AD) using the [Microsoft Authentication Library for JavaScript]() (MSAL.js) and then call a protected Node.js web API. The web API then calls the [Microsoft Graph API]() (MS Graph) on user's behalf using the [on-behalf-of flow]().
 
 ## Scenario
 
-1. The client JavaScript SPA application uses the Microsoft Authentication Library (MSAL) to sign-in and obtain a JWT access token from **Azure AD**:
-2. The access token is used as a bearer token to authorize the user to call the Node.js Web Api protected  **Azure AD**.
+1. The client JavaScript SPA uses MSAL.js to sign-in a user and obtain a [JWT]() [Access Token]() from **Azure AD**:
+1. The access token is used as a *bearer token* to authorize the user to call a Node.js web API protected by **Azure AD**.
+1. The web API exchanges the user's access token with an access token for itself to call MS Graph.
 
 ![Overview](./ReadmeFiles/topology_obo.png)
 
 ## Contents
 
-> Give a high-level folder structure of the sample.
-
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `LICENSE`         | The license for the sample.                |
+| `AppCreationScripts/` | Contains Powershell scripts to automate app registration. |
+| `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
+| `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
+| `App/authConfig.js`   | Contains configuration parameters for the sample. |
+| `SPA/server.js`           | Simple Node server for `index.html`.        |
+| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
+| `API/index.js`   | Main application logic resides here.                     |
+| `API/config.json`   | Contains authentication parameters for the sample. |
 
 ## Prerequisites
 
@@ -143,7 +147,7 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
 1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `access_as_user`.
+        - For **Scope name**, use `user_impersonation`.
         - Select **Admins and users** options for **Who can consent?**
         - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-ch5-s1-api`
         - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-ch5-s1-api as the signed-in user.`
@@ -241,8 +245,24 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ## About the code
 
-> - Describe where the code uses auth libraries, or calls the graph
-> - Describe specific aspects (e.g. caching, validation etc.)
+### /.default scope and combined consent
+
+Notice that we have set the scope in the **client** app as `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`, instead of `api://cd96451f-9709-4a95-b1f5-79da05cf8502/user_impersonation`. The [/.default](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope) scope is a built-in scope for every application that refers to the static list of permissions configured on the application registration in **Azure Portal**. Basically, it bundles all the permissions from the web API and MS Graph in one call, thus allowing you to grant combined consent to both the **client** app and the **web API**.
+
+Furthermore, we had configured the `knownClientApplications` attribute in **application manifest**. This attribute is used for bundling consent if you have a solution that contains two (or more) parts: a **client** app and a custom **web API**. If you enter the appID (clientID) of the client app into this array, the user will only have to consent once to the client app. **Azure AD** will know that consenting to the client means implicitly consenting to the web API.
+
+### Token validation
+
+The middle-tier web API uses the [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) to validate the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
+
+```javascript
+    app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
+        (req, res) => {
+            console.log('Validated claims: ', req.authInfo);
+    );
+```
+
+Clients, on the other hand, should treat access tokens as opaque strings, as the contents of the token are intended for the resource only (such as a web API or Microsoft Graph). For validation and debugging purposes, developers can decode **JWT**s (*JSON Web Tokens*) using a site like [jwt.ms](https://jwt.ms).
 
 ## More information
 
