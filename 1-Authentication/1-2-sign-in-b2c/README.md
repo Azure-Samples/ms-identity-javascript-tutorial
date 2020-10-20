@@ -1,4 +1,4 @@
-| In this Tutorial | Previous Tutorial | Next Tutorial |
+| In this Tutorial | Previous Chapter | Next Chapter |
 |------------------|------------------|----------------|
 | authentication, id tokens, user-flows | [Sign-in with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-1-sign-in) | [Call Microsoft Graph](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/2-Authorization-I/1-1-call-graph) |
 

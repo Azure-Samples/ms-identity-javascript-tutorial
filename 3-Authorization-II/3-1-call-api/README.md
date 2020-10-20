@@ -21,7 +21,9 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users authenticate against [Azure Active Directory (Azure AD)](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js) and authorize them to call a Web API secured with the Microsoft Identity Platform. In doing so, it also illustrates various authorization concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users authenticate against [Azure Active Directory (Azure AD)](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js).
+
+It then acquires an Access Token for a protected Web API for the signed-in user and calls the protected Web API. In doing so, it also illustrates various authorization concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
 
 ## Scenario
 
@@ -218,7 +220,9 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+## We'd love your feedback!
+
+Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 
@@ -346,7 +350,7 @@ For more information about how OAuth 2.0 protocols work in this scenario and oth
 
 Use [Stack Overflow](http://stackoverflow.com/questions/tagged/msal) to get support from the community.
 Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
-Make sure that your questions or comments are tagged with [`azure-ad` `azure-ad-b2c` `ms-identity` `adal` `msal`].
+Make sure that your questions or comments are tagged with [`azure-ad` `azure-ad-b2c` `ms-identity` `msal`].
 
 If you find a bug in the sample, please raise the issue on [GitHub Issues](../../issues).
 
