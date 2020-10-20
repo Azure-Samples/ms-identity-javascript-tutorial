@@ -90,16 +90,16 @@ To use this option, simply [watch the video tutorial](https://docs.microsoft.com
 
 Once the initialization is done, commit all your files to your local Git. On Visual Studio Code, you can use the **Source Control** panel on the left bar for this.
 
-2. Deploy your app. Click on the **Azure** icon on the left bar in VS Code. Hover your mouse cursor to **App Service** section and you will see an upward-facing arrow icon. Click on it publish your local files in the `TodoListAPI` folder to **Azure App Services**.
+2. Deploy your app. Click on the **Azure** icon on the left bar in VS Code. Hover your mouse cursor to **App Service** section and you will see an upward-facing arrow icon. Click on it publish your local files in the `API` folder to **Azure App Services**.
 
 ![api_step1](./ReadmeFiles/api_step1.png)
 ![api_step2](./ReadmeFiles/api_step2.png)
 
-Click "Add Config" if a popup dialog displays regarding configuration to deploy. Choose **Create new Web App** and give it a name, or choose an existing one from the options under **Select Web App**.
+Click **Add Config** if a popup dialog displays regarding configuration to deploy. Choose **Create new Web App** and give it a name, or choose an existing one from the options under **Select Web App**.
 
 ![api_step3](./ReadmeFiles/api_step3.png)
 
-3. Configure your app. On the **App Services** portal, click on the **Configuration** blade and set the **stack** property to **Node 12 LTS**.
+3. Configure your app. On the **App Service** portal, click on the **Configuration** blade and set the **stack** property to **Node 12 LTS**.
 
 4. Disable Azure AD authentication
 
@@ -112,6 +112,12 @@ Still on the **App Services** portal, click on the **Authentication/Authorizatio
 ![enable_cors](./ReadmeFiles/enable_cors.png)
 
 #### Update service app's authentication parameters
+
+1. Navigate back to to the [Azure portal](https://portal.azure.com).
+1. In the left-hand navigation pane, select the **Azure Active Directory** service, and then select **App registrations**.
+1. In the resulting screen, select the `ms-identity-javascript-nodejs-webapi` application.
+1. From the *Branding* menu, update the **Home page URL**, to the address of your service, for example [https://node-webapi-1.azurewebsites.com](https://node-webapi-1.azurewebsites.com). Save the configuration.
+1. Add the same URI in the list of values of the *Authentication -> Redirect URIs* menu. If you have multiple redirect URIs, make sure that there a new entry using the App service's URI for each redirect URI.
 
 ### Deploy the client app (JavaScript SPA)
 

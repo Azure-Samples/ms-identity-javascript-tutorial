@@ -61,7 +61,7 @@ git clone https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
 
 or download and extract the repository .zip file.
 
-> :warning: Given that the name of the sample is quite long, and so are the names of the referenced packages, you might want to clone it in a folder close to the root of your hard drive, to avoid maximum file path length limitations on Windows.
+> :warning: To avoid path length limitations on Windows, we recommend cloning into a directory near the root of your drive.
 
 ### Step 2: Install project dependencies
 
@@ -122,7 +122,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 ## Running the sample
 
 ```console
-    cd cd 1-Authentication/1-2-sign-in-b2c
+    cd 1-Authentication/1-2-sign-in-b2c
     npm start
 ```
 

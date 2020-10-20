@@ -64,7 +64,7 @@ From your shell or command line:
 
 or download and extract the repository .zip file.
 
-> :warning: Given that the name of the sample is quite long, and so are the names of the referenced packages, you might want to clone it in a folder close to the root of your hard drive, to avoid maximum file path length limitations on Windows.
+> :warning: To avoid path length limitations on Windows, we recommend cloning into a directory near the root of your drive.
 
 ### Step 2: Install project dependencies
 
