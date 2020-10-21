@@ -64,26 +64,26 @@ Alternatively, choose below the sample you want to review.
 | <img src="./1-Authentication/1-1-sign-in/ReadmeFiles/topology_signin.png" width="200"> | [**Sign-in with Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/1-Authentication/1-1-sign-in) </br> Sign-in your users with the **Azure AD** and learn to work with **ID Tokens**. Learn how **single sign-on (SSO)** works. Learn to secure your apps to operate in **national clouds**. |
 | <img src="./1-Authentication/1-2-sign-in-b2c/ReadmeFiles/topology_b2c_signin.png" width="200"> | [**Sign-in with Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/1-Authentication/1-2-sign-in-b2c) </br> Sign-in your customers with **Azure AD B2C**. Learn to integrate with **external social identity providers**. Learn how to use **user-flows** and **custom policies**. |
 
-### Chapter 2: Sign-in and get an Access Token for Microsoft Graph
+### Chapter 2: Authorization-I
 
 |                |               |
 |----------------|---------------|
 | <img src="./2-Authorization-I/2-1-call-graph/ReadmeFiles/topology_callgraph.png" width="200"> | [**Acquire an Access Token from Azure AD and call Microsoft Graph**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/2-Authorization-I/2-1-call-graph) </br> Authenticate your users and acquire an **Access Token** for Microsoft Graph and then call the **Microsoft Graph API**. |
 
-### Chapter 3: Protect your Web API with Azure AD and call your API from clients
+### Chapter 3: Authorization-II
 
 |                 |               |
 |-----------------|---------------|
 | <img src="./3-Authorization-II/3-1-call-api/ReadmeFiles/topology_callapi.png" width="200"> | [**Protect and call a web API on Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/3-Authorization-II/3-1-call-api) </br> Protect your web API with the **Azure AD**. Use a client application to sign-in a user, acquire an **Access Token** for your web API and call your protected Web API. |
 | <img src="./3-Authorization-II/3-2-call-api-b2c/ReadmeFiles/topology_b2c_callapi.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/3-Authorization-II/3-2-call-api-b2c) </br> Protect your web API with **Azure AD B2C**. Use a client application to sign-in a user, acquire an **Access Token** for your web API and call your protected web API. |
 
-### Chapter 4: Call Microsoft Graph API from your own API using the on-behalf of flow
+### Chapter 4: Advanced Grants
 
 |                 |               |
 |-----------------|---------------|
 | <img src="./4-AdvancedGrants/4-1-call-api-graph/ReadmeFiles/topology_obo.png" width="200"> | [**Call a web API that calls Microsoft Graph on behalf of a user**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/4-AdvancedGrants/4-1-call-api-graph) </br> Enhance your protected web API to acquire an **Access Token** for Microsoft Graph **on-behalf-of** a user signed-in to the client app. |
 
-### Chapter 5: Deploy to Azure
+### Chapter 5: Deployment
 
 |                 |               |
 |-----------------|---------------|
@@ -131,4 +131,4 @@ the rights to use your contribution. For details, visit https://cla.opensource.m
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.

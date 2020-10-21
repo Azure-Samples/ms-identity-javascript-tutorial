@@ -22,7 +22,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 ## Scenario
 
 1. The client application uses the **MSAL.js** library to sign-in a user and obtain a JWT **Access Token** from **Azure AD**.
-1. The **Access Token** is used as a **bearer** token to *authorize* the user to call the protected Web API.
+1. The **Access Token** is used as a **bearer** token to *authorize* the user to call the protected web API.
 1. The protected web API responds with the claims in the **Access Token**.
 
 ![Overview](./ReadmeFiles/topology_callapi.png)
@@ -126,7 +126,7 @@ As a first step you'll need to:
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c3s1-api`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c3s1-api`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
@@ -140,9 +140,9 @@ The first thing that we need to do is to declare the unique [resource](https://d
         - For **Scope name**, use `access_as_user`.
         - Select **Admins and users** options for **Who can consent?**
         - For **Admin consent display name** type `ms-identity-javascript-c3s1-api`
-        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-c3s1-api as the signed-in user.`
+        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c3s1-api as the signed-in user.`
         - For **User consent display name** type `Access ms-identity-javascript-c3s1-api`
-        - For **User consent description** type `Allow the application to access ms-identity-javascript-c3s1-api on your behalf.`
+        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c3s1-api on your behalf.`
         - Keep **State** as **Enabled**
         - Click on the **Add scope** button on the bottom to save this scope.
 1. On the right side menu, select the `Manifest` blade.
@@ -156,9 +156,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `config.js` file.
-1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
+1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s1-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
+1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s1-api` application copied from the Azure portal.
 
 #### Register the client app
 
@@ -174,7 +174,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. In the app's registration screen, click on the **API Permissions** blade in the left to open the page where we add access to the APIs that your application needs.
     - Click the **Add a permission** button and then,
     - Ensure that the **My APIs** tab is selected.
-    - In the list of APIs, select the API that you've just registered, i.e. `ms-identity-javascript-c3s1-api`.
+    - In the list of APIs, select the API that you've just registered, i.e. `ms-identity-javascript-tutorial-c3s1-api`.
     - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
     - Click on the **Add permissions** button at the bottom.
 
@@ -188,7 +188,7 @@ Open the `App\authConfig.js` file. Then:
 
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-spa` application copied from the Azure portal.
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `ms-identity-javascript-c3s1-spa` application (by default `http://localhost:3000`).
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c3s1-spa` application (by default `http://localhost:3000`).
 
 After you configured your web API, open the `App\apiConfig.js` file. Then:
 
@@ -356,3 +356,9 @@ To provide a recommendation, visit the following [User Voice page](https://feedb
 If you'd like to contribute to this sample, see [CONTRIBUTING.MD](../../CONTRIBUTING.md).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Code of Conduct
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.

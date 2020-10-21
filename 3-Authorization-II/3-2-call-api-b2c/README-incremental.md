@@ -98,7 +98,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
 
-`ms-identity-b2c-javascript-c1s2-spa`
+`ms-identity-javascript-c1s2-spa`
 
 1. In the **Register an application page** that appears, enter your application's registration information:
    - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c3s2-spa`.
