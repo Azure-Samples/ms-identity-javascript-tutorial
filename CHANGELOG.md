@@ -1,5 +1,5 @@
 # CHANGELOG
 
-## 10/14/2020
+## 10/20/2020
 
 * Initial sample.

@@ -65,12 +65,10 @@ or download and extract the repository .zip file.
 ### Step 2: Install project dependencies
 
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-spa
+    cd 4-AdvancedGrants/4-1-call-api-graph/API
     npm install
-```
-
-```console
-    cd ms-identity-javascript-tutorial-c4s1-api
+    cd ..
+    cd SPA
     npm install
 ```
 
@@ -164,7 +162,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-api` application copied from the Azure portal.
 1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of the `ms-identity-javascript-tutorial-c4s1-api` app in the Azure portal.
 
-### Register the spa app
+### Register the client app
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
@@ -189,16 +187,19 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
    - Click on the **Add permissions** button at the bottom.
 
-#### Configure the spa app to use your app registration
+#### Configure the client app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `Client\App\authConfig.js` file.
+Open the `SPA\App\authConfig.js` file. Then:
+
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-spa` application copied from the Azure portal.
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with "https://login.microsoftonline.com/"+$tenantId.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c4s1-spa` app. For example, 'http://localhost:3000/' .
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c4s1-spa` app. For example, `http://localhost:3000/`.
+
+Open the `SPA\App\apiConfig.js` file. Then:
 
 #### Configure knownClientApplications for service app
 
@@ -220,12 +221,10 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 ## Running the sample
 
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-api
+    cd 4-AdvancedGrants/4-1-call-api-graph/API
     npm start
-```
-
-```console
-    cd ms-identity-javascript-tutorial-c4s1-spa
+    cd ..
+    cd SPA
     npm start
 ```
 
@@ -239,7 +238,7 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 

@@ -9,7 +9,6 @@
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
- 1. [Deployment](#deployment)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
@@ -102,7 +101,7 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
 1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `demo.read`.
+        - For **Scope name**, use `access_as_user`.
         - Select **Admins and users** options for **Who can consent?**
         - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c3s2-api`
         - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c3s2-api as the signed-in user.`
@@ -136,6 +135,12 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
 1. Select **Save** to save your changes.
+1. In the app's registration screen, click on the **API Permissions** blade in the left to open the page where we add access to the APIs that your application needs.
+    - Click the **Add a permission** button and then,
+    - Ensure that the **My APIs** tab is selected.
+    - In the list of APIs, select the API that you've just registered, i.e. `ms-identity-javascript-tutorial-c3s2-api`.
+    - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
+    - Click on the **Add permissions** button at the bottom.
 
 #### Configure the client app to use your app registration
 
@@ -153,8 +158,8 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `policies.authorityDomain` abd replace it with the domain of your authority e.g. `fabrikamb2c.b2clogin.com`.
 
 1. Open the `App\apiConfig.js` file.
-1. Find the key `scopes` and replace the existing value with the scope of your web API.
-1. Find the key `uri` and replace the existing value with the coordinates of your web API.
+1. Find the key `scopes` and replace the existing value with the scope of your web API (e.g. `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`).
+1. Find the key `uri` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000`).
 
 ## Running the sample
 

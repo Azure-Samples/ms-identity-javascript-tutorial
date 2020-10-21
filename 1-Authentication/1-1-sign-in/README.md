@@ -1,7 +1,3 @@
-| In this Tutorial | Previous Tutorial | Next Tutorial |
-|------------------|------------------|----------------|
-| authentication, id tokens, single sign-on |  | [Sign-in with B2C](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-2-sign-in-b2c) |
-
 # Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authenticate users against Azure Active Directory
 
  1. [Overview](#overview)

@@ -32,7 +32,7 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 - [VS Code Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) extension is recommended for interacting with **Azure** through VS Code interface.
 - An **Azure AD** tenant. For more information, see: [How to get an Azure AD tenant](https://azure.microsoft.com/documentation/articles/active-directory-howto-tenant/)
 - A user account in your **Azure AD** tenant.
-- An **Azure subscription**. This sample uses **Azure Storage**, **Azure App Services**, **Azure Managed Identity** and **Azure Key Vault**.
+- An **Azure subscription**. This sample uses **Azure Storage** and **Azure App Service**.
 
 ## Setup
 
@@ -163,7 +163,7 @@ Open `apiConfig.js`. Then:
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## More information
 

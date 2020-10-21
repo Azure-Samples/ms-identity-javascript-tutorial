@@ -35,6 +35,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 | `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
+| `App/apiConfig.js`   | Contains coordinates of the web API to be called. |
 | `SPA/server.js`           | Simple Node server for `index.html`.        |
 | `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
 | `API/index.js`   | Main application logic resides here.                     |
@@ -173,7 +174,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. In the app's registration screen, click on the **API Permissions** blade in the left to open the page where we add access to the APIs that your application needs.
     - Click the **Add a permission** button and then,
     - Ensure that the **My APIs** tab is selected.
-    - In the list of APIs, select the API **TodoListAPI**.
+    - In the list of APIs, select the API that you've just registered, i.e. `ms-identity-javascript-c3s1-api`.
     - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
     - Click on the **Add permissions** button at the bottom.
 
@@ -191,7 +192,7 @@ Open the `App\authConfig.js` file. Then:
 
 After you configured your web API, open the `App\apiConfig.js` file. Then:
 
-1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the coordinates of your web API.
+1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000`).
 1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scopes for your web API, like `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`. You can copy this from the **Expose an API** blade of the web APIs registration.
 
 ## Running the sample
@@ -216,7 +217,7 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 

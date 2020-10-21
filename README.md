@@ -28,7 +28,7 @@ We recommend following the chapters in successive order. However, the code sampl
 - [Node.js](https://nodejs.org/en/download/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [VS Code Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
-- A modern web browser. While **MSAL.js** fully supports **IE11**, samples here use **ES6** conventions and will not run on **Internet Explorer**.
+- A modern web browser -while **MSAL.js** fully supports **IE11**, samples here use **ES6** conventions and will not run on **Internet Explorer**
 
 Please refer to each sample's README for sample-specific prerequisites.
 
@@ -41,6 +41,11 @@ Please refer to each sample's README for sample-specific prerequisites.
 Please refer to each sample's README for sample-specific recommendations.
 
 ## Contents
+
+- For **Azure AD**, start from [here](./1-Authentication/1-1-sign-in/README-incremental.md)
+- For **Azure AD B2C**, start from [here](./1-Authentication/1-2-sign-in-b2c/README-incremental.md)
+
+Alternatively, choose below the sample you want to review.  
 
 <!-- | Chapter              | Covers                                                                      |
 |----------------------|-----------------------------------------------------------------------------|

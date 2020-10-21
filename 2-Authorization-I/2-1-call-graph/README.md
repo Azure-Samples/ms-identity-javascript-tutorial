@@ -35,6 +35,7 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 | `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
+| `App/graphConfig.js`   | Contains coordinates of the web API to be called. |
 | `App/ui.js`           | Contains UI logic.                         |
 | `server.js`           | Simple Node server for `index.html`.        |
 
@@ -45,7 +46,7 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 - [Visual Studio Code](https://code.visualstudio.com/download) is recommended for running and editing this sample.
 - [VS Code Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) extension is recommended for interacting with Azure through VS Code Interface.
 - An **Azure AD** tenant. For more information see: [How to get an Azure AD tenant](https://azure.microsoft.com/documentation/articles/active-directory-howto-tenant/)
-- A user account in your **Azure AD**. This sample will not work with a **personal Microsoft account**. Therefore, if you signed in to the [Azure portal](https://portal.azure.com) with a personal account and have never created a user account in your directory before, you need to do that now.
+- A user account in your **Azure AD** tenant.
 
 ## Setup
 
@@ -67,6 +68,8 @@ or download and extract the repository .zip file.
     cd 2-Authorization-I/2-1-call-graph
     npm install
 ```
+
+## Registration
 
 ### Register the sample application(s) with your Azure Active Directory tenant
 
@@ -139,10 +142,6 @@ Open the `app\authConfig.js` file. Then:
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with your *tenanted* authority string. For example, `https://login.microsoftonline.com/<your-tenant-id>`
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-c2s1` app. For example, `http://localhost:3000/`.
 
-Open the `app\authConfig.js` file. Then:
-
-1. Find the key `Enter_the_Graph_Endpoint_Here` and replace the existing value with the Microsoft Graph API endpoint copied from the Azure Portal. For example, `https://graph.microsoft.com`.
-
 ## Running the sample
 
 ```console
@@ -161,7 +160,7 @@ Open the `app\authConfig.js` file. Then:
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 
