@@ -83,7 +83,7 @@ If you don't have an Azure AD B2C tenant yet, please see: [Tutorial: Create an A
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-b2c-javascript-c1s2`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c1s2`.
    - Under **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C**.
    - In the **Redirect URI (optional)** section, select **Single-Page Application** in the combo-box and enter the following redirect URI: `http://localhost:6420/`.
 1. Select **Register** to create the application.
@@ -105,9 +105,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `App\authConfig.js` file.
-1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-b2c-javascript-c1s2` application copied from the Azure portal.
-1. Find the key `redirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-c1s2 project (by default `http://localhost:6420`).
-1. Find the key `postLogoutRedirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-c1s2 project and the **signout** page that the app will redirect to e.g. `http://localhost:6420/signout`.
+1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c1s2` application copied from the Azure portal.
+1. Find the key `redirectUri` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c1s2` app (by default `http://localhost:6420`).
+1. Find the key `postLogoutRedirectUri` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c1s2` app and the **signout** page that the app will redirect to e.g. `http://localhost:6420/signout`.
 
 1. Open the `App\policies.js` file.
 1. Find the key `names` and populate it with your policy names e.g. `signUpSignIn`.
@@ -331,3 +331,9 @@ To provide a recommendation, visit the following [User Voice page](https://feedb
 If you'd like to contribute to this sample, see [CONTRIBUTING.MD](../../CONTRIBUTING.md).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Code of Conduct
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
