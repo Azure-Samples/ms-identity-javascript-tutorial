@@ -1,5 +1,5 @@
 {
-  "name": "ms-identity-javascript-callapi",
+  "name": "ms-identity-javascript-tutorial-c4s1-spa",
   "version": "1.0.0",
   "description": "JavaScript SPA calling a custom web API with MSAL.js 2.x using the auth code flow with PKCE",
   "main": "server.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-callapi.git"
+    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git"
   },
   "keywords": [
     "javascript",
@@ -27,9 +27,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure-Samples/ms-identity-javascript-callapi/issues"
+    "url": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial/issues"
   },
-  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-callapi#readme",
+  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial#readme",
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.10.0",

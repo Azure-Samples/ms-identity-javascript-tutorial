@@ -1,5 +1,5 @@
 {
-  "name": "ms-identity-b2c-javascript-signin",
+  "name": "ms-identity-javascript-tutorial-c3s2-spa",
   "version": "1.0.0",
   "description": "A Vanilla JavaScript Single-page Application that lets users to sign-in to Azure AD B2C built with MSAL.js",
   "main": "server.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin.git"
+    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git"
   },
   "keywords": [
     "javascript",
@@ -24,9 +24,9 @@
   "author": "derisen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin/issues"
+    "url": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial/issues"
   },
-  "homepage": "https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin#readme",
+  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial#readme",
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.10.0"

@@ -1,7 +1,3 @@
-| In this Tutorial |Previous Tutorial | Next Tutorial |
-|------------------|------------------|----------------|
-| authorization, access tokens, calling an API | [Sign-in with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) | |
-
 # A Node.js Web API secured by Azure AD and calling Microsoft Graph on behalf of a signed-in user
 
  1. [Overview](#overview)
@@ -20,14 +16,13 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory]() (Azure AD) using the [Microsoft Authentication Library for JavaScript]() (MSAL.js) and then call a protected Node.js web API.
-The web API then calls the [Microsoft Graph API]() (MS Graph) on behalf of the user signed-in to the client app using the [on-behalf-of flow]().
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js) and then calls a protected Node.js web API. The web API then calls the [Microsoft Graph API](https://docs.microsoft.com/graph/overview) (MS Graph) on behalf of the user signed-in to the client app using the [on-behalf-of flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow).
 
 ## Scenario
 
-1. The client JavaScript SPA uses MSAL.js to sign-in a user and obtain a [JWT]() [Access Token]() from **Azure AD**:
-1. The access token is used as a *bearer token* to authorize the user to call a Node.js web API protected by **Azure AD**.
-1. The web API exchanges the user's access token with an access token for itself to call MS Graph.
+1. The client JavaScript SPA uses **MSAL.js** to sign-in a user and obtain an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**:
+1. The **Access Token** is used as a *bearer token* to authorize the user to call a Node.js web API protected by **Azure AD**.
+1. The web API exchanges the user's **Access Token** with an **Access Token** for itself to call **MS Graph**.
 
 ![Overview](./ReadmeFiles/topology_obo.png)
 
@@ -70,12 +65,12 @@ or download and extract the repository .zip file.
 ### Step 2: Install project dependencies
 
 ```console
-    cd ms-identity-javascript-tutorial-ch5-s1-client
+    cd ms-identity-javascript-tutorial-c4s1-spa
     npm install
 ```
 
 ```console
-    cd ms-identity-javascript-tutorial-ch5-s1-api
+    cd ms-identity-javascript-tutorial-c4s1-api
     npm install
 ```
 
@@ -120,12 +115,12 @@ As a first step you'll need to:
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. If your account is present in more than one Azure AD tenant, select your profile at the top right corner in the menu on top of the page, and then **switch directory** to change your portal session to the desired Azure AD tenant.
 
-### Register the service app (ms-identity-javascript-tutorial-ch5-s1-api)
+### Register the service app
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-ch5-s1-api`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c4s1-api`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
@@ -150,31 +145,31 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `user_impersonation`.
         - Select **Admins and users** options for **Who can consent?**
-        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-ch5-s1-api`
-        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-ch5-s1-api as the signed-in user.`
-        - For **User consent display name** type `Access ms-identity-javascript-tutorial-ch5-s1-api`
-        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-ch5-s1-api on your behalf.`
+        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api`
+        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c4s1-api as the signed-in user.`
+        - For **User consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api`
+        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-api on your behalf.`
         - Keep **State** as **Enabled**
         - Click on the **Add scope** button on the bottom to save this scope.
 
-#### Configure the service app (ms-identity-javascript-tutorial-ch5-s1-api) to use your app registration
+#### Configure the service app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `API\config.json` file.
-1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-ch5-s1-api` application copied from the Azure portal.
+1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-ch5-s1-api` application copied from the Azure portal.
-1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of the `ms-identity-javascript-tutorial-ch5-s1-api` app, in the Azure portal.
+1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-api` application copied from the Azure portal.
+1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of the `ms-identity-javascript-tutorial-c4s1-api` app in the Azure portal.
 
-### Register the spa app (ms-identity-javascript-tutorial-ch5-s1-client)
+### Register the spa app
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-ch5-s1-client`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c4s1-spa`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
    - In the **Redirect URI (optional)** section, select **Single-Page Application** in the combo-box and enter the following redirect URI: `http://localhost:3000/`.
 1. Select **Register** to create the application.
@@ -190,29 +185,29 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - Click the **Add a permission** button and then:
 
    - Ensure that the **My APIs** tab is selected.
-   - In the list of APIs, select the API `ms-identity-javascript-tutorial-ch5-s1-api`.
+   - In the list of APIs, select the API `ms-identity-javascript-tutorial-c4s1-api`.
    - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
    - Click on the **Add permissions** button at the bottom.
 
-#### Configure the spa app (ms-identity-javascript-tutorial-ch5-s1-client) to use your app registration
+#### Configure the spa app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `Client\App\authConfig.js` file.
-1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-ch5-s1-client` application copied from the Azure portal.
+1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-spa` application copied from the Azure portal.
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with "https://login.microsoftonline.com/"+$tenantId.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for ms-identity-javascript-tutorial-ch5-s1-client app. For example, 'http://localhost:3000/' .
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c4s1-spa` app. For example, 'http://localhost:3000/' .
 
-#### Configure Known Client Applications for service (ms-identity-javascript-tutorial-ch5-s1-api)
+#### Configure knownClientApplications for service app
 
-For a middle tier Web API (`ms-identity-javascript-tutorial-ch5-s1-api`) to be able to call a downstream Web API, the middle tier app needs to be granted the required permissions as well. However, since the middle tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle tier Web Api and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
+For a middle tier Web API to be able to call a downstream Web API, the middle tier app needs to be granted the required permissions as well. However, since the middle tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle tier Web Api and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
 
 To achieve this, you need to add the **Application Id** of the client app, in the Manifest of the Web API in the `knownClientApplications` property. Here's how:
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-tutorial-ch5-s1-api` app registration, and select **Manifest** section.
-1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ms-identity-javascript-tutorial-ch5-s1-client`) as an element of the array.
+1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-tutorial-c4s1-api` app registration, and select **Manifest** section.
+1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ms-identity-javascript-tutorial-c4s1-spa`) as an element of the array.
 
     For instance:
 
@@ -225,12 +220,12 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 ## Running the sample
 
 ```console
-    cd ms-identity-javascript-tutorial-ch5-s1-client
+    cd ms-identity-javascript-tutorial-c4s1-api
     npm start
 ```
 
 ```console
-    cd ms-identity-javascript-tutorial-ch5-s1-api
+    cd ms-identity-javascript-tutorial-c4s1-spa
     npm start
 ```
 
@@ -244,7 +239,7 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 

@@ -1,5 +1,5 @@
 {
-  "name": "ms-identity-javascript-v2",
+  "name": "ms-identity-javascript-c2s1",
   "version": "1.0.0",
   "description": "Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph",
   "main": "server.js",

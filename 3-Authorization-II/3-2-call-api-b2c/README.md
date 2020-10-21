@@ -1,7 +1,3 @@
-| In this Tutorial | Previous Tutorial | Next Tutorial |
-|------------------|------------------|----------------|
-| authorization, access tokens, user-flows | [Sign-in with Azure AD B2C](https://github.com/Azure-Samples/ms-identity-b2c-javascript-signin) | |
-
 # Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD B2C
 
  1. [Overview](#overview)
@@ -21,9 +17,7 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application that lets users authenticate against [Azure Active Directory B2C](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js) 
-
-It then acquires an Access Token for a web API that is also protected by **Azure AD B2C**. In doing so, it also illustrates various authorization and B2C concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Refresh Tokens](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#token-types), [Token Lifetimes and Configuration](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#configuration), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
+This sample demonstrates a Vanilla JavaScript single-page application that lets users authenticate against [Azure Active Directory B2C](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js), then acquires an **Access Token** for a web API that is also protected by **Azure AD B2C**. In doing so, it also illustrates various authorization and B2C concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Refresh Tokens](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#token-types), [Token Lifetimes and Configuration](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#configuration), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
 
 ## Scenario
 
@@ -73,7 +67,7 @@ or download and extract the repository .zip file.
 
 ```console
     cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II-3-2-call-api-b2c
+    cd 3-Authorization-II/3-2-call-api-b2c
     cd API
     npm install
     cd..
@@ -85,8 +79,6 @@ or download and extract the repository .zip file.
 
 > :information_source: This sample comes with a pre-registered application for testing purposes. If you would like to use your own **Azure AD B2C** tenant and application, follow the steps below to register and configure the applications in the **Azure Portal**. Otherwise, continue with the steps for [Running the sample](#running-the-sample).
 
-> :information_source: This sample is calling a web API that is already protected by Azure AD B2C and hosted on Azure websites. If you would like to setup and use your own web API, follow the instructions on the [Node.js Web API with Azure AD B2C](https://github.com/Azure-Samples/active-directory-b2c-javascript-nodejs-webapi) sample. Otherwise, continue with the steps for [Running the sample](#running-the-sample).
-
 ### Choose the Azure AD B2C tenant where you want to create your applications
 
 As a first step you'll need to:
@@ -94,12 +86,12 @@ As a first step you'll need to:
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. If your account is present in more than one Azure AD B2C tenant, select your profile at the top right corner in the menu on top of the page, and then **switch directory** to change your portal session to the desired Azure AD B2C tenant.
 
-### Register the service app (active-directory-b2c-javascript-nodejs-webapi)
+### Register the service app
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD B2C** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `active-directory-b2c-javascript-nodejs-webapi`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c3s2-api`.
    - Under **Supported account types**, select **Accounts in any organizational directory only**.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
@@ -112,48 +104,48 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `demo.read`.
         - Select **Admins and users** options for **Who can consent?**
-        - For **Admin consent display name** type `Access active-directory-b2c-javascript-nodejs-webapi`
-        - For **Admin consent description** type `Allows the app to access active-directory-b2c-javascript-nodejs-webapi as the signed-in user.`
-        - For **User consent display name** type `Access active-directory-b2c-javascript-nodejs-webapi`
-        - For **User consent description** type `Allow the application to access active-directory-b2c-javascript-nodejs-webapi on your behalf.`
+        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c3s2-api`
+        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c3s2-api as the signed-in user.`
+        - For **User consent display name** type `Access ms-identity-javascript-tutorial-c3s2-api`
+        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c3s2-api on your behalf.`
         - Keep **State** as **Enabled**
         - Click on the **Add scope** button on the bottom to save this scope.
 1. On the right side menu, select the `Manifest` blade.
    - Set `accessTokenAcceptedVersion` property to **2**.
    - Click on **Save**.
 
-#### Configure the service app (active-directory-b2c-javascript-nodejs-webapi) to use your app registration
+#### Configure the service app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `config.json` file.
-1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `active-directory-b2c-javascript-nodejs-webapi` application copied from the Azure portal.
+1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s2-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `active-directory-b2c-javascript-nodejs-webapi` application copied from the Azure portal.
+1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s2-api` application copied from the Azure portal.
 
-#### Register the client app (ms-identity-b2c-javascript-callapi)
+#### Register the client app
 
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-b2c-javascript-callapi`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c3s2-spa`.
    - Under **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C**.
    - In the **Redirect URI (optional)** section, select **Web** in the combo-box and enter the following redirect URI: `http://localhost:6420`.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
 1. Select **Save** to save your changes.
 
-#### Configure the client app (ms-identity-b2c-javascript-callapi) to use your app registration
+#### Configure the client app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `App\authConfig.js` file.
-1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-b2c-javascript-callapi` application copied from the Azure portal.
-1. Find the key `redirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-callapi project (by default `http://localhost:6420`).
+1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s2-spa` application copied from the Azure portal.
+1. Find the key `redirectUri` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c3s2-spa` app (by default `http://localhost:6420`).
 
 1. Open the `App\policies.js` file.
 1. Find the key `policies.names` and replace it with the names (IDs) of your policies/user-flows e.g. `b2c_1_susi`.
@@ -168,7 +160,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 ```console
     cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II-3-2-call-api-b2c
+    cd 3-Authorization-II/3-2-call-api-b2c
     cd API
     npm start
     cd..
@@ -186,7 +178,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 

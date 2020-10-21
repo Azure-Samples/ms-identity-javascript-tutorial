@@ -1,5 +1,5 @@
 {
-  "name": "active-directory-javascript-nodejs-webapi-v2",
+  "name": "ms-identity-javascript-tutorial-c4s1-api",
   "version": "1.0.0",
   "description": "---\r page_type: sample\r description: \"This sample demonstrates how to protect a Node.js web API with Azure AD using the Passport.js library.\"\r languages:\r - javascript\r - nodejs\r products:\r - azure\r - azure-active-directory\r urlFragment: nodejs-web-api-azure-ad\r ---",
   "author": "derisen",
@@ -21,7 +21,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure-Samples/active-directory-javascript-nodejs-webapi-v2.git"
+    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git"
   },
   "keywords": [
     "azure-ad",
@@ -30,9 +30,9 @@
     "api"
   ],
   "bugs": {
-    "url": "https://github.com/Azure-Samples/active-directory-javascript-nodejs-webapi-v2/issues"
+    "url": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial/issues"
   },
-  "homepage": "https://github.com/Azure-Samples/active-directory-javascript-nodejs-webapi-v2#readme",
+  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial#readme",
   "devDependencies": {
     "nodemon": "^2.0.4"
   }

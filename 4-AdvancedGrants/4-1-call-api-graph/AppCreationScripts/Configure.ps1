@@ -259,14 +259,14 @@ Function ConfigureApplications
     $user = Get-AzureADUser -ObjectId $creds.Account.Id
 
    # Create the service AAD application
-   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-ch5-s1-api)"
+   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-c4s1-api)"
    # Get a 2 years application key for the service Application
    $pw = ComputePassword
    $fromDate = [DateTime]::Now;
    $key = CreateAppKey -fromDate $fromDate -durationInYears 2 -pw $pw
    $serviceAppKey = $pw
    # create the application 
-   $serviceAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-ch5-s1-api" `
+   $serviceAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-c4s1-api" `
                                                    -HomePage "http://localhost:5000/api" `
                                                    -PasswordCredentials $key `
                                                    -PublicClient $False
@@ -304,9 +304,9 @@ Function ConfigureApplications
         {
             # Add scope
             $scope = CreateScope -value "access_as_user"  `
-                -userConsentDisplayName "Access ms-identity-javascript-tutorial-ch5-s1-api"  `
-                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-ch5-s1-api on your behalf."  `
-                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-ch5-s1-api"  `
+                -userConsentDisplayName "Access ms-identity-javascript-tutorial-c4s1-api"  `
+                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-c4s1-api on your behalf."  `
+                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-c4s1-api"  `
                 -adminConsentDescription "Allows the app to have the same access to information in the directory on behalf of the signed-in user."
             
             $scopes.Add($scope)
@@ -316,12 +316,12 @@ Function ConfigureApplications
     # add/update scopes
     Set-AzureADApplication -ObjectId $serviceAadApplication.ObjectId -OAuth2Permission $scopes
 
-   Write-Host "Done creating the service application (ms-identity-javascript-tutorial-ch5-s1-api)"
+   Write-Host "Done creating the service application (ms-identity-javascript-tutorial-c4s1-api)"
 
    # URL of the AAD application in the Azure portal
    # Future? $servicePortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$serviceAadApplication.AppId+"/objectId/"+$serviceAadApplication.ObjectId+"/isMSAApp/"
    $servicePortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$serviceAadApplication.AppId+"/objectId/"+$serviceAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>service</td><td>$currentAppId</td><td><a href='$servicePortalUrl'>ms-identity-javascript-tutorial-ch5-s1-api</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>service</td><td>$currentAppId</td><td><a href='$servicePortalUrl'>ms-identity-javascript-tutorial-c4s1-api</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 
@@ -337,12 +337,12 @@ Function ConfigureApplications
    Write-Host "Granted permissions."
 
    # Create the spa AAD application
-   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-ch5-s1-client)"
+   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-c4s1-spa)"
    # create the application 
-   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-ch5-s1-client" `
+   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-c4s1-spa" `
                                                -HomePage "http://localhost:3000/" `
                                                -ReplyUrls "http://localhost:3000/" `
-                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-tutorial-ch5-s1-client" `
+                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-tutorial-c4s1-spa" `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -358,12 +358,12 @@ Function ConfigureApplications
    }
 
 
-   Write-Host "Done creating the spa application (ms-identity-javascript-tutorial-ch5-s1-client)"
+   Write-Host "Done creating the spa application (ms-identity-javascript-tutorial-c4s1-spa)"
 
    # URL of the AAD application in the Azure portal
    # Future? $spaPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
    $spaPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-javascript-tutorial-ch5-s1-client</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-javascript-tutorial-c4s1-spa</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 
@@ -376,7 +376,7 @@ Function ConfigureApplications
 
    # Add Required Resources Access (from 'spa' to 'service')
    Write-Host "Getting access from 'spa' to 'service'"
-   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-ch5-s1-api" `
+   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s1-api" `
                                                 -requiredDelegatedPermissions "user_impersonation" `
 
    $requiredResourcesAccess.Add($requiredPermissions)

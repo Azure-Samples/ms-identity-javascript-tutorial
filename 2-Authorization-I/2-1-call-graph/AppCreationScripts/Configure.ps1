@@ -197,12 +197,12 @@ Function ConfigureApplications
     $user = Get-AzureADUser -ObjectId $creds.Account.Id
 
    # Create the spa AAD application
-   Write-Host "Creating the AAD application (ms-identity-javascript-v2)"
+   Write-Host "Creating the AAD application (ms-identity-javascript-c2s1)"
    # create the application 
-   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-v2" `
+   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-c2s1" `
                                                -HomePage "http://localhost:3000/" `
                                                -ReplyUrls "http://localhost:3000/" `
-                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-v2" `
+                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-c2s1" `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -218,12 +218,12 @@ Function ConfigureApplications
    }
 
 
-   Write-Host "Done creating the spa application (ms-identity-javascript-v2)"
+   Write-Host "Done creating the spa application (ms-identity-javascript-c2s1)"
 
    # URL of the AAD application in the Azure portal
    # Future? $spaPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
    $spaPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-javascript-v2</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-javascript-c2s1</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 

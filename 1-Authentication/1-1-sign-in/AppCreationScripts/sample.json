@@ -10,7 +10,7 @@
     "AADApps": [
       {
         "Id": "spa",
-        "Name": "ms-identity-javascript-signin",
+        "Name": "ms-identity-javascript-c1s1",
         "Kind" :  "SinglePageApplication",
         "Audience": "AzureADMyOrg",
         "HomePage": "http://localhost:3000",

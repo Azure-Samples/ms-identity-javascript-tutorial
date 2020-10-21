@@ -1,7 +1,3 @@
-| In this Tutorial | Previous Chapter | Next Chapter |
-|------------------|------------------|----------------|
-| authentication, id tokens, user-flows | [Sign-in with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-1-sign-in) | [Call Microsoft Graph](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/2-Authorization-I/1-1-call-graph) |
-
 # Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authenticate users against Azure AD B2C
 
  1. [Overview](#overview)
@@ -27,7 +23,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 
 ## Scenario
 
-1. The client application uses **MSAL.js** to obtain an [ID token](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#token-types) from **Azure AD B2C**.
+1. The client application uses **MSAL.js** to obtain an **ID Token** from **Azure AD B2C**.
 2. The **ID Token** proves that the user has successfully authenticated against **Azure AD B2C**.
 
 ## Contents
@@ -83,12 +79,12 @@ As a first step you'll need to:
 
 If you don't have an Azure AD B2C tenant yet, please see: [Tutorial: Create an Azure Active Directory B2C tenant](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-create-tenant).
 
-#### Register the app (ms-identity-b2c-javascript-signin)
+#### Register the app
 
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-b2c-javascript-signin`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-b2c-javascript-c1s2`.
    - Under **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C**.
    - In the **Redirect URI (optional)** section, select **Single-Page Application** in the combo-box and enter the following redirect URI: `http://localhost:6420/`.
 1. Select **Register** to create the application.
@@ -103,16 +99,16 @@ Please refer to: [Tutorial: Create user flows in Azure Active Directory B2C](htt
 
 Please refer to: [Tutorial: Add identity providers to your applications in Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-add-identity-providers)
 
-#### Configure the app (ms-identity-b2c-javascript-signin) to use your app registration
+#### Configure the app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `App\authConfig.js` file.
-1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-b2c-javascript-signin` application copied from the Azure portal.
-1. Find the key `redirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-signin project (by default `http://localhost:6420`).
-1. Find the key `postLogoutRedirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-signin project and the **signout** page that the app will redirect to e.g. `http://localhost:6420/signout`.
+1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-b2c-javascript-c1s2` application copied from the Azure portal.
+1. Find the key `redirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-c1s2 project (by default `http://localhost:6420`).
+1. Find the key `postLogoutRedirectUri` and replace the existing value with the base address of the ms-identity-b2c-javascript-c1s2 project and the **signout** page that the app will redirect to e.g. `http://localhost:6420/signout`.
 
 1. Open the `App\policies.js` file.
 1. Find the key `names` and populate it with your policy names e.g. `signUpSignIn`.
@@ -133,7 +129,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-> :thought_balloon: Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+## We'd love your feedback!
+
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 

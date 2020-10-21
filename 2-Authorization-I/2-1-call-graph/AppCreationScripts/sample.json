@@ -11,7 +11,7 @@
     "AADApps": [
       {
         "Id": "spa",
-        "Name": "ms-identity-javascript-v2",
+        "Name": "ms-identity-javascript-c2s1",
         "Kind" :  "SinglePageApplication",
         "HomePage": "http://localhost:3000/",
         "ReplyUrls":"http://localhost:3000/",

@@ -8,9 +8,9 @@ products:
 - azure-storage
 - azure-key-vault
 - azure-functions
-- microsoft-identity-platform
 - azure-active-directory
 - azure-active-directory-b2c
+- microsoft-identity-platform
 description: "Tutorial: Enable your JavaScript Single-page Application (SPA) to sign-in users and call APIs with the Microsoft identity platform"
 urlFragment: "ms-identity-javascript-tutorial"
 ---
@@ -56,33 +56,33 @@ Please refer to each sample's README for sample-specific recommendations.
 
 |               |               |
 |---------------|---------------|
-| <img src="./1-Authentication/1-1-sign-in/ReadmeFiles/topology_signin.png" width="200"> | [**Sign-in with Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-1-sign-in) </br> Sign-in your users with the Microsoft identity platform and learn to work with **ID Tokens**. Learn how **single sign-on (SSO)** works. Learn to secure your apps to operate in **national clouds**. |
-| <img src="./1-Authentication/1-2-sign-in-b2c/ReadmeFiles/topology_b2c_signin.png" width="200"> | [**Sign-in with Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/1-Authentication/1-2-sign-in-b2c) </br> Sign-in your customers with **Azure AD B2C**. Learn to integrate with **external social identity providers**. Learn how to use **user-flows** and **custom policies**. |
+| <img src="./1-Authentication/1-1-sign-in/ReadmeFiles/topology_signin.png" width="200"> | [**Sign-in with Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/1-Authentication/1-1-sign-in) </br> Sign-in your users with the **Azure AD** and learn to work with **ID Tokens**. Learn how **single sign-on (SSO)** works. Learn to secure your apps to operate in **national clouds**. |
+| <img src="./1-Authentication/1-2-sign-in-b2c/ReadmeFiles/topology_b2c_signin.png" width="200"> | [**Sign-in with Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/1-Authentication/1-2-sign-in-b2c) </br> Sign-in your customers with **Azure AD B2C**. Learn to integrate with **external social identity providers**. Learn how to use **user-flows** and **custom policies**. |
 
 ### Chapter 2: Sign-in and get an Access Token for Microsoft Graph
 
 |                |               |
 |----------------|---------------|
-| <img src="./2-Authorization-I/2-1-call-graph/ReadmeFiles/topology_callgraph.png" width="200"> | [**Acquire an Access Token from Azure AD and call Microsoft Graph**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/2-Authorization-I/2-1-call-graph) </br> Here we build on the concepts we obtained from authenticate users to further acquire an **Access Token** for Microsoft Graph and then call the Microsoft Graph API. |
+| <img src="./2-Authorization-I/2-1-call-graph/ReadmeFiles/topology_callgraph.png" width="200"> | [**Acquire an Access Token from Azure AD and call Microsoft Graph**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/2-Authorization-I/2-1-call-graph) </br> Authenticate your users and acquire an **Access Token** for Microsoft Graph and then call the **Microsoft Graph API**. |
 
 ### Chapter 3: Protect your Web API with Azure AD and call your API from clients
 
 |                 |               |
 |-----------------|---------------|
-| <img src="./3-Authorization-II/3-1-call-api/ReadmeFiles/topology_callapi.png" width="200"> | [**Protect and call a web API on Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-1-call-api) </br> Here we learn to protect your web API with the Microsoft Identity Platform. Then we use a client application to sign-in a user, acquire an Access Token for your Web API and call your protected Web API. |
-| <img src="./3-Authorization-II/3-2-call-api-b2c/ReadmeFiles/topology_b2c_callapi.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/3-Authorization-II/3-2-call-api-b2c) </br> In this chapter, we learn to protect your web API with Azure AD B2C. Then we use a client application to sign-in a user, acquire an **Access Token** for your Web API and call your protected web API. |
+| <img src="./3-Authorization-II/3-1-call-api/ReadmeFiles/topology_callapi.png" width="200"> | [**Protect and call a web API on Azure AD**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/3-Authorization-II/3-1-call-api) </br> Protect your web API with the **Azure AD**. Use a client application to sign-in a user, acquire an **Access Token** for your web API and call your protected Web API. |
+| <img src="./3-Authorization-II/3-2-call-api-b2c/ReadmeFiles/topology_b2c_callapi.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/3-Authorization-II/3-2-call-api-b2c) </br> Protect your web API with **Azure AD B2C**. Use a client application to sign-in a user, acquire an **Access Token** for your web API and call your protected web API. |
 
 ### Chapter 4: Call Microsoft Graph API from your own API using the on-behalf of flow
 
 |                 |               |
 |-----------------|---------------|
-| <img src="./4-AdvancedGrants/4-1-call-api-graph/ReadmeFiles/topology_obo.png" width="200"> | [**Call a web API that calls Microsoft Graph on behalf of a user**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/4-AdvancedGrants/4-1-call-api-graph) </br> In this chapter, we enhance our protected web API to acquire an **Access Token** for Microsoft Graph **on-behalf-of** the user signed-in the client app. |
+| <img src="./4-AdvancedGrants/4-1-call-api-graph/ReadmeFiles/topology_obo.png" width="200"> | [**Call a web API that calls Microsoft Graph on behalf of a user**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/4-AdvancedGrants/4-1-call-api-graph) </br> Enhance your protected web API to acquire an **Access Token** for Microsoft Graph **on-behalf-of** a user signed-in to the client app. |
 
 ### Chapter 5: Deploy to Azure
 
 |                 |               |
 |-----------------|---------------|
-| <img src="./5-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Services**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/master/5-Deployment) </br> Finally, we prepare your app for deployment to various **Azure** services. Learn how to package and upload files, configure authentication parameters and use the various **Azure** services for managing your operations. |
+| <img src="./5-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Service**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/5-Deployment) </br> Prepare your app for deployment to various **Azure** services. Learn how to package and upload files, configure authentication parameters and use the various **Azure** services for managing your operations. |
 
 ## We'd love your feedback!
 

@@ -10,7 +10,7 @@
     "AADApps": [
       {
         "Id": "service",
-        "Name": "ms-identity-javascript-tutorial-ch5-s1-api",
+        "Name": "ms-identity-javascript-tutorial-c4s1-api",
         "Kind": "WebApi",
         "HomePage": "http://localhost:5000/api",
         "Audience": "AzureADMyOrg",
@@ -29,7 +29,7 @@
       },
       {
         "Id": "spa",
-        "Name": "ms-identity-javascript-tutorial-ch5-s1-client",
+        "Name": "ms-identity-javascript-tutorial-c4s1-spa",
         "Kind" :  "SinglePageApplication",
         "Audience": "AzureADMyOrg",
         "HomePage": "http://localhost:3000/",

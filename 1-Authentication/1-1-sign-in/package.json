@@ -1,5 +1,5 @@
 {
-  "name": "ms-identity-javascript-signin",
+  "name": "ms-identity-javascript-c1s1",
   "version": "1.0.0",
   "description": "Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authenticate users against Azure Active Directory",
   "main": "server.js",

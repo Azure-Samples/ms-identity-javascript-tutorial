@@ -1,7 +1,3 @@
-| In this Tutorial |Previous Tutorial | Next Tutorial |
-|------------------|------------------|----------------|
-| authorization, access tokens, calling an API | [Sign-in with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) | |
-
 # Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD
 
  1. [Overview](#overview)
@@ -21,9 +17,7 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users authenticate against [Azure Active Directory (Azure AD)](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js).
-
-It then acquires an Access Token for a protected Web API for the signed-in user and calls the protected Web API. In doing so, it also illustrates various authorization concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js), then acquires an **Access Token** for a protected web API for the signed-in user and calls the protected web API. In doing so, it also illustrates various authorization concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
 
 ## Scenario
 
@@ -73,7 +67,7 @@ or download and extract the repository .zip file.
 
 ```console
     cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II-3-1-call-api
+    cd 3-Authorization-II/3-1-call-api
     cd API
     npm install
     cd..
@@ -126,12 +120,12 @@ As a first step you'll need to:
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. If your account is present in more than one Azure AD tenant, select your profile at the top right corner in the menu on top of the page, and then **switch directory** to change your portal session to the desired Azure AD tenant..
 
-### Register the service app (active-directory-javascript-nodejs-webapi-v2)
+### Register the service app
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `active-directory-javascript-nodejs-webapi-v2`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c3s1-api`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
@@ -144,33 +138,33 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `access_as_user`.
         - Select **Admins and users** options for **Who can consent?**
-        - For **Admin consent display name** type `Access active-directory-javascript-nodejs-webapi-v2`
-        - For **Admin consent description** type `Allows the app to access active-directory-javascript-nodejs-webapi-v2 as the signed-in user.`
-        - For **User consent display name** type `Access active-directory-javascript-nodejs-webapi-v2`
-        - For **User consent description** type `Allow the application to access active-directory-javascript-nodejs-webapi-v2 on your behalf.`
+        - For **Admin consent display name** type `ms-identity-javascript-c3s1-api`
+        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-c3s1-api as the signed-in user.`
+        - For **User consent display name** type `Access ms-identity-javascript-c3s1-api`
+        - For **User consent description** type `Allow the application to access ms-identity-javascript-c3s1-api on your behalf.`
         - Keep **State** as **Enabled**
         - Click on the **Add scope** button on the bottom to save this scope.
 1. On the right side menu, select the `Manifest` blade.
    - Set `accessTokenAcceptedVersion` property to **2**.
    - Click on **Save**.
 
-#### Configure the service app (active-directory-javascript-nodejs-webapi-v2) to use your app registration
+#### Configure the service app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `config.js` file.
-1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `active-directory-javascript-nodejs-webapi-v2` application copied from the Azure portal.
+1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `active-directory-javascript-nodejs-webapi-v2` application copied from the Azure portal.
+1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
 
-#### Register the client app (ms-identity-javascript-callapi)
+#### Register the client app
 
 1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
 1. Select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-callapi`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c3s1-spa`.
    - Under **Supported account types**, select **Accounts in your organizational directory only**.
    - In the **Redirect URI (optional)** section, select **Single-Page Application** in the combo-box and enter the following redirect URI: `http://localhost:3000/`.
 1. Select **Register** to create the application.
@@ -183,7 +177,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
     - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
     - Click on the **Add permissions** button at the bottom.
 
-#### Configure the client app (ms-identity-javascript-callapi) to use your app registration
+#### Configure the client app to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
@@ -191,9 +185,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 Open the `App\authConfig.js` file. Then:
 
-1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-callapi` application copied from the Azure portal.
+1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-spa` application copied from the Azure portal.
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the ms-identity-javascript-callapi project (by default `http://localhost:3000`).
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `ms-identity-javascript-c3s1-spa` application (by default `http://localhost:3000`).
 
 After you configured your web API, open the `App\apiConfig.js` file. Then:
 
@@ -204,7 +198,7 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ```console
     cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II-3-1-call-api
+    cd 3-Authorization-II/3-1-call-api
     cd API
     npm start
     cd ..
@@ -222,7 +216,7 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ## We'd love your feedback!
 
-Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
 
 ## About the code
 

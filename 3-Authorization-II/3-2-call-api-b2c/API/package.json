@@ -1,5 +1,5 @@
 {
-  "name": "active-directory-b2c-javascript-nodejs-webapi",
+  "name": "ms-identity-javascript-tutorial-c3s2-api",
   "version": "1.0.0",
   "description": "---\r page_type: sample\r description: \"This sample demonstrates how to protect a Node.js web API with Azure AD B2C using the Passport.js library.\"\r languages:\r - javascript\r - nodejs\r products:\r - azure\r - azure-active-directory\r urlFragment: nodejs-web-api-azure-ad\r ---",
   "author": "derisen",
@@ -20,12 +20,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure-Samples/active-directory-b2c-javascript-nodejs-webapi.git"
+    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git"
   },
   "bugs": {
-    "url": "https://github.com/Azure-Samples/active-directory-b2c-javascript-nodejs-webapi/issues"
+    "url": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial/issues"
   },
-  "homepage": "https://github.com/Azure-Samples/active-directory-b2c-javascript-nodejs-webapi#readme",
+  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial#readme",
   "devDependencies": {
     "nodemon": "^2.0.2"
   },

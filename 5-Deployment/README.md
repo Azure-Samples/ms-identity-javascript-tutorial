@@ -14,9 +14,7 @@
 
 ## Overview
 
-This sample demonstrates how to deploy a JavaScript single-page application (SPA) coupled with a Node.js web API to **Azure Cloud** using [Azure Storage](https://docs.microsoft.com/azure/storage/blobs/) and [Azure App Service](https://docs.microsoft.com/azure/app-service/), respectively.
-
-We will use the same sample from Chapter 3.
+This sample demonstrates how to deploy a JavaScript single-page application (SPA) coupled with a Node.js web API to **Azure Cloud** using [Azure Storage](https://docs.microsoft.com/azure/storage/blobs/) and [Azure App Service](https://docs.microsoft.com/azure/app-service/), respectively. To do so, we will use the same code sample from Chapter 3 (3-Authorization-II/3-1-call-api).
 
 ## Scenario
 
@@ -42,7 +40,7 @@ We will use the same sample from Chapter 3.
 
 ```console
     cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II-/3-1-call-api
+    cd 3-Authorization-II/3-1-call-api
     cd API
     npm install
 ```
@@ -75,7 +73,7 @@ There are basically **3** stages that you will have to go through in order to de
 
 ### Deploy the service app (Node.js web API)
 
-There are various ways to deploy your applications to **Azure App Service**. Here we provide steps for deployment via **VS Code Azure Tools Extension**. For more 
+There are various ways to deploy your applications to **Azure App Service**. Here we provide steps for deployment via **VS Code Azure Tools Extension**. For more alternatives, visit: [Static website hosting in Azure Storage](https://docs.microsoft.com/azure/storage/blobs/storage-blob-static-website#uploading-content).
 
 > We recommend watching the [video tutorial](https://docs.microsoft.com/azure/developer/javascript/tutorial-vscode-azure-app-service-node-01) offered by Microsoft Docs for preparation.
 
@@ -137,7 +135,7 @@ Create a distributable files folder, where your `html`, `css` and `javascript` f
 
 1. Navigate back to to the [Azure Portal](https://portal.azure.com).
 1. In the left-hand navigation pane, select the **Azure Active Directory** service, and then select **App registrations**.
-1. In the resulting screen, select the `ms-identity-javascript-callapi` application.
+1. In the resulting screen, select the name of your application.
 1. From the *Branding* menu, update the **Home page URL**, to the address of your service, for example [https://javascriptspa1.z22.web.core.windows.net/](https://javascriptspa1.z22.web.core.windows.net/). Save the configuration.
 1. Add the same URI in the list of values of the *Authentication -> Redirect URIs* menu. If you have multiple redirect URIs, make sure that there a new entry using the App service's URI for each redirect URI.
 
