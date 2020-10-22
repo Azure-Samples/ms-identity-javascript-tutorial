@@ -42,8 +42,8 @@ Please refer to each sample's README for sample-specific recommendations.
 
 ## Contents
 
-- For **Azure AD**, start from [here](./1-Authentication/1-1-sign-in/README-incremental.md)
-- For **Azure AD B2C**, start from [here](./1-Authentication/1-2-sign-in-b2c/README-incremental.md)
+- For **Azure AD**, start the chapterwise tutorial from [here](./1-Authentication/1-1-sign-in/README-incremental.md)
+- For **Azure AD B2C**, start the chapterwise tutorial from [here](./1-Authentication/1-2-sign-in-b2c/README-incremental.md)
 
 Alternatively, choose below the sample you want to review.  
 
