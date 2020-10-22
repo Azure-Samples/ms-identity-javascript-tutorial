@@ -243,7 +243,7 @@ For the purpose of the sample, **cross-origin resource sharing** is enabled for 
 
 ## Next Tutorial
 
-Continue with the next tutorial: [Deploy your app to Azure](../../5-Deployment/README-incremental).
+Continue with the next tutorial: [Deploy your app to Azure](../../5-Deployment/README-incremental.md).
 
 ## More information
 
