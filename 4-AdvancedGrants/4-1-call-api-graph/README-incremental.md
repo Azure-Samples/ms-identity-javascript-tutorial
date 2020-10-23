@@ -33,7 +33,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) whic
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
 | `SPA/server.js`       | Simple Node server for `index.html`.        |
-| `API/process.json`    | Contains configuration parameters for logging via Bunyan.  |
+| `API/process.json`    | Contains configuration parameters for logging via Morgan.  |
 | `API/index.js`        | Main application logic resides here.                     |
 | `API/config.json`     | Contains authentication parameters for the sample. |
 

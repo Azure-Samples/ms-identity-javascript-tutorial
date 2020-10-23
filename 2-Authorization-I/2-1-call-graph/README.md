@@ -221,7 +221,7 @@ For `acquireTokenRedirect()`, you must register a redirect promise handler:
 The **MSAL.js** exposes the `acquireTokenSilent()` API which is meant to retrieve non-expired token silently.
 
 ```javascript
-    msalInstance.acquireTokenSilent(request)
+    myMSALObj.acquireTokenSilent(request)
         .then(tokenResponse => {
         // Do something with the tokenResponse
         }).catch(async (error) => {

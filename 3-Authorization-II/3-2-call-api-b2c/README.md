@@ -35,7 +35,7 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 | `SPA/App/authConfig.js`   | Contains configuration parameters for the sample. |
 | `SPA/App/apiConfig.js`   | Contains Web API scopes and coordinates. |
 | `SPA/App/policies.js`     | Contains B2C custom policies and user-flows.  |
-| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
+| `API/process.json`   | Contains configuration parameters for logging via Morgan.  |
 | `API/index.js`   | Main application logic resides here.                     |
 | `API/config.json`   | Contains authentication parameters for the sample. |
 
