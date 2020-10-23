@@ -34,9 +34,9 @@ Please refer to each sample's README for sample-specific prerequisites.
 
 ## Recommendations
 
-- [jwt.ms](https://jwt.ms) for inspecting your tokens.
-- [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting.
-- Follow the [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) to stay up-to-date with the latest developments.
+- [jwt.ms](https://jwt.ms) for inspecting your tokens
+- [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting
+- Follow the [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) to stay up-to-date with the latest developments
 
 Please refer to each sample's README for sample-specific recommendations.
 
