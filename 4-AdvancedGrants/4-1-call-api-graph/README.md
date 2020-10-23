@@ -20,7 +20,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) whic
 
 ## Scenario
 
-1. The client JavaScript SPA uses **MSAL.js** to sign-in a user and obtain an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**:
+1. The client JavaScript SPA uses **MSAL.js** to sign-in a user and obtain an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**.
 1. The **Access Token** is used as a *bearer token* to authorize the user to call a Node.js web API protected by **Azure AD**.
 1. The web API exchanges the user's **Access Token** with an **Access Token** for itself to call **MS Graph**.
 

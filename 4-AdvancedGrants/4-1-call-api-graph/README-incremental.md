@@ -189,7 +189,7 @@ Clients, on the other hand, should treat access tokens as opaque strings, as the
 
 ## Next Tutorial
 
-Continue with the next tutorial: [Deploy your app to Azure](../../5-Deployment/README-incremental).
+Continue with the next tutorial: [Deploy your app to Azure](../../5-Deployment/README-incremental.md).
 
 ## More information
 
