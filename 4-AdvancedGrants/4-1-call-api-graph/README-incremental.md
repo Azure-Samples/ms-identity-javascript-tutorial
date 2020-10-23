@@ -14,7 +14,7 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js) and then calls a protected Node.js web API. The web API then calls the [Microsoft Graph API](https://docs.microsoft.com/graph/overview) (MS Graph) on behalf of the user signed-in to the client app using the [on-behalf-of flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow).
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) which lets a user authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js) and then calls a protected Node.js web API. The web API then calls the [Microsoft Graph API](https://docs.microsoft.com/graph/overview) (MS Graph) on behalf of the user signed-in to the client app using the [on-behalf-of flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow), thus illustrating how to propagate user consent across your application topology.
 
 ## Scenario
 
@@ -120,7 +120,14 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `SPA\App\apiConfig.js` file.
+Open the `App\authConfig.js` file. Then:
+
+1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
+1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the ms-identity-javascript-signin project (by default `http://localhost:3000`).
+
+Open the `SPA\App\apiConfig.js` file. Then:
+
 1. Find the key `scope` and replace the existing value with the application ID (clientId) of the, e.g. `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`
 
 #### Configure knownClientApplications for the service app

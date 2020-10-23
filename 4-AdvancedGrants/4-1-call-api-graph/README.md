@@ -65,6 +65,7 @@ or download and extract the repository .zip file.
 ### Step 2: Install project dependencies
 
 ```console
+    cd ms-identity-javascript-tutorial
     cd 4-AdvancedGrants/4-1-call-api-graph/API
     npm install
     cd ..

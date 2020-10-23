@@ -9,7 +9,6 @@
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
- 1. [Deployment](#deployment)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
@@ -17,7 +16,7 @@
 
 ## Overview
 
-This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js), then acquires an **Access Token** for a protected web API for the signed-in user and calls the protected web API. In doing so, it also illustrates various authorization concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
+This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js), then acquires an **Access Token** for a protected web API for the signed-in user and calls the protected web API. In doing so, it also illustrates various authorization concepts, such as [token validation](https://docs.microsoft.com/azure/active-directory/develop/access-tokens#validating-tokens), [CORS configuration](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services#understanding-cors-requests), **silent requests** and more.
 
 ## Scenario
 
