@@ -118,7 +118,19 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `App\apiConfig.js` file.
+Open the `App\authConfig.js` file. Then:
+
+1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s2-spa` application copied from the Azure portal.
+1. Find the key `redirectUri` and replace the existing value with the base address of the `ms-identity-javascript-c1s2-spa` app (by default `http://localhost:6420`).
+
+Open the `App\policies.js` file. Then:
+
+1. Find the key `names` and populate it with your policy names e.g. `signUpSignIn`.
+1. Find the key `authorities` and populate it with your policy authority strings e.g. `https://<your-tenant-name>.b2clogin.com/<your-tenant-name>.onmicrosoft.com/b2c_1_susi`.
+1. Find the key `authorityDomain` and populate it with the domain portion of your authority string e.g. `<your-tenant-name>.b2clogin.com`.
+
+Open the `App\apiConfig.js` file. Then:
+
 1. Find the key `scopes` and replace the existing value with the scope of your web API (e.g. `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`).
 1. Find the key `uri` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000`).
 

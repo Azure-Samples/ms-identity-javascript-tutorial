@@ -35,7 +35,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 
 ## Prerequisites
 
-- An Azure Active Directory B2C (Azure AD B2C) tenant. For more information on how to get an Azure AD tenant, see: [Create an Azure Active Directory B2C tenant](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-create-tenant)
+- An Azure Active Directory B2C (Azure AD B2C) tenant. For more information, see: [Create an Azure Active Directory B2C tenant](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-create-tenant)
 - A user account in your **Azure AD B2C** tenant.
 
 ## Setup
@@ -99,12 +99,14 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `App\authConfig.js` file.
+Open the `App\authConfig.js` file. Then:
+
 1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s2-spa` application copied from the Azure portal.
 1. Find the key `redirectUri` and replace the existing value with the base address of the `ms-identity-javascript-c1s2-spa` app (by default `http://localhost:6420`).
 1. Find the key `postLogoutRedirectUri` and replace the existing value with the base address of the `ms-identity-javascript-c1s2-spa` app and the **signout** page that the app will redirect to e.g. `http://localhost:6420/signout`.
 
-1. Open the `App\policies.js` file.
+Open the `App\policies.js` file. Then:
+
 1. Find the key `names` and populate it with your policy names e.g. `signUpSignIn`.
 1. Find the key `authorities` and populate it with your policy authority strings e.g. `https://<your-tenant-name>.b2clogin.com/<your-tenant-name>.onmicrosoft.com/b2c_1_susi`.
 1. Find the key `authorityDomain` and populate it with the domain portion of your authority string e.g. `<your-tenant-name>.b2clogin.com`.

@@ -64,6 +64,7 @@ or download and extract the repository .zip file.
 ### Step 2: Install project dependencies
 
 ```console
+    cd ms-identity-javascript-tutorial
     cd 2-Authorization-I/2-1-call-graph
     npm install
 ```
@@ -116,7 +117,7 @@ As a first step you'll need to:
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c2s1`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c2s1`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
    - In the **Redirect URI (optional)** section, select **Single-Page Application** in the combo-box and enter the following redirect URI: `http://localhost:3000/`.
 1. Select **Register** to create the application.
@@ -137,9 +138,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 Open the `app\authConfig.js` file. Then:
 
-1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c2s1` application copied from the Azure portal.
+1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c2s1` application copied from the Azure portal.
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with your *tenanted* authority string. For example, `https://login.microsoftonline.com/<your-tenant-id>`
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-c2s1` app. For example, `http://localhost:3000/`.
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c2s1` app. For example, `http://localhost:3000/`.
 
 ## Running the sample
 
