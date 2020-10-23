@@ -9,7 +9,6 @@
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
- 1. [Deployment](#deployment)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
