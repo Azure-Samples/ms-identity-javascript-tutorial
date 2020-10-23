@@ -87,7 +87,7 @@ Alternatively, choose below the sample you want to review.
 
 |                 |               |
 |-----------------|---------------|
-| <img src="./5-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Service**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/5-Deployment) </br> Prepare your app for deployment to various **Azure** services. Learn how to package and upload files, configure authentication parameters and use the various **Azure** services for managing your operations. |
+| <img src="./5-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Service**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/5-Deployment) </br> Prepare your app for deployment to various **Azure** services. Learn how to package and upload files, configure authentication parameters and use **Azure** services for managing your operations. |
 
 ## We'd love your feedback!
 
