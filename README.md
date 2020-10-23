@@ -57,7 +57,7 @@ Alternatively, choose below the sample you want to review.
 | `Deployment`         | Multi-tenant (SaaS) applications, managed identity, key vaults, hosting     |
 | `Hybrid Identity`    | ADFS, on-prem authentication, migration scenarios, Azure AD Connect         | -->
 
-### Chapter 1: Integrate Authentication with Azure AD in your web application
+### Chapter 1: Add authentication to your web application
 
 |               |               |
 |---------------|---------------|
