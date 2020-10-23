@@ -28,19 +28,17 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 
 ## Setup
 
-- Setup the service app:
+Locate the sample folder `3-Authorization-II/3-1-call-api` first, as we will use the same code here (if following the B2C path, you may alternatively use `3-Authorization-II/3-2-call-api-b2c`). After that:
+
+Locate the sample folder `API`, then type:
 
 ```console
-    cd 3-Authorization-II/3-1-call-api
-    cd API
     npm install
 ```
 
-- Setup the client app:
+Locate the sample folder `SPA`, then type:
 
 ```console
-    cd ..
-    cd SPA
     npm install
 ```
 
@@ -48,23 +46,23 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 
 ### Register the service app (Node.js web API)
 
-Use the same app registration credentials that you've obtained during [**chapter 3-1**](../3-Authorization-II/3-1-call-api).
+Use the same app registration credentials that you've obtained during [chapter 3-1](../3-Authorization-II/3-1-call-api).
 
 ### Register the client app (JavaScript SPA)
 
-Use the same app registration credentials that you've obtained during [**chapter 3-1**](../3-Authorization-II/3-1-call-api).
+Use the same app registration credentials that you've obtained during [chapter 3-1](../3-Authorization-II/3-1-call-api).
 
 ## Deployment
 
 There are basically **3** stages that you will have to go through in order to deploy your projects and enable authentication:
 
 1. Upload your project files to **Azure** services and obtain published website URIs
-1. Update **Azure AD** **App Registration** with URIs you have just obtained
-1. Update your configuration files with URIs you have just obtained
+1. Update **Azure AD** **App Registration** with URIs that you have just obtained
+1. Update your configuration files with URIs that you have just obtained
 
 ### Deploy the service app (Node.js web API)
 
-There are various ways to deploy your applications to **Azure App Service**. Here we provide steps for deployment via **VS Code Azure Tools Extension**. For more alternatives, visit: [Static website hosting in Azure Storage](https://docs.microsoft.com/azure/storage/blobs/storage-blob-static-website#uploading-content).
+There are various ways to deploy your applications to **Azure App Service**. Here we provide steps for deployment via **VS Code Azure Tools Extension**. For more alternatives, visit: [Deploy your app to Azure App Service](https://docs.microsoft.com/azure/storage/blobs/storage-blob-static-website#uploading-content).
 
 > We recommend watching the [video tutorial](https://docs.microsoft.com/azure/developer/javascript/tutorial-vscode-azure-app-service-node-01) offered by Microsoft Docs for preparation.
 
@@ -79,20 +77,16 @@ There are various ways to deploy your applications to **Azure App Service**. Her
 ![api_step2](./ReadmeFiles/api_step2.png)
 
 3. Choose a creation option based on the operating system to which you want to deploy. in this sample, we choose **Linux**.
-
 4. Select a Node.js version when prompted. An **LTS** version is recommended.
-
 5. Type a globally unique name for your web app and press Enter. The name must be unique across all of **Azure**.
-
 6. After you respond to all the prompts, **VS Code** shows the **Azure** resources that are being created for your app in its notification popup.
-
 7. Select **Yes** when prompted to update your configuration to run npm install on the target Linux server.
 
 ![api_step3](./ReadmeFiles/api_step3.png)
 
 #### Step 2: Disable default authentication
 
-Now you need to navigate to the **Azure App Service** Portal, and locate your project there. Once you do, click on the **Authentication/Authorization** blade. There, make sure that the **App Services Authentication** is switched off (and nothing else is checked), as we are using **our own** authentication logic.  
+Now you need to navigate to the **Azure App Service** Portal, and locate your project there. Once you do, click on the **Authentication/Authorization** blade. There, make sure that the **App Services Authentication** is switched off (and nothing else is checked), as we are using our **native** authentication logic.  
 
 ![disable_easy_auth](./ReadmeFiles/disable_easy_auth.png)
 
@@ -100,9 +94,11 @@ Now you need to navigate to the **Azure App Service** Portal, and locate your pr
 
 ![enable_cors](./ReadmeFiles/enable_cors.png)
 
+> It is a good idea to disable your in-code CORS settings now.
+
 ### Deploy the client app (JavaScript SPA)
 
-There are various ways to deploy your applications to **Azure Storage**. Here we provide steps for deployment via **VS Code Azure Tools Extension**. For more alternatives, visit: [Static website hosting in Azure Storage](https://docs.microsoft.com/azure/storage/blobs/storage-blob-static-website#uploading-content).
+There are various ways to deploy your applications to **Azure Storage**. Here we provide steps for deployment via **VS Code Azure Tools Extension**. For more alternatives, visit: [Static website hosting in Azure Storage](https://docs.microsoft.com/azure/app-service/deploy-ftp).
 
 > We recommend watching the [video tutorial](https://docs.microsoft.com/azure/developer/javascript/tutorial-vscode-static-website-node-01) offered by Microsoft Docs for preparation.
 
@@ -138,7 +134,7 @@ Now you need to update your authentication configuration files in the client pro
 
 Open `authConfig.js`. Then:
 
-1. Find the key `redirectUri` and replace the existing value with your static webpage's URI that you have just registered e.g. `https://javascriptspa1.z22.web.core.windows.net/`
+1. Find the key `redirectUri` and replace the existing value with your static webpage's URI that you have just registered, e.g. `https://javascriptspa1.z22.web.core.windows.net/`
 
 Open `apiConfig.js`. Then:
 

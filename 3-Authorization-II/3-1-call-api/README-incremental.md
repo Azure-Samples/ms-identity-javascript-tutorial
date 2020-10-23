@@ -33,21 +33,21 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
 | `App/apiConfig.js`   | Contains coordinates of the web API to be called. |
 | `SPA/server.js`           | Simple Node server for `index.html`.        |
-| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
+| `API/process.json`   | Contains configuration parameters for logging via Morgan.  |
 | `API/index.js`   | Main application logic resides here.                     |
 | `API/config.json`   | Contains authentication parameters for the sample. |
 
 ## Setup
 
-Install project dependencies:
+Locate the sample folder `API`, then type:
 
 ```console
-    cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II/3-1-call-api
-    cd API
     npm install
-    cd ..
-    cd SPA
+```
+
+Locate the sample folder `SPA`, then type:
+
+```console
     npm install
 ```
 
@@ -92,7 +92,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
 
-#### Register the client app
+#### Update the client app's registration
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then find and select the client app that you have registered in the previous tutorial (`ms-identity-javascript-c1s1-spa`).
@@ -116,13 +116,15 @@ After you configured your web API, open the `App\apiConfig.js` file. Then:
 
 ## Running the sample
 
+Locate the sample folder `API`, then type:
+
 ```console
-    cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II/3-1-call-api
-    cd API
     npm start
-    cd ..
-    cd SPA
+```
+
+Locate the sample folder `SPA`, then type:
+
+```console
     npm start
 ```
 

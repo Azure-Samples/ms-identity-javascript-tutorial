@@ -37,16 +37,15 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 
 ## Setup
 
-Install project dependencies:
+Locate the sample folder, then type:
 
 ```console
-    cd 2-Authorization-I/2-1-call-graph
     npm install
 ```
 
 ## Registration
 
-### Register the app
+### Update app registration
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then find and select the application that you have registered in the previous tutorial (`ms-identity-javascript-c1s1-spa`).
@@ -57,10 +56,18 @@ Install project dependencies:
    - In the **Delegated permissions** section, select the **User.Read** in the list. Use the search box if necessary.
    - Click on the **Add permissions** button at the bottom.
 
+### Configure the app to use your app registration
+
+1. Open the `App\authConfig.js` file.
+1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
+1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the ms-identity-javascript-signin project (by default `http://localhost:3000`).
+
 ## Running the sample
 
+Locate the sample folder, then type:
+
 ```console
-    cd 2-Authorization-I/2-1-call-graph
     npm start
 ```
 
@@ -155,7 +162,7 @@ Clients should treat access tokens as opaque strings, as the contents of the tok
 
 ## Next Tutorial
 
-Continue with the next tutorial: [Protect and call a web API](../../3-Authorization-II/3-2-call-api-b2c/README-incremental.md).
+Continue with the next tutorial: [Protect and call a web API](../../3-Authorization-II/3-1-call-api/README-incremental.md).
 
 ## More information
 

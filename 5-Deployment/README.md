@@ -88,13 +88,9 @@ There are various ways to deploy your applications to **Azure App Service**. Her
 ![api_step2](./ReadmeFiles/api_step2.png)
 
 3. Choose a creation option based on the operating system to which you want to deploy. in this sample, we choose **Linux**.
-
 4. Select a Node.js version when prompted. An **LTS** version is recommended.
-
 5. Type a globally unique name for your web app and press Enter. The name must be unique across all of **Azure**.
-
 6. After you respond to all the prompts, **VS Code** shows the **Azure** resources that are being created for your app in its notification popup.
-
 7. Select **Yes** when prompted to update your configuration to run npm install on the target Linux server.
 
 ![api_step3](./ReadmeFiles/api_step3.png)

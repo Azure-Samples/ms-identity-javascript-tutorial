@@ -1,4 +1,4 @@
-# A Node.js Web API secured by Azure AD and calling Microsoft Graph on behalf of a signed-in user
+# A Node.js Web API secured by Azure AD and calling Microsoft Graph on behalf of signed-in user
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)
@@ -18,7 +18,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) whic
 
 ## Scenario
 
-1. The client JavaScript SPA uses **MSAL.js** to sign-in a user and obtain an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**:
+1. The client JavaScript SPA uses **MSAL.js** to sign-in a user and obtain an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**.
 1. The **Access Token** is used as a *bearer token* to authorize the user to call a Node.js web API protected by **Azure AD**.
 1. The web API exchanges the user's **Access Token** with an **Access Token** for itself to call **MS Graph**.
 
@@ -32,22 +32,22 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) whic
 | `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
-| `SPA/server.js`           | Simple Node server for `index.html`.        |
-| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
-| `API/index.js`   | Main application logic resides here.                     |
-| `API/config.json`   | Contains authentication parameters for the sample. |
+| `SPA/server.js`       | Simple Node server for `index.html`.        |
+| `API/process.json`    | Contains configuration parameters for logging via Morgan.  |
+| `API/index.js`        | Main application logic resides here.                     |
+| `API/config.json`     | Contains authentication parameters for the sample. |
 
 ## Setup
 
-Install project dependencies:
+Locate the sample folder `API`, then type:
 
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-spa
     npm install
 ```
 
+Locate the sample folder `SPA`, then type:
+
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-api
     npm install
 ```
 
@@ -96,23 +96,23 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
 1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of the `ms-identity-javascript-c3s1-api` app in the Azure portal.
 
-### Register the client app
+### Update the client app's registration
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then find and select the client app that you have registered in the previous tutorial (`ms-identity-javascript-c1s1-spa`).
 1. In the app's registration screen, click on the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs.
-   - Click the **Add a permission** button and then:
+    - Click the **Add a permission** button and then:
 
-   - Ensure that the **Microsoft APIs** tab is selected.
-   - In the *Commonly used Microsoft APIs* section, click on **Microsoft Graph**
-   - In the **Delegated permissions** section, select the **User.Read** in the list. Use the search box if necessary.
-   - Click on the **Add permissions** button at the bottom.
-   - Click the **Add a permission** button and then:
+    - Ensure that the **Microsoft APIs** tab is selected.
+       - In the *Commonly used Microsoft APIs* section, click on **Microsoft Graph**
+       - In the **Delegated permissions** section, select the **User.Read** in the list. Use the search box if necessary.
+       - Click on the **Add permissions** button at the bottom.
 
-   - Ensure that the **My APIs** tab is selected.
-   - In the list of APIs, select the API `ms-identity-javascript-c3s1-api`.
-   - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
-   - Click on the **Add permissions** button at the bottom.
+    - Click the **Add a permission** button and then:
+       - Ensure that the **My APIs** tab is selected.
+       - In the list of APIs, select the API `ms-identity-javascript-c3s1-api`.
+       - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
+       - Click on the **Add permissions** button at the bottom.
 
 #### Configure the client app to use your app registration
 
@@ -142,13 +142,15 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ## Running the sample
 
+Locate the sample folder `API`, then type:
+
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-api
     npm start
 ```
 
+Locate the sample folder `SPA`, then type:
+
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-spa
     npm start
 ```
 

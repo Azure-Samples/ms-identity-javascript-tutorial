@@ -42,8 +42,8 @@ Please refer to each sample's README for sample-specific recommendations.
 
 ## Contents
 
-- For **Azure AD**, start the chapterwise tutorial from [here](./1-Authentication/1-1-sign-in/README-incremental.md)
-- For **Azure AD B2C**, start the chapterwise tutorial from [here](./1-Authentication/1-2-sign-in-b2c/README-incremental.md)
+- For **Azure AD**, start the tutorial from [here](./1-Authentication/1-1-sign-in/README-incremental.md)
+- For **Azure AD B2C**, start the tutorial from [here](./1-Authentication/1-2-sign-in-b2c/README-incremental.md)
 
 Alternatively, choose below the sample you want to review.  
 
@@ -83,7 +83,7 @@ Alternatively, choose below the sample you want to review.
 |-----------------|---------------|
 | <img src="./4-AdvancedGrants/4-1-call-api-graph/ReadmeFiles/topology_obo.png" width="200"> | [**Call a web API that calls Microsoft Graph on behalf of a user**](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/4-AdvancedGrants/4-1-call-api-graph) </br> Enhance your protected web API to acquire an **Access Token** for Microsoft Graph **on-behalf-of** a user signed-in to the client app. |
 
-### Chapter 5: Deploy your solutions to Azure
+### Chapter 5: Deploy your applications to Azure
 
 |                 |               |
 |-----------------|---------------|

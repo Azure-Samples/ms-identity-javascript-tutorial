@@ -41,10 +41,9 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 
 ## Setup
 
-Install the project dependencies:
+Locate the sample folder, then type:
 
 ```console
-    cd 1-Authentication/1-1-sign-in
     npm install
 ```
 
@@ -116,8 +115,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 ## Running the sample
 
+Locate the sample folder, then type:
+
 ```console
-    cd 1-Authentication/1-1-sign-in
     npm start
 ```
 
@@ -234,7 +234,7 @@ See [National Clouds](https://docs.microsoft.com/azure/active-directory/develop/
 
 ## Next Tutorial
 
-Continue with the next tutorial: [Acquire an Access Token and call Microsoft Graph](../../2-Authorization-I/2-1-call-graph/README-incremental.md).
+Continue with the next tutorial: [Get an Access Token and call Microsoft Graph](../../2-Authorization-I/2-1-call-graph/README-incremental.md).
 
 ## More information
 

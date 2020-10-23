@@ -35,7 +35,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) whic
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
 | `SPA/server.js`           | Simple Node server for `index.html`.        |
-| `API/process.json`   | Contains configuration parameters for logging via Bunyan.  |
+| `API/process.json`   | Contains configuration parameters for logging via Morgan.  |
 | `API/index.js`   | Main application logic resides here.                     |
 | `API/config.json`   | Contains authentication parameters for the sample. |
 
@@ -139,7 +139,7 @@ As a first step you'll need to:
 The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this Api. To declare an resource URI, follow the following steps:
    - Click `Set` next to the **Application ID URI** to generate a URI that is unique for this app.
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
-1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
+1. All APIs have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `user_impersonation`.
         - Select **Admins and users** options for **Who can consent?**
