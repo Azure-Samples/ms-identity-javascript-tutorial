@@ -45,7 +45,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 From your shell or command line:
 
 ```console
-git clone https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
+    git clone https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
 ```
 
 or download and extract the repository .zip file.
@@ -54,8 +54,9 @@ or download and extract the repository .zip file.
 
 ### Step 2: Install project dependencies
 
+Locate the sample folder, then type:
+
 ```console
-    cd 1-Authentication/1-2-sign-in-b2c
     npm install
 ```
 
@@ -110,8 +111,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 ## Running the sample
 
+Locate the sample folder, then type:
+
 ```console
-    cd 1-Authentication/1-2-sign-in-b2c
     npm start
 ```
 

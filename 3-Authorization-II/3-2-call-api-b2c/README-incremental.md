@@ -39,14 +39,15 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 
 ## Setup
 
-Install project dependencies:
+Locate the sample folder `API`, then type:
 
 ```console
-    cd 3-Authorization-II/3-2-call-api-b2c
-    cd API
     npm install
-    cd ..
-    cd SPA
+```
+
+Locate the sample folder `SPA`, then type:
+
+```console
     npm install
 ```
 
@@ -93,13 +94,10 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s2-api` application copied from the Azure portal.
 
-#### Register the client app
+#### Update the client app's registration
 
-1. Navigate to the Microsoft identity platform for developers [App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page.
-1. Select **New registration**.
-
-`ms-identity-javascript-c1s2-spa`
-
+1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
+1. Select the **App Registrations** blade on the left, then find and select the application that you have registered in the previous tutorial (`ms-identity-javascript-c1s2-spa`).
 1. In the **Register an application page** that appears, enter your application's registration information:
    - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c3s2-spa`.
    - Under **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C**.
@@ -126,13 +124,15 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 ## Running the sample
 
+Locate the sample folder `API`, then type:
+
 ```console
-    cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II/3-2-call-api-b2c
-    cd API
     npm start
-    cd ..
-    cd SPA
+```
+
+Locate the sample folder `SPA`, then type:
+
+```console
     npm start
 ```
 
@@ -185,38 +185,7 @@ For `acquireTokenRedirect()`, you must register a redirect promise handler:
     myMSALObj.acquireTokenRedirect(request);
 ```
 
-### Dynamic Scopes and Incremental Consent
-
-In **Azure AD B2C**, the scopes (permissions) set directly on the application registration are called static scopes. Other scopes that are only defined within the code are called dynamic scopes. This has implications on the **login** (i.e. loginPopup, loginRedirect) and **acquireToken** (i.e. `acquireTokenPopup`, `acquireTokenRedirect`, `acquireTokenSilent`) methods of **MSAL.js**. Consider:
-
-```javascript
-     const loginRequest = {
-          scopes: [ "openid", "profile", "User.Read" ]
-     };
-     const tokenRequest = {
-          scopes: [ "Mail.Read" ]
-     };
-
-     // will return an ID Token and an Access Token with scopes: "openid", "profile" and "User.Read"
-     msalInstance.loginPopup(loginRequest);
-
-     // will fail and fallback to an interactive method prompting a consent screen
-     // after consent, the received token will be issued for "openid", "profile" ,"User.Read" and "Mail.Read" combined
-     msalInstance.acquireTokenSilent(tokenRequest);
-```
-
-In the code snippet above, the user will be prompted for consent once they authenticate and receive an ID Token and an Access Token with scope User.Read. Later, if they request an Access Token for User.Read, they will not be asked for consent again (in other words, they can acquire a token silently). On the other hand, the user did not consented to Mail.Read at the authentication stage. As such, they will be asked for consent when requesting an Access Token for that scope. The token received will contain all the previously consented scopes, hence the term incremental consent.
-
 ### Token Validation
-
-[passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) validates the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
-
-```javascript
-    app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
-        (req, res) => {
-            console.log('Validated claims: ', req.authInfo);
-    );
-```
 
 On the web API side, [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) validates the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
 
