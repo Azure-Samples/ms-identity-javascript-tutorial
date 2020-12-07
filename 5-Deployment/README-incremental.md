@@ -12,7 +12,7 @@
 
 ## Overview
 
-This sample demonstrates how to deploy a JavaScript single-page application (SPA) coupled with a Node.js web API to **Azure Cloud** using [Azure Storage](https://docs.microsoft.com/azure/storage/blobs/) and [Azure App Service](https://docs.microsoft.com/azure/app-service/), respectively. To do so, we will use the [same code sample from Chapter 3](../3-Authorization-II/3-1-call-api).
+This sample demonstrates how to deploy a JavaScript single-page application (SPA) coupled with a Node.js web API to **Azure Cloud** using [Azure Storage](https://docs.microsoft.com/azure/storage/blobs/) and [Azure App Service](https://docs.microsoft.com/azure/app-service/), respectively. To do so, we will use the [same code sample from Chapter 3](../3-Authorization-II/1-call-api).
 
 ## Scenario
 
@@ -28,7 +28,7 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 
 ## Setup
 
-Locate the sample folder `3-Authorization-II/3-1-call-api` first, as we will use the same code here (if following the B2C path, you may alternatively use `3-Authorization-II/3-2-call-api-b2c`). After that:
+Locate the sample folder `3-Authorization-II/1-call-api` first, as we will use the same code here (if following the B2C path, you may alternatively use `3-Authorization-II/2-call-api-b2c`). After that:
 
 Locate the sample folder `API`, then type:
 
@@ -46,11 +46,11 @@ Locate the sample folder `SPA`, then type:
 
 ### Register the service app (Node.js web API)
 
-Use the same app registration credentials that you've obtained during [chapter 3-1](../3-Authorization-II/3-1-call-api).
+Use the same app registration credentials that you've obtained during [chapter 3-1](../3-Authorization-II/1-call-api).
 
 ### Register the client app (JavaScript SPA)
 
-Use the same app registration credentials that you've obtained during [chapter 3-1](../3-Authorization-II/3-1-call-api).
+Use the same app registration credentials that you've obtained during [chapter 3-1](../3-Authorization-II/1-call-api).
 
 ## Deployment
 

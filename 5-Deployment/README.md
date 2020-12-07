@@ -14,7 +14,7 @@
 
 ## Overview
 
-This sample demonstrates how to deploy a JavaScript single-page application (SPA) coupled with a Node.js web API to **Azure Cloud** using [Azure Storage](https://docs.microsoft.com/azure/storage/blobs/) and [Azure App Service](https://docs.microsoft.com/azure/app-service/), respectively. To do so, we will use the [same code sample from Chapter 3](../3-Authorization-II/3-1-call-api).
+This sample demonstrates how to deploy a JavaScript single-page application (SPA) coupled with a Node.js web API to **Azure Cloud** using [Azure Storage](https://docs.microsoft.com/azure/storage/blobs/) and [Azure App Service](https://docs.microsoft.com/azure/app-service/), respectively. To do so, we will use the [same code sample from Chapter 3](../3-Authorization-II/1-call-api).
 
 ## Scenario
 
@@ -40,7 +40,7 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 
 ```console
     cd ms-identity-javascript-tutorial
-    cd 3-Authorization-II/3-1-call-api
+    cd 3-Authorization-II/1-call-api
     cd API
     npm install
 ```
@@ -57,11 +57,11 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 
 ### Register the service app (Node.js web API)
 
-Use the same app registration credentials that you've obtained during [**chapter 3-1**](../3-Authorization-II/3-1-call-api).
+Use the same app registration credentials that you've obtained during [**chapter 3-1**](../3-Authorization-II/1-call-api).
 
 ### Register the client app (JavaScript SPA)
 
-Use the same app registration credentials that you've obtained during [**chapter 3-1**](../3-Authorization-II/3-1-call-api).
+Use the same app registration credentials that you've obtained during [**chapter 3-1**](../3-Authorization-II/1-call-api).
 
 ## Deployment
 
