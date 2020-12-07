@@ -1,4 +1,4 @@
-# Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD B2C
+# Vanilla JavaScript single-page application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD B2C
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)

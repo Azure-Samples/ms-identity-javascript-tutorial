@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "Vanilla JavaScript Single-page Application using MSAL.js to authenticate users against Azure Active Directory",
+      "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory",
       "Level": 100,
       "Client": "Vanilla JavaScript SPA",
       "RepositoryUrl": "ms-identity-javascript-tutorial/1-Authentication/1-sign-in",

@@ -26,8 +26,6 @@ function updateTable() {
         scopes: ["openid"]
     }).then(response => {
 
-        console.log(response.idToken);
-
         tableDiv.classList.remove('d-none');
         footerDiv.classList.remove('d-none');
     

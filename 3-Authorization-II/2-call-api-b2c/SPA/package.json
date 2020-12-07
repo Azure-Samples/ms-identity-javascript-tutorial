@@ -1,7 +1,7 @@
 {
   "name": "ms-identity-javascript-tutorial-c3s2-spa",
   "version": "1.0.0",
-  "description": "A Vanilla JavaScript Single-page Application that lets users to sign-in to Azure AD B2C built with MSAL.js",
+  "description": "A Vanilla JavaScript single-page application that lets users to sign-in to Azure AD B2C built with MSAL.js",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

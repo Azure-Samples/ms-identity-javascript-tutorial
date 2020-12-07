@@ -17,29 +17,18 @@ function welcomeUser(username) {
     welcomeDiv.innerHTML = `Welcome ${username}!`
 }
 
-function updateTable() {
+function updateTable(idTokenClaims) {
+    tableDiv.classList.remove('d-none');
+    footerDiv.classList.remove('d-none');
 
-    /**
-     * In order to obtain the ID Token in the cached obtained previously, you can initiate a 
-     * silent token request by passing the current user's account and the scope "openid".
-     */
-    myMSALObj.acquireTokenSilent({
-        account: myMSALObj.getAccountByHomeId(homeAccountId),
-        scopes: ["openid"]
-    }).then(response => {
+    Object.entries(idTokenClaims).forEach(claim => {
 
-        tableDiv.classList.remove('d-none');
-        footerDiv.classList.remove('d-none');
-    
-        Object.entries(response.idTokenClaims).forEach(claim => {
-    
-            if (claim[0] === "name" || claim[0] === "oid") {
-                let row = tableBody.insertRow(0);
-                let cell1 = row.insertCell(0);
-                let cell2 = row.insertCell(1);
-                cell1.innerHTML = claim[0];
-                cell2.innerHTML = claim[1];
-            }
-        });
+        if (claim[0] === "name" || claim[0] === "oid") {
+            let row = tableBody.insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.innerHTML = claim[0];
+            cell2.innerHTML = claim[1];
+        }
     });
 }

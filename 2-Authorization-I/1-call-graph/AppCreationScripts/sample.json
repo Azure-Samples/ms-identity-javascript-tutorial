@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph",
+      "Title": "Vanilla JavaScript single-page application using MSAL.js to authorize users for calling Microsoft Graph",
       "Level": 100,
       "Client": "Vanilla JavaScript SPA",
       "Service": "Microsoft Graph",

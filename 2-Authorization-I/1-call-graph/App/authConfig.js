@@ -5,10 +5,10 @@
  */
 const msalConfig = {
     auth: {
-        clientId: "Enter_the_Application_Id_Here",
-        authority: "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
-        redirectUri: "Enter_the_Redirect_Uri_Here",
-    },
+        clientId: "955e84b4-947a-48dd-9661-668475d94dc6", // This is the ONLY mandatory field that you need to supply.
+        authority: "https://login.microsoftonline.com/cbaf2168-de14-4c72-9d88-f5f05366dbef", // Defaults to "https://login.microsoftonline.com/common"
+        redirectUri: "http://localhost:3000", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.href
+      },
     cache: {
         cacheLocation: "localStorage", // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge

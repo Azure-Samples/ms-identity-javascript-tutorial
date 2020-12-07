@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD",
+      "Title": "Vanilla JavaScript single-page application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD",
       "Level": 200,
       "Client": "JavaScript SPA",
       "Service": "Node.js Web Api",

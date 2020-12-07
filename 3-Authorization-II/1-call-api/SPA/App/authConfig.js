@@ -31,5 +31,5 @@ const loginRequest = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 const tokenRequest = {
-    scopes: [apiConfig.scope],
+    scopes: [...apiConfig.scopes],
 };

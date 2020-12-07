@@ -15,8 +15,6 @@ function callApi(endpoint, token) {
     fetch(endpoint, options)
       .then(response => response.json())
       .then(response => {
-        
-        console.log(response);
 
         if (response) {
           logMessage('Web API responded: Hello ' + response['name'] + '!');

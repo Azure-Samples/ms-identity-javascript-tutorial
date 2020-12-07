@@ -1,4 +1,4 @@
-# Vanilla JavaScript Single-page Application (SPA) using MSAL.js to authenticate users against Azure Active Directory
+# Vanilla JavaScript single-page application (SPA) using MSAL.js to authenticate users against Azure Active Directory
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)

@@ -1,4 +1,4 @@
-# Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph
+# Vanilla JavaScript single-page application using MSAL.js to authorize users for calling Microsoft Graph
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)

@@ -6,10 +6,10 @@ const mailButton = document.getElementById("readMail");
 const profileButton = document.getElementById("seeProfile");
 const profileDiv = document.getElementById("profile-div");
 
-function showWelcomeMessage(account) {
+function showWelcomeMessage(username) {
     // Reconfiguring DOM elements
     cardDiv.style.display = 'initial';
-    welcomeDiv.innerHTML = `Welcome ${account.username}`;
+    welcomeDiv.innerHTML = `Welcome ${username}`;
     signInButton.setAttribute("onclick", "signOut();");
     signInButton.setAttribute('class', "btn btn-success")
     signInButton.innerHTML = "Sign Out";
@@ -19,6 +19,7 @@ function updateUI(data, endpoint) {
     console.log('Graph API responded at: ' + new Date().toString());
 
     if (endpoint === graphConfig.graphMeEndpoint) {
+        profileDiv.innerHTML = '';
         const title = document.createElement('p');
         title.innerHTML = "<strong>Title: </strong>" + data.jobTitle;
         const email = document.createElement('p');
