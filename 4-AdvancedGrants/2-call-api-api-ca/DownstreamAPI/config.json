@@ -1,11 +1,7 @@
 {
     "credentials": {
         "tenantID": "cbaf2168-de14-4c72-9d88-f5f05366dbef",
-        "clientID": "883e5e50-8089-4107-a110-84ecb93ee8e5",
-        "audience": "883e5e50-8089-4107-a110-84ecb93ee8e5"
-    },
-    "resource": {
-        "scope": ["user_impersonation"]
+        "clientID": "883e5e50-8089-4107-a110-84ecb93ee8e5"
     },
     "metadata": {
         "authority": "login.microsoftonline.com",

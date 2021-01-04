@@ -446,6 +446,18 @@ Function ConfigureApplications
    Write-Host "Configured."
 
 
+   # Update config file for 'service1'
+   $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
+   Write-Host "Updating the sample code ($configFile)"
+   $dictionary = @{ "clientID" = $service1AadApplication.AppId;"tenantID" = $tenantId };
+   UpdateTextFile -configFilePath $configFile -dictionary $dictionary
+
+   # Update config file for 'service2'
+   $configFile = $pwd.Path + "\..\DownstreamAPI\config.json"
+   Write-Host "Updating the sample code ($configFile)"
+   $dictionary = @{ "clientID" = $service2AadApplication.AppId;"tenantID" = $tenantId;"clientSecret" = $service2AppKey };
+   UpdateTextFile -configFilePath $configFile -dictionary $dictionary
+
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\Client\App\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
@@ -457,18 +469,6 @@ Function ConfigureApplications
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "Enter_the_Web_Api_Uri_Here" = service.HomePage;"Enter_the_Web_Api_Scope_Here" = service.Scope };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
-
-   # Update config file for 'service1'
-   $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
-   Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientID" = $service1AadApplication.AppId;"tenantID" = $tenantId;"audience" = $service1AadApplication.AppId;"clientSecret" = $service1AppKey };
-   UpdateTextFile -configFilePath $configFile -dictionary $dictionary
-
-   # Update config file for 'service2'
-   $configFile = $pwd.Path + "\..\DownstreamAPI\config.json"
-   Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientID" = $service2AadApplication.AppId;"tenantID" = $tenantId;"audience" = $service2AadApplication.AppId;"clientSecret" = $service2AppKey };
-   UpdateTextFile -configFilePath $configFile -dictionary $dictionary
    Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":

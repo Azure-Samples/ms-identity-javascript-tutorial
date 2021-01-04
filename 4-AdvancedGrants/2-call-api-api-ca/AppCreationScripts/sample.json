@@ -1,9 +1,9 @@
 {
     "Sample": {
-      "Title": "A Node.js web API secured by Azure AD and another Node.js web API on behalf of a user with conditional access",
+      "Title": "A Node.js web API secured by Azure AD calling another Node.js web API on behalf of a user with conditional access",
       "Level": 300,
       "Client": "JavaScript SPA",
-      "Service": "Node.js Web Api",
+      "Service": "Node.js web API",
       "RepositoryUrl": "ms-identity-javascript-tutorial",
       "Endpoint": "AAD v2.0"
     },
@@ -61,6 +61,40 @@
     ],
     "CodeConfiguration": [
       {
+        "App": "service1",
+        "SettingKind": "JSON",
+        "SettingFile": "\\..\\MiddletierAPI\\config.json",
+        "Mappings": [
+          {
+            "key": "clientID",
+            "value": ".AppId"
+          },
+          {
+            "key": "tenantID",
+            "value": "$tenantId"
+          }
+        ]
+      },
+      {
+        "App": "service2",
+        "SettingKind": "JSON",
+        "SettingFile": "\\..\\DownstreamAPI\\config.json",
+        "Mappings": [
+          {
+            "key": "clientID",
+            "value": ".AppId"
+          },
+          {
+            "key": "tenantID",
+            "value": "$tenantId"
+          },
+          {
+            "key": "clientSecret",
+            "value": ".AppKey"
+          }
+        ]
+      },
+      {
         "App": "spa",
         "SettingKind": "Replace",
         "SettingFile": "\\..\\Client\\App\\authConfig.js",
@@ -91,52 +125,6 @@
           {
             "key": "Enter_the_Web_Api_Scope_Here",
             "value": "service.Scope"
-          }
-        ]
-      },
-      {
-        "App": "service1",
-        "SettingKind": "JSON",
-        "SettingFile": "\\..\\MiddletierAPI\\config.json",
-        "Mappings": [
-          {
-            "key": "clientID",
-            "value": ".AppId"
-          },
-          {
-            "key": "tenantID",
-            "value": "$tenantId"
-          },
-          {
-            "key": "audience",
-            "value": ".AppId"
-          },
-          {
-            "key": "clientSecret",
-            "value": ".AppKey"
-          }
-        ]
-      },
-      {
-        "App": "service2",
-        "SettingKind": "JSON",
-        "SettingFile": "\\..\\DownstreamAPI\\config.json",
-        "Mappings": [
-          {
-            "key": "clientID",
-            "value": ".AppId"
-          },
-          {
-            "key": "tenantID",
-            "value": "$tenantId"
-          },
-          {
-            "key": "audience",
-            "value": ".AppId"
-          },
-          {
-            "key": "clientSecret",
-            "value": ".AppKey"
           }
         ]
       }

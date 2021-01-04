@@ -73,7 +73,6 @@ async function getNewAccessToken(userToken) {
         method: 'POST',
         headers: myHeaders,
         body: urlencoded,
-        redirect: 'follow'
     };
 
     let response = await fetch(tokenEndpoint, options);

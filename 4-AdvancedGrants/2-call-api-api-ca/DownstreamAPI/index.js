@@ -3,21 +3,24 @@ const morgan = require("morgan");
 const passport = require("passport");
 const config = require('./config');
 
+// this is the API scope you've exposed during app registration
+const EXPOSED_SCOPES = [ "user_impersonation" ]
+
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
 const options = {
     identityMetadata: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}/${config.metadata.discovery}`,
     issuer: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}`,
     clientID: config.credentials.clientID,
-    audience: config.credentials.audience,
+    audience: config.credentials.clientID,
     validateIssuer: config.settings.validateIssuer,
     passReqToCallback: config.settings.passReqToCallback,
     loggingLevel: config.settings.loggingLevel,
-    scope: config.resource.scope
+    scope: EXPOSED_SCOPES
 };
 
 const bearerStrategy = new BearerStrategy(options, (token, done) => {
-        // Send user info using the second argument
+        // send user info using the second argument
         done(null, {}, token);
     }
 );
@@ -43,7 +46,7 @@ app.get("/api",
     (req, res) => {
         console.log('Validated claims: ', req.authInfo);
 
-        // Service relies on the name claim.  
+        // service relies on the name claim.  
         res.status(200).json({
             'name': req.authInfo['name'],
             'issued-by': req.authInfo['iss'],
