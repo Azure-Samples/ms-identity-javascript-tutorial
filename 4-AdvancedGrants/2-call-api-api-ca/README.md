@@ -68,19 +68,19 @@ or download and extract the repository .zip file.
 Locate the project root folder in a command prompt. Then:
 
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-api1
+    cd DownstreamAPI
     npm install
 ```
 
 ```console
     cd ..
-    cd ms-identity-javascript-tutorial-c4s1-api2
+    cd MiddletierAPI
     npm install
 ```
 
 ```console
     cd ..
-    cd ms-identity-javascript-tutorial-c4s1-spa
+    cd SPA
     npm install
 ```
 
@@ -126,12 +126,12 @@ As a first step you'll need to:
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. If your account is present in more than one Azure AD tenant, select your profile at the top right corner in the menu on top of the page, and then **switch directory** to change your portal session to the desired Azure AD tenant.
 
-### Register the downstream web API (ms-identity-javascript-tutorial-c4s1-api1)
+### Register the downstream web API (ms-identity-javascript-tutorial-c4s1-downstream)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c4s1-api1`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c4s1-downstream`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
@@ -144,32 +144,32 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `user_impersonation`.
         - Select **Admins and users** options for **Who can consent?**.
-        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api1`.
-        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c4s1-api1 as the signed-in user.`
-        - For **User consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api1`.
-        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-api1 on your behalf.`
+        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c4s1-downstream`.
+        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c4s1-downstream as the signed-in user.`
+        - For **User consent display name** type `Access ms-identity-javascript-tutorial-c4s1-downstream`.
+        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-downstream on your behalf.`
         - Keep **State** as **Enabled**.
         - Select the **Add scope** button on the bottom to save this scope.
 1. On the right side menu, select the `Manifest` blade.
    - Set `accessTokenAcceptedVersion` property to **2**.
    - Click on **Save**.
 
-#### Configure the downstream web API (ms-identity-javascript-tutorial-c4s1-api1) to use your app registration
+#### Configure the downstream web API (ms-identity-javascript-tutorial-c4s1-downstream) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `DownstreamAPI\config.json` file.
-1. Find the key `clientID` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s1-api1` app copied from the Azure portal.
+1. Find the key `clientID` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s1-downstream` app copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 
-### Register the middle-tier web API (ms-identity-javascript-tutorial-c4s1-api2)
+### Register the middle-tier web API (ms-identity-javascript-tutorial-c4s1-middle)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c4s1-api2`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-tutorial-c4s1-middle`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
@@ -183,7 +183,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. In the app's registration screen, select the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs.
    - Select the **Add a permission** button and then,
    - Ensure that the **My APIs** tab is selected.
-   - In the list of APIs, select the API `ms-identity-javascript-tutorial-c4s1-api1`.
+   - In the list of APIs, select the API `ms-identity-javascript-tutorial-c4s1-downstream`.
    - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
 1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an API for which client applications can obtain [access tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) for.
@@ -194,28 +194,28 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `user_impersonation`.
         - Select **Admins and users** options for **Who can consent?**.
-        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api2`.
-        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c4s1-api2 as the signed-in user.`
-        - For **User consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api2`.
-        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-api2 on your behalf.`
+        - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c4s1-middle`.
+        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c4s1-middle as the signed-in user.`
+        - For **User consent display name** type `Access ms-identity-javascript-tutorial-c4s1-middle`.
+        - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-middle on your behalf.`
         - Keep **State** as **Enabled**.
         - Select the **Add scope** button on the bottom to save this scope.
 1. On the right side menu, select the `Manifest` blade.
    - Set `accessTokenAcceptedVersion` property to **2**.
    - Click on **Save**.
 
-#### Configure the middle-tier web API (ms-identity-javascript-tutorial-c4s1-api2) to use your app registration
+#### Configure the middle-tier web API (ms-identity-javascript-tutorial-c4s1-middle) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `MiddletierAPI\config.json` file.
-1. Find the key `clientID` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s1-api2` app copied from the Azure portal.
+1. Find the key `clientID` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s1-middle` app copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of `ms-identity-javascript-tutorial-c4s1-api2` copied from the Azure portal.
+1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of `ms-identity-javascript-tutorial-c4s1-middle` copied from the Azure portal.
 
-### Register the spa app (ms-identity-javascript-tutorial-c4s1-spa)
+### Register the SPA app (ms-identity-javascript-tutorial-c4s1-spa)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
@@ -229,7 +229,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. In the app's registration screen, select the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs.
    - Select the **Add a permission** button and then,
    - Ensure that the **My APIs** tab is selected.
-   - In the list of APIs, select the API `ms-identity-javascript-tutorial-c4s1-api2`.
+   - In the list of APIs, select the API `ms-identity-javascript-tutorial-c4s1-middle`.
    - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
 
@@ -245,15 +245,15 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c4s1-spa`. (by default `http://localhost:3000/`).
 
 1. Open the `SPA\App\apiConfig.js` file.
-1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scope for `ms-identity-javascript-tutorial-c4s1-api2` using the `.default` form e.g. `api://<Enter_Web_API_Application_Id>/.default`.
+1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scope for `ms-identity-javascript-tutorial-c4s1-middle` using the `.default` form e.g. `api://<Enter_Web_API_Application_Id>/.default`.
 
-#### Configure Known Client Applications for the middle-tier web API (ms-identity-javascript-tutorial-c4s1-api2)
+#### Configure Known Client Applications for the middle-tier web API (ms-identity-javascript-tutorial-c4s1-middle)
 
-For a middle-tier web API (`ms-identity-javascript-tutorial-c4s1-api2`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle-tier web API and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
+For a middle-tier web API (`ms-identity-javascript-tutorial-c4s1-middle`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle-tier web API and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
 
 To achieve this, you need to add the **Application Id** of the client app, in the Manifest of the web API in the `knownClientApplications` property. Here's how:
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-tutorial-c4s1-api2` app registration, and select **Manifest** section.
+1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-tutorial-c4s1-middle` app registration, and select **Manifest** section.
 1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ms-identity-javascript-tutorial-c4s1-spa`) as an element of the array.
 
     For instance:
@@ -278,7 +278,7 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ![CA4](./ReadmeFiles/ca4.png)
 
-4. Select the **Cloud apps**, then hit the **Select apps** radio button in the **Include** tab, and select the `ms-identity-javascript-tutorial-c4s1-api1`.
+4. Select the **Cloud apps**, then hit the **Select apps** radio button in the **Include** tab, and select the `ms-identity-javascript-tutorial-c4s1-downstream`.
 
 ![CA5](./ReadmeFiles/ca5.png)
 
@@ -293,19 +293,19 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 Locate the project root folder in a command prompt. Then:
 
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-api1
+    cd DownstreamAPI
     npm start
 ```
 
 ```console
     cd ..
-    cd ms-identity-javascript-tutorial-c4s1-api2
+    cd MiddletierAPI
     npm start
 ```
 
 ```console
     cd ..
-    cd ms-identity-javascript-tutorial-c4s1-spa
+    cd SPA
     npm start
 ```
 
