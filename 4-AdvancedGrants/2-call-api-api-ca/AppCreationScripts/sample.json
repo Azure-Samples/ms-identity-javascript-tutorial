@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "A Node.js web API secured by Azure AD calling another Node.js web API on behalf of a user with conditional access",
+      "Title": "Handling Conditional Access challenges in an Azure AD protected Node.js web API calling another protected Node.js web API on behalf of a user",
       "Level": 300,
       "Client": "JavaScript SPA",
       "Service": "Node.js web API",
@@ -101,7 +101,7 @@
       {
         "App": "spa",
         "SettingKind": "Replace",
-        "SettingFile": "\\..\\Client\\App\\authConfig.js",
+        "SettingFile": "\\..\\sPA\\App\\authConfig.js",
         "Mappings": [
           {
             "key": "Enter_the_Application_Id_Here",
@@ -116,7 +116,7 @@
       {
         "App": "spa",
         "SettingKind": "Replace",
-        "SettingFile": "\\..\\Client\\App\\apiConfig.js",
+        "SettingFile": "\\..\\SPA\\App\\apiConfig.js",
         "Mappings": [
           {
             "key": "Enter_the_Web_Api_Scope_Here",

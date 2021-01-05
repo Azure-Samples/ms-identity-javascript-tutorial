@@ -286,9 +286,9 @@ Function ConfigureApplications
     if ($scopes.Count -ge 0) 
     {
         # add all existing scopes first
-        $serviceAadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
+        $service1AadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
 
-        $scope = $serviceAadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
+        $scope = $service1AadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
 
         if ($scope -ne $null) 
         {
@@ -307,8 +307,10 @@ Function ConfigureApplications
         }        
     }
      
+    Write-Host "done adding scopes"
+
     # add/update scopes
-    Set-AzureADApplication -ObjectId $serviceAadApplication.ObjectId -OAuth2Permission $scopes
+    Set-AzureADApplication -ObjectId $service1AadApplication.ObjectId -OAuth2Permission $scopes
 
    Write-Host "Done creating the service1 application (ms-identity-javascript-tutorial-c4s1-api1)"
 
@@ -352,9 +354,9 @@ Function ConfigureApplications
     if ($scopes.Count -ge 0) 
     {
         # add all existing scopes first
-        $serviceAadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
+        $service2AadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
 
-        $scope = $serviceAadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
+        $scope = $service2AadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
 
         if ($scope -ne $null) 
         {
@@ -374,7 +376,7 @@ Function ConfigureApplications
     }
      
     # add/update scopes
-    Set-AzureADApplication -ObjectId $serviceAadApplication.ObjectId -OAuth2Permission $scopes
+    Set-AzureADApplication -ObjectId $service2AadApplication.ObjectId -OAuth2Permission $scopes
 
    Write-Host "Done creating the service2 application (ms-identity-javascript-tutorial-c4s1-api2)"
 
@@ -388,7 +390,7 @@ Function ConfigureApplications
    # Add Required Resources Access (from 'service2' to 'service1')
    Write-Host "Getting access from 'service2' to 'service1'"
    $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s1-api1" `
-                                                -requiredDelegatedPermissions "user_impersonation" `
+                                                -requiredDelegatedPermissions "access_as_user" `
 
    $requiredResourcesAccess.Add($requiredPermissions)
 
@@ -430,7 +432,7 @@ Function ConfigureApplications
    # Add Required Resources Access (from 'spa' to 'service2')
    Write-Host "Getting access from 'spa' to 'service2'"
    $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s1-api2" `
-                                                -requiredDelegatedPermissions "user_impersonation" `
+                                                -requiredDelegatedPermissions "access_as_user" `
 
    $requiredResourcesAccess.Add($requiredPermissions)
 
@@ -459,13 +461,13 @@ Function ConfigureApplications
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\Client\App\authConfig.js"
+   $configFile = $pwd.Path + "\..\SPA\App\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"https://login.microsoftonline.com/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantId };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\Client\App\apiConfig.js"
+   $configFile = $pwd.Path + "\..\SPA\App\apiConfig.js"
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$service2AadApplication.AppId+"/access_as_user") };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
