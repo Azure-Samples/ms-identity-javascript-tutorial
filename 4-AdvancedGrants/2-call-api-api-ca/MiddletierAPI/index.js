@@ -46,7 +46,7 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
         try {
             // request new token and use it to call resource API on user's behalf
             let tokenObj = await getNewAccessToken(userToken);
-    
+            
             if (tokenObj['error_codes']) {
                 
                 /**
@@ -55,7 +55,7 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
                  * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
                  */
 
-                if (tokenObj['error_codes'].includes(50076)) {
+                if (tokenObj['error_codes'].includes(50076) || tokenObj['error_codes'].includes(50079)) {
                     return res.status(401).json(tokenObj);
                 }
             }

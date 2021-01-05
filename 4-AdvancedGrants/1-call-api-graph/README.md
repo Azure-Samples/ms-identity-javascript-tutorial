@@ -150,6 +150,9 @@ The first thing that we need to do is to declare the unique [resource](https://d
         - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-api on your behalf.`
         - Keep **State** as **Enabled**
         - Click on the **Add scope** button on the bottom to save this scope.
+1. On the right side menu, select the `Manifest` blade.
+   - Set `accessTokenAcceptedVersion` property to **2**.
+   - Click on **Save**.
 
 #### Configure the service app to use your app registration
 

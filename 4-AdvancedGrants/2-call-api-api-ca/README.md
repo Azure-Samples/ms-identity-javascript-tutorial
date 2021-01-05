@@ -22,7 +22,7 @@ This sample demonstrates a JavaScript single-page application (SPA) calling a mi
 1. The client uses the **MSAL.js** to sign-in and obtain a **JWT** access token from **Azure AD**.
 1. The access token is used as a *bearer token* to authorize the user to call the **middle-tier web API** protected by **Azure AD**.
 1. The **middle-tier web API** presents the token sent from client to **Azure AD** in order to receive a new token to call the **downstream web API**.
-1. Because the **downstream web API** has a **conditional access** policy enabled (MFA), it generates a **claims challenge** and sends it back.
+1. **Downstream web API** generates a **claims challenge** and sends it back.
 1. The **middle-tier web API** propagates the **claims challenge** back to client, which triggers an **interactive** token request.
 
 ![Overview](./ReadmeFiles/topology.png)
@@ -150,6 +150,9 @@ The first thing that we need to do is to declare the unique [resource](https://d
         - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-api1 on your behalf.`
         - Keep **State** as **Enabled**.
         - Select the **Add scope** button on the bottom to save this scope.
+1. On the right side menu, select the `Manifest` blade.
+   - Set `accessTokenAcceptedVersion` property to **2**.
+   - Click on **Save**.
 
 #### Configure the downstream web API (ms-identity-javascript-tutorial-c4s1-api1) to use your app registration
 
@@ -197,6 +200,9 @@ The first thing that we need to do is to declare the unique [resource](https://d
         - For **User consent description** type `Allow the application to access ms-identity-javascript-tutorial-c4s1-api2 on your behalf.`
         - Keep **State** as **Enabled**.
         - Select the **Add scope** button on the bottom to save this scope.
+1. On the right side menu, select the `Manifest` blade.
+   - Set `accessTokenAcceptedVersion` property to **2**.
+   - Click on **Save**.
 
 #### Configure the middle-tier web API (ms-identity-javascript-tutorial-c4s1-api2) to use your app registration
 
@@ -233,10 +239,13 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `Client\App\authConfig.js` file.
+1. Open the `SPA\App\authConfig.js` file.
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s1-spa` app copied from the Azure portal.
-1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with "https://login.microsoftonline.com/"+$tenantId.
+1. Find the key `https://login.microsoftonline.com/Enter_the_Tenant_Info_Here` and replace the existing value with your tenant ID copied from Azure portal.
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c4s1-spa`. (by default `http://localhost:3000/`).
+
+1. Open the `SPA\App\apiConfig.js` file.
+1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scope for `ms-identity-javascript-tutorial-c4s1-api2` using the `.default` form e.g. `api://<Enter_Web_API_Application_Id>/.default`.
 
 #### Configure Known Client Applications for the middle-tier web API (ms-identity-javascript-tutorial-c4s1-api2)
 
@@ -306,9 +315,17 @@ Locate the project root folder in a command prompt. Then:
 1. Click the **sign-in** button on the top right corner.
 1. Once you authenticate, click the **Call API** button at the center, which will result in **MFA required** screen.
 
-> :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../issues) page.
-
 ![Screenshot](./ReadmeFiles/screenshot.png)
+
+4. If the user has no predefined verification method to satisfy MFA, they will see the following screen:
+
+![More](./ReadmeFiles/more_info.png)
+
+5. They will then have to setup a verification method:
+
+![Verification](./ReadmeFiles/verification.png)
+
+> :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../issues) page.
 
 ## We'd love your feedback!
 
@@ -333,14 +350,13 @@ If the conditional access policy is not satisfied when calling the downstream we
              * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
              */
 
-            if (tokenObj['error_codes'].includes(50076)) {
+            if (tokenObj['error_codes'].includes(50076) || tokenObj['error_codes'].includes(50079)) {
                return res.status(401).json(tokenObj);
             }
       }
 
       // access the resource with the token
       let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resources.downstreamAPI.resourceUri)
-
       res.status(200).json(apiResponse);
    } catch (error) {
       console.log(error)
@@ -359,13 +375,13 @@ Then, in the SPA project, we catch this error response and initiate an interacti
        * If this occurs, sample middle-tier API will propagate this to client
        * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
        */
-      if (response['error_codes'].includes(50076)) {
+      if (response['error_codes'].includes(50076) || response['error_codes'].includes(50079)) {
 
-      // attach the stringified JSON claims challenge to token request 
-      tokenRequest.claims = response['claims'];
-
-      // calls the MSAL.js acquireToken* API
-      passTokenToApi();
+          // attach the stringified JSON claims challenge to token request 
+          tokenRequest.claims = response['claims'];
+    
+          // calls the MSAL.js acquireToken* API
+          passTokenToApi();
       }
    } else {
       // if no errors, display user name

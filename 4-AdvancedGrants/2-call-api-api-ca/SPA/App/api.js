@@ -2,7 +2,7 @@ function callApi(endpoint, token) {
 
     const headers = new Headers();
     const bearer = `Bearer ${token}`;
-  
+
     headers.append("Authorization", bearer);
   
     const options = {
@@ -26,7 +26,7 @@ function callApi(endpoint, token) {
            * If this occurs, sample middle-tier API will propagate this to client
            * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
            */
-          if (response['error_codes'].includes(50076)) {
+          if (response['error_codes'].includes(50076) || response['error_codes'].includes(50079)) {
 
             // attach the stringified JSON claims challenge to token request 
             tokenRequest.claims = response['claims'];
