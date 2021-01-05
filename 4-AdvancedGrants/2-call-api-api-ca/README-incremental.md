@@ -1,4 +1,4 @@
-# A Node.js web API secured by Azure AD and calling another Node.js web API downstream on behalf of a user with conditional access
+# Handling Conditional Access challenges in an Azure AD protected Node.js web API calling another protected Node.js web API on behalf of a user
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)
