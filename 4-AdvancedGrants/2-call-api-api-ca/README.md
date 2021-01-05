@@ -68,19 +68,19 @@ or download and extract the repository .zip file.
 Locate the project root folder in a command prompt. Then:
 
 ```console
-    cd ms-identity-javascript-tutorial-c4s1-api1
+    cd DownstreamAPI
     npm install
 ```
 
 ```console
     cd ..
-    cd ms-identity-javascript-tutorial-c4s1-api2
+    cd MiddletierAPI
     npm install
 ```
 
 ```console
     cd ..
-    cd ms-identity-javascript-tutorial-c4s1-spa
+    cd SPA
     npm install
 ```
 
