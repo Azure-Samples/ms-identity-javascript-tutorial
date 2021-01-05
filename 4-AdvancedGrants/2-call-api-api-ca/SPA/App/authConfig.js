@@ -5,8 +5,8 @@
  */
 const msalConfig = {
     auth: {
-        clientId: "3b4c804e-af20-46e8-9d36-3fbaa6e077a9",
-        authority: "https://login.microsoftonline.com/cbaf2168-de14-4c72-9d88-f5f05366dbef",
+        clientId: "Enter_the_Application_Id_Here",
+        authority: "https://login.microsoftonline.com/Enter_the_Tenant_Info_Here",
         redirectUri: "http://localhost:3000",
     },
     cache: {

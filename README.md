@@ -73,6 +73,7 @@ Alternatively, choose below the sample you want to review.
 |                 |               |
 |-----------------|---------------|
 | <img src="./4-AdvancedGrants/1-call-api-graph/ReadmeFiles/topology_obo.png" width="200"> | [**Call a web API that calls Microsoft Graph on behalf of a user**](./4-AdvancedGrants/1-call-api-graph) </br> Enhance your protected web API to acquire an **Access Token** for Microsoft Graph **on-behalf-of** a user signed-in to the client app. |
+| <img src="./4-AdvancedGrants/2-call-api-api-ca/ReadmeFiles/topology.png" width="200"> | [**Call a web API that calls another web API with conditional access on behalf of a user**](./4-AdvancedGrants/2-call-api-api-ca) </br> Enhance your protected web API to acquire an **Access Token** for another web API with **MFA** requirement **on-behalf-of** a user signed-in to the client app. |
 
 ### Chapter 5: Deploy your applications to Azure
 

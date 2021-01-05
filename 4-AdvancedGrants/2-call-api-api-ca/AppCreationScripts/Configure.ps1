@@ -447,27 +447,27 @@ Function ConfigureApplications
 
 
    # Update config file for 'service1'
-   $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
+   $configFile = $pwd.Path + "\..\DownstreamAPI\config.json"
    Write-Host "Updating the sample code ($configFile)"
    $dictionary = @{ "clientID" = $service1AadApplication.AppId;"tenantID" = $tenantId };
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'service2'
-   $configFile = $pwd.Path + "\..\DownstreamAPI\config.json"
+   $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientID" = $service2AadApplication.AppId;"tenantID" = $tenantId;"clientSecret" = $service2AppKey };
+   $dictionary = @{ "clientID" = $service2AadApplication.AppId;"tenantID" = $tenantId;"clientSecret" = $service2AppKey;"Enter_the_Web_Api_Scope_Here" = ("api://"+$service1AadApplication.AppId+"/access_as_user") };
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\Client\App\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantId;"Enter_the_Redirect_Uri_Here" = $spaAadApplication.ReplyUrls };
+   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"https://login.microsoftonline.com/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantId };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\Client\App\apiConfig.js"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Web_Api_Uri_Here" = service.HomePage;"Enter_the_Web_Api_Scope_Here" = service.Scope };
+   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$service2AadApplication.AppId+"/access_as_user") };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
    Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
