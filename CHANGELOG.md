@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 01/04/2021
+
+* New chapter (4-2) added.
+
 ## 12/07/2020
 
 * Updated MSAL.js to 2.7.0

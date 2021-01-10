@@ -9,8 +9,8 @@
     },
     "AADApps": [
       {
-        "Id": "service1",
-        "Name": "ms-identity-javascript-tutorial-c4s1-api1",
+        "Id": "DownstreamAPI",
+        "Name": "ms-identity-javascript-tutorial-c4s2-downstream",
         "Kind": "WebApi",
         "HomePage": "http://localhost:7000/api",
         "Audience": "AzureADMyOrg",
@@ -21,16 +21,16 @@
           ]
       },
       {
-        "Id": "service2",
-        "Name": "ms-identity-javascript-tutorial-c4s1-api2",
+        "Id": "MiddletierAPI",
+        "Name": "ms-identity-javascript-tutorial-c4s2-middletier",
         "Kind": "WebApi",
         "HomePage": "http://localhost:5000/api",
         "Audience": "AzureADMyOrg",
         "PasswordCredentials": "Auto",
         "RequiredResourcesAccess": [
             {
-              "Resource": "service1",
-              "DelegatedPermissions": [ "user_impersonation" ]
+              "Resource": "DownstreamAPI",
+              "DelegatedPermissions": [ "access_downstream_api_as_user" ]
             }
           ],
           "ManualSteps": [
@@ -41,15 +41,15 @@
       },
       {
         "Id": "spa",
-        "Name": "ms-identity-javascript-tutorial-c4s1-spa",
+        "Name": "ms-identity-javascript-tutorial-c4s2-spa",
         "Kind" :  "SinglePageApplication",
         "Audience": "AzureADMyOrg",
         "HomePage": "http://localhost:3000/",
         "ReplyUrls":"http://localhost:3000/",
         "RequiredResourcesAccess": [
           {
-            "Resource": "service2",
-            "DelegatedPermissions": [ "user_impersonation" ]
+            "Resource": "middletierAPI",
+            "DelegatedPermissions": [ "access_middletier_api_as_user" ]
           }
         ],
         "ManualSteps": [
@@ -61,7 +61,7 @@
     ],
     "CodeConfiguration": [
       {
-        "App": "service1",
+        "App": "DownstreamAPI",
         "SettingKind": "JSON",
         "SettingFile": "\\..\\DownstreamAPI\\config.json",
         "Mappings": [
@@ -76,7 +76,7 @@
         ]
       },
       {
-        "App": "service2",
+        "App": "middletierAPI",
         "SettingKind": "JSON",
         "SettingFile": "\\..\\MiddletierAPI\\config.json",
         "Mappings": [
@@ -94,14 +94,25 @@
           },
           {
             "key": "Enter_the_Web_Api_Scope_Here",
-            "value": "service1.Scope"
+            "value": "DownstreamAPI.Scope"
+          }
+        ]
+      },
+      {
+        "App": "middletierAPI",
+        "SettingKind": "Replace",
+        "SettingFile": "\\..\\MiddletierAPI\\config.json",
+        "Mappings": [
+          {
+            "key": "Enter_the_Web_Api_Scope_Here",
+            "value": "DownstreamAPI.Scope"
           }
         ]
       },
       {
         "App": "spa",
         "SettingKind": "Replace",
-        "SettingFile": "\\..\\sPA\\App\\authConfig.js",
+        "SettingFile": "\\..\\SPA\\App\\authConfig.js",
         "Mappings": [
           {
             "key": "Enter_the_Application_Id_Here",
@@ -120,7 +131,7 @@
         "Mappings": [
           {
             "key": "Enter_the_Web_Api_Scope_Here",
-            "value": "service2.Scope"
+            "value": "MiddletierAPI.Scope"
           }
         ]
       }

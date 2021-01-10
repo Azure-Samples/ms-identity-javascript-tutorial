@@ -4,7 +4,7 @@ const passport = require("passport");
 const config = require('./config');
 
 // this is the API scope you've exposed during app registration
-const EXPOSED_SCOPES = [ "user_impersonation" ]
+const EXPOSED_SCOPES = [ "access_downstream_api_as_user" ]
 
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 

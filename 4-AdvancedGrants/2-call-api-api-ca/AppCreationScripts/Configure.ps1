@@ -258,26 +258,26 @@ Function ConfigureApplications
     # Get the user running the script to add the user as the app owner
     $user = Get-AzureADUser -ObjectId $creds.Account.Id
 
-   # Create the service1 AAD application
-   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-c4s1-api1)"
+   # Create the DownstreamAPI AAD application
+   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-c4s2-downstream)"
    # create the application 
-   $service1AadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-c4s1-api1" `
+   $DownstreamAPIAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-c4s2-downstream" `
                                                     -HomePage "http://localhost:7000/api" `
                                                     -PublicClient $False
 
-   $service1IdentifierUri = 'api://'+$service1AadApplication.AppId
-   Set-AzureADApplication -ObjectId $service1AadApplication.ObjectId -IdentifierUris $service1IdentifierUri
+   $DownstreamAPIIdentifierUri = 'api://'+$DownstreamAPIAadApplication.AppId
+   Set-AzureADApplication -ObjectId $DownstreamAPIAadApplication.ObjectId -IdentifierUris $DownstreamAPIIdentifierUri
 
    # create the service principal of the newly created application 
-   $currentAppId = $service1AadApplication.AppId
-   $service1ServicePrincipal = New-AzureADServicePrincipal -AppId $currentAppId -Tags {WindowsAzureActiveDirectoryIntegratedApp}
+   $currentAppId = $DownstreamAPIAadApplication.AppId
+   $DownstreamAPIServicePrincipal = New-AzureADServicePrincipal -AppId $currentAppId -Tags {WindowsAzureActiveDirectoryIntegratedApp}
 
    # add the user running the script as an app owner if needed
-   $owner = Get-AzureADApplicationOwner -ObjectId $service1AadApplication.ObjectId
+   $owner = Get-AzureADApplicationOwner -ObjectId $DownstreamAPIAadApplication.ObjectId
    if ($owner -eq $null)
    { 
-        Add-AzureADApplicationOwner -ObjectId $service1AadApplication.ObjectId -RefObjectId $user.ObjectId
-        Write-Host "'$($user.UserPrincipalName)' added as an application owner to app '$($service1ServicePrincipal.DisplayName)'"
+        Add-AzureADApplicationOwner -ObjectId $DownstreamAPIAadApplication.ObjectId -RefObjectId $user.ObjectId
+        Write-Host "'$($user.UserPrincipalName)' added as an application owner to app '$($DownstreamAPIServicePrincipal.DisplayName)'"
    }
 
     # rename the user_impersonation scope if it exists to match the readme steps or add a new scope
@@ -286,21 +286,21 @@ Function ConfigureApplications
     if ($scopes.Count -ge 0) 
     {
         # add all existing scopes first
-        $service1AadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
+        $DownstreamAPIAadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
 
-        $scope = $service1AadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
+        $scope = $DownstreamAPIAadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
 
         if ($scope -ne $null) 
         {
-            $scope.Value = "access_as_user"
+            $scope.Value = "access_downstream_api_as_user"
         }
         else 
         {
             # Add scope
-            $scope = CreateScope -value "access_as_user"  `
-                -userConsentDisplayName "Access ms-identity-javascript-tutorial-c4s1-api1"  `
-                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-c4s1-api1 on your behalf."  `
-                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-c4s1-api1"  `
+            $scope = CreateScope -value "access_downstream_api_as_user"  `
+                -userConsentDisplayName "Access ms-identity-javascript-tutorial-c4s2-downstream"  `
+                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-c4s2-downstream on your behalf."  `
+                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-c4s2-downstream"  `
                 -adminConsentDescription "Allows the app to have the same access to information in the directory on behalf of the signed-in user."
             
             $scopes.Add($scope)
@@ -310,42 +310,42 @@ Function ConfigureApplications
     Write-Host "done adding scopes"
 
     # add/update scopes
-    Set-AzureADApplication -ObjectId $service1AadApplication.ObjectId -OAuth2Permission $scopes
+    Set-AzureADApplication -ObjectId $DownstreamAPIAadApplication.ObjectId -OAuth2Permission $scopes
 
-   Write-Host "Done creating the service1 application (ms-identity-javascript-tutorial-c4s1-api1)"
+   Write-Host "Done creating the DownstreamAPI application (ms-identity-javascript-tutorial-c4s2-downstream)"
 
    # URL of the AAD application in the Azure portal
-   # Future? $service1PortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$service1AadApplication.AppId+"/objectId/"+$service1AadApplication.ObjectId+"/isMSAApp/"
-   $service1PortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$service1AadApplication.AppId+"/objectId/"+$service1AadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>service1</td><td>$currentAppId</td><td><a href='$service1PortalUrl'>ms-identity-javascript-tutorial-c4s1-api1</a></td></tr>" -Path createdApps.html
+   # Future? $DownstreamAPIPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$DownstreamAPIAadApplication.AppId+"/objectId/"+$DownstreamAPIAadApplication.ObjectId+"/isMSAApp/"
+   $DownstreamAPIPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$DownstreamAPIAadApplication.AppId+"/objectId/"+$DownstreamAPIAadApplication.ObjectId+"/isMSAApp/"
+   Add-Content -Value "<tr><td>DownstreamAPI</td><td>$currentAppId</td><td><a href='$DownstreamAPIPortalUrl'>ms-identity-javascript-tutorial-c4s2-downstream</a></td></tr>" -Path createdApps.html
 
 
-   # Create the service2 AAD application
-   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-c4s1-api2)"
-   # Get a 2 years application key for the service2 Application
+   # Create the MiddletierAPI AAD application
+   Write-Host "Creating the AAD application (ms-identity-javascript-tutorial-c4s2-middletier)"
+   # Get a 2 years application key for the MiddletierAPI Application
    $pw = ComputePassword
    $fromDate = [DateTime]::Now;
    $key = CreateAppKey -fromDate $fromDate -durationInYears 2 -pw $pw
-   $service2AppKey = $pw
+   $MiddletierAPIAppKey = $pw
    # create the application 
-   $service2AadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-c4s1-api2" `
+   $MiddletierAPIAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-tutorial-c4s2-middletier" `
                                                     -HomePage "http://localhost:5000/api" `
                                                     -PasswordCredentials $key `
                                                     -PublicClient $False
 
-   $service2IdentifierUri = 'api://'+$service2AadApplication.AppId
-   Set-AzureADApplication -ObjectId $service2AadApplication.ObjectId -IdentifierUris $service2IdentifierUri
+   $MiddletierAPIIdentifierUri = 'api://'+$MiddletierAPIAadApplication.AppId
+   Set-AzureADApplication -ObjectId $MiddletierAPIAadApplication.ObjectId -IdentifierUris $MiddletierAPIIdentifierUri
 
    # create the service principal of the newly created application 
-   $currentAppId = $service2AadApplication.AppId
-   $service2ServicePrincipal = New-AzureADServicePrincipal -AppId $currentAppId -Tags {WindowsAzureActiveDirectoryIntegratedApp}
+   $currentAppId = $MiddletierAPIAadApplication.AppId
+   $MiddletierAPIServicePrincipal = New-AzureADServicePrincipal -AppId $currentAppId -Tags {WindowsAzureActiveDirectoryIntegratedApp}
 
    # add the user running the script as an app owner if needed
-   $owner = Get-AzureADApplicationOwner -ObjectId $service2AadApplication.ObjectId
+   $owner = Get-AzureADApplicationOwner -ObjectId $MiddletierAPIAadApplication.ObjectId
    if ($owner -eq $null)
    { 
-        Add-AzureADApplicationOwner -ObjectId $service2AadApplication.ObjectId -RefObjectId $user.ObjectId
-        Write-Host "'$($user.UserPrincipalName)' added as an application owner to app '$($service2ServicePrincipal.DisplayName)'"
+        Add-AzureADApplicationOwner -ObjectId $MiddletierAPIAadApplication.ObjectId -RefObjectId $user.ObjectId
+        Write-Host "'$($user.UserPrincipalName)' added as an application owner to app '$($MiddletierAPIServicePrincipal.DisplayName)'"
    }
 
     # rename the user_impersonation scope if it exists to match the readme steps or add a new scope
@@ -354,21 +354,21 @@ Function ConfigureApplications
     if ($scopes.Count -ge 0) 
     {
         # add all existing scopes first
-        $service2AadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
+        $MiddletierAPIAadApplication.Oauth2Permissions | foreach-object { $scopes.Add($_) }
 
-        $scope = $service2AadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
+        $scope = $MiddletierAPIAadApplication.Oauth2Permissions | Where-Object { $_.Value -eq "User_impersonation" }
 
         if ($scope -ne $null) 
         {
-            $scope.Value = "access_as_user"
+            $scope.Value = "access_middletier_api_as_user"
         }
         else 
         {
             # Add scope
-            $scope = CreateScope -value "access_as_user"  `
-                -userConsentDisplayName "Access ms-identity-javascript-tutorial-c4s1-api2"  `
-                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-c4s1-api2 on your behalf."  `
-                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-c4s1-api2"  `
+            $scope = CreateScope -value "access_middletier_api_as_user"  `
+                -userConsentDisplayName "Access ms-identity-javascript-tutorial-c4s2-middletier"  `
+                -userConsentDescription "Allow the application to access ms-identity-javascript-tutorial-c4s2-middletier on your behalf."  `
+                -adminConsentDisplayName "Access ms-identity-javascript-tutorial-c4s2-middletier"  `
                 -adminConsentDescription "Allows the app to have the same access to information in the directory on behalf of the signed-in user."
             
             $scopes.Add($scope)
@@ -376,26 +376,26 @@ Function ConfigureApplications
     }
      
     # add/update scopes
-    Set-AzureADApplication -ObjectId $service2AadApplication.ObjectId -OAuth2Permission $scopes
+    Set-AzureADApplication -ObjectId $MiddletierAPIAadApplication.ObjectId -OAuth2Permission $scopes
 
-   Write-Host "Done creating the service2 application (ms-identity-javascript-tutorial-c4s1-api2)"
+   Write-Host "Done creating the MiddletierAPI application (ms-identity-javascript-tutorial-c4s2-middletier)"
 
    # URL of the AAD application in the Azure portal
-   # Future? $service2PortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$service2AadApplication.AppId+"/objectId/"+$service2AadApplication.ObjectId+"/isMSAApp/"
-   $service2PortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$service2AadApplication.AppId+"/objectId/"+$service2AadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>service2</td><td>$currentAppId</td><td><a href='$service2PortalUrl'>ms-identity-javascript-tutorial-c4s1-api2</a></td></tr>" -Path createdApps.html
+   # Future? $MiddletierAPIPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$MiddletierAPIAadApplication.AppId+"/objectId/"+$MiddletierAPIAadApplication.ObjectId+"/isMSAApp/"
+   $MiddletierAPIPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$MiddletierAPIAadApplication.AppId+"/objectId/"+$MiddletierAPIAadApplication.ObjectId+"/isMSAApp/"
+   Add-Content -Value "<tr><td>MiddletierAPI</td><td>$currentAppId</td><td><a href='$MiddletierAPIPortalUrl'>ms-identity-javascript-tutorial-c4s2-middletier</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 
-   # Add Required Resources Access (from 'service2' to 'service1')
-   Write-Host "Getting access from 'service2' to 'service1'"
-   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s1-api1" `
-                                                -requiredDelegatedPermissions "access_as_user" `
+   # Add Required Resources Access (from 'MiddletierAPI' to 'DownstreamAPI')
+   Write-Host "Getting access from 'MiddletierAPI' to 'DownstreamAPI'"
+   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s2-downstream" `
+                                                -requiredDelegatedPermissions "access_downstream_api_as_user" `
 
    $requiredResourcesAccess.Add($requiredPermissions)
 
 
-   Set-AzureADApplication -ObjectId $service2AadApplication.ObjectId -RequiredResourceAccess $requiredResourcesAccess
+   Set-AzureADApplication -ObjectId $MiddletierAPIAadApplication.ObjectId -RequiredResourceAccess $requiredResourcesAccess
    Write-Host "Granted permissions."
 
    # Create the spa AAD application
@@ -429,10 +429,10 @@ Function ConfigureApplications
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 
-   # Add Required Resources Access (from 'spa' to 'service2')
-   Write-Host "Getting access from 'spa' to 'service2'"
-   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s1-api2" `
-                                                -requiredDelegatedPermissions "access_as_user" `
+   # Add Required Resources Access (from 'spa' to 'MiddletierAPI')
+   Write-Host "Getting access from 'spa' to 'MiddletierAPI'"
+   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s2-middletier" `
+                                                -requiredDelegatedPermissions "access_middletier_api_as_user" `
 
    $requiredResourcesAccess.Add($requiredPermissions)
 
@@ -440,25 +440,31 @@ Function ConfigureApplications
    Set-AzureADApplication -ObjectId $spaAadApplication.ObjectId -RequiredResourceAccess $requiredResourcesAccess
    Write-Host "Granted permissions."
 
-   # Configure known client applications for service2 
-   Write-Host "Configure known client applications for the 'service2'"
+   # Configure known client applications for MiddletierAPI 
+   Write-Host "Configure known client applications for the 'MiddletierAPI'"
    $knowApplications = New-Object System.Collections.Generic.List[System.String]
     $knowApplications.Add($spaAadApplication.AppId)
-   Set-AzureADApplication -ObjectId $service2AadApplication.ObjectId -KnownClientApplications $knowApplications
+   Set-AzureADApplication -ObjectId $MiddletierAPIAadApplication.ObjectId -KnownClientApplications $knowApplications
    Write-Host "Configured."
 
 
-   # Update config file for 'service1'
+   # Update config file for 'DownstreamAPI'
    $configFile = $pwd.Path + "\..\DownstreamAPI\config.json"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientID" = $service1AadApplication.AppId;"tenantID" = $tenantId };
+   $dictionary = @{ "clientID" = $DownstreamAPIAadApplication.AppId;"tenantID" = $tenantId };
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
 
-   # Update config file for 'service2'
+   # Update config file for 'MiddletierAPI'
    $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientID" = $service2AadApplication.AppId;"tenantID" = $tenantId;"clientSecret" = $service2AppKey;"Enter_the_Web_Api_Scope_Here" = ("api://"+$service1AadApplication.AppId+"/access_as_user") };
+   $dictionary = @{ "clientID" = $MiddletierAPIAadApplication.AppId;"tenantID" = $tenantId;"clientSecret" = $MiddletierAPIAppKey};
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
+
+   # Update config file for 'MiddletierAPI'
+   $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
+   Write-Host "Updating the sample code ($configFile)"
+   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$DownstreamAPIAadApplication.AppId+"/access_downstream_api_as_user") };
+   ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\SPA\App\authConfig.js"
@@ -469,16 +475,16 @@ Function ConfigureApplications
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\SPA\App\apiConfig.js"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$service2AadApplication.AppId+"/access_as_user") };
+   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$MiddletierAPIAadApplication.AppId+"/.default") };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
    Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":
-   Write-Host "- For 'service1'"
-   Write-Host "  - Navigate to '$service1PortalUrl'"
+   Write-Host "- For 'DownstreamAPI'"
+   Write-Host "  - Navigate to '$DownstreamAPIPortalUrl'"
    Write-Host "  - Navigate to the Manifest and set 'accessTokenAcceptedVersion' to '2' instead of 'null'" -ForegroundColor Red 
-   Write-Host "- For 'service2'"
-   Write-Host "  - Navigate to '$service2PortalUrl'"
+   Write-Host "- For 'MiddletierAPI'"
+   Write-Host "  - Navigate to '$MiddletierAPIPortalUrl'"
    Write-Host "  - Navigate to the Manifest and set 'accessTokenAcceptedVersion' to '2' instead of 'null'" -ForegroundColor Red 
    Write-Host "- For 'spa'"
    Write-Host "  - Navigate to '$spaPortalUrl'"

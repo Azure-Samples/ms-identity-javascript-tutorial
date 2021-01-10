@@ -59,9 +59,9 @@ Function Cleanup
     # Removes the applications
     Write-Host "Cleaning-up applications from tenant '$tenantName'"
 
-    Write-Host "Removing 'service1' (ms-identity-javascript-tutorial-c4s1-api1) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api1'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
-    $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api1'"
+    Write-Host "Removing 'DownstreamAPI' (ms-identity-javascript-tutorial-c4s2-downstream) if needed"
+    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s2-downstream'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s2-downstream'"
     if ($apps)
     {
         Remove-AzureADApplication -ObjectId $apps.ObjectId
@@ -70,14 +70,14 @@ Function Cleanup
     foreach ($app in $apps) 
     {
         Remove-AzureADApplication -ObjectId $app.ObjectId
-        Write-Host "Removed ms-identity-javascript-tutorial-c4s1-api1.."
+        Write-Host "Removed ms-identity-javascript-tutorial-c4s2-downstream.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api1'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s2-downstream'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
     
-    Write-Host "Removing 'service2' (ms-identity-javascript-tutorial-c4s1-api2) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api2'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
-    $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api2'"
+    Write-Host "Removing 'MiddletierAPI' (ms-identity-javascript-tutorial-c4s2-middletier) if needed"
+    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s2-middletier'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s2-middletier'"
     if ($apps)
     {
         Remove-AzureADApplication -ObjectId $apps.ObjectId
@@ -86,10 +86,10 @@ Function Cleanup
     foreach ($app in $apps) 
     {
         Remove-AzureADApplication -ObjectId $app.ObjectId
-        Write-Host "Removed ms-identity-javascript-tutorial-c4s1-api2.."
+        Write-Host "Removed ms-identity-javascript-tutorial-c4s2-middletier.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api2'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s2-middletier'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
     
     Write-Host "Removing 'spa' (ms-identity-javascript-tutorial-c4s1-spa) if needed"
     Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-spa'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
