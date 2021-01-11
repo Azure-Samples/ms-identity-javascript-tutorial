@@ -86,6 +86,8 @@ Locate the project root folder (`4-AdvancedGrants\2-call-api-api-ca`) in a comma
     npm install
 ```
 
+## Registration
+
 ### Register the sample application(s) with your Azure Active Directory tenant
 
 There are three projects in this sample. Each needs to be separately registered in your Azure AD tenant. To register these projects, you can:
@@ -277,7 +279,7 @@ To achieve this, you need to add the **Application Id** of the client app, in th
 
 ![CA3](./ReadmeFiles/ca3.png)
 
-3. Select the **Users and groups** button, select **All Users** in the **Include** tab.  "Choose "Select users and groups" and then "Users and groups" and select the user account you want to work with.
+3. Select the **Users and groups** button and then select the **user account** you want to work with in the **Include** tab (hint: you might want to use a test account for this).
 
 ![CA4](./ReadmeFiles/ca4.png)
 
@@ -318,7 +320,7 @@ Run all three projects. Open **3** separate command prompts, and type:
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
 
-4. If the user has no predefined verification method to satisfy MFA, they will see the following screen:
+4. If the user has no predefined verification method to satisfy **MFA**, they will see the following screen:
 
 ![More](./ReadmeFiles/more_info.png)
 

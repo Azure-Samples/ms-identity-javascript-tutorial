@@ -5,6 +5,9 @@ const config = require('./config');
 
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
+// this is the API scope you've exposed during app registration
+const EXPOSED_SCOPES = [ "access_as_user" ]
+
 const options = {
     identityMetadata: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}/${config.metadata.discovery}`,
     issuer: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}`,
@@ -13,7 +16,7 @@ const options = {
     validateIssuer: config.settings.validateIssuer,
     passReqToCallback: config.settings.passReqToCallback,
     loggingLevel: config.settings.loggingLevel,
-    scope: config.resource.scope
+    scope: EXPOSED_SCOPES
 };
 
 const bearerStrategy = new BearerStrategy(options, (token, done) => {

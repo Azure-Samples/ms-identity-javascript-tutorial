@@ -7,13 +7,13 @@ const config = require('./config.json');
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
 const options = {
-    identityMetadata: `https://${config.authority}/${config.tenantID}/${config.version}/${config.discovery}`,
-    issuer: `https://${config.authority}/${config.tenantID}/${config.version}`,
-    clientID: config.clientID,
-    validateIssuer: config.validateIssuer,
-    audience: config.audience,
-    loggingLevel: config.loggingLevel,
-    passReqToCallback: config.passReqToCallback,
+    identityMetadata: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}/${config.metadata.discovery}`,
+    issuer: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}`,
+    clientID: config.credentials.clientID,
+    validateIssuer: config.settings.validateIssuer,
+    audience: config.credentials.clientID,
+    loggingLevel: config.settings.loggingLevel,
+    passReqToCallback: config.settings.passReqToCallback,
 };
 
 const bearerStrategy = new BearerStrategy(options, (token, done) => {
@@ -47,7 +47,7 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
         let tokenObj = await getNewAccessToken(userToken);
 
         // access the resource with token
-        let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resourceUri)
+        let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resources.resourceUri)
 
         res.status(200).json(apiResponse);
     }
@@ -56,17 +56,17 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
 async function getNewAccessToken(userToken) {
 
     const [bearer, tokenValue] = userToken.split(' ');
-    const tokenEndpoint = `https://${config.authority}/${config.tenantName}/oauth2/${config.version}/token`;
+    const tokenEndpoint = `https://${config.metadata.authority}/${config.credentials.tenantID}/oauth2/${config.metadata.version}/token`;
 
     let myHeaders = new fetch.Headers();
     myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
     let urlencoded = new URLSearchParams();
     urlencoded.append('grant_type', 'urn:ietf:params:oauth:grant-type:jwt-bearer');
-    urlencoded.append('client_id', config.clientID);
-    urlencoded.append('client_secret', config.clientSecret);
+    urlencoded.append('client_id', config.credentials.clientID);
+    urlencoded.append('client_secret', config.credentials.clientSecret);
     urlencoded.append('assertion', tokenValue);
-    urlencoded.append('scope', ...config.resourceScope);
+    urlencoded.append('scope', ...config.resources.resourceScope);
     urlencoded.append('requested_token_use', 'on_behalf_of');
 
     let options = {

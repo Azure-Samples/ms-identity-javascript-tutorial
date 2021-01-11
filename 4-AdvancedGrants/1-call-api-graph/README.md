@@ -142,7 +142,7 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
 1. All APIs have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `user_impersonation`.
+        - For **Scope name**, use `access_as_user`.
         - Select **Admins and users** options for **Who can consent?**
         - For **Admin consent display name** type `Access ms-identity-javascript-tutorial-c4s1-api`
         - For **Admin consent description** type `Allows the app to access ms-identity-javascript-tutorial-c4s1-api as the signed-in user.`
@@ -163,7 +163,6 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Open the `API\config.json` file.
 1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c4s1-api` application copied from the Azure portal.
 1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of the `ms-identity-javascript-tutorial-c4s1-api` app in the Azure portal.
 
 ### Register the client app
@@ -188,7 +187,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
    - Ensure that the **My APIs** tab is selected.
    - In the list of APIs, select the API `ms-identity-javascript-tutorial-c4s1-api`.
-   - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
+   - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
    - Click on the **Add permissions** button at the bottom.
 
 #### Configure the client app to use your app registration
@@ -248,7 +247,7 @@ Were we successful in addressing your learning objective? Consider taking a mome
 
 ### /.default scope and combined consent
 
-Notice that we have set the scope in the **client** app as `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`, instead of `api://cd96451f-9709-4a95-b1f5-79da05cf8502/user_impersonation`. The [/.default](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope) scope is a built-in scope for every application that refers to the static list of permissions configured on the application registration in **Azure Portal**. Basically, it bundles all the permissions from the web API and MS Graph in one call, thus allowing you to grant combined consent to both the **client** app and the **web API**.
+Notice that we have set the scope in the **client** app as `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`, instead of `api://cd96451f-9709-4a95-b1f5-79da05cf8502/access_as_user`. The [/.default](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope) scope is a built-in scope for every application that refers to the static list of permissions configured on the application registration in **Azure Portal**. Basically, it bundles all the permissions from the web API and MS Graph in one call, thus allowing you to grant combined consent to both the **client** app and the **web API**.
 
 Furthermore, we had configured the `knownClientApplications` attribute in **application manifest**. This attribute is used for bundling consent if you have a solution that contains two (or more) parts: a **client** app and a custom **web API**. If you enter the appID (clientID) of the client app into this array, the user will only have to consent once to the client app. **Azure AD** will know that consenting to the client means implicitly consenting to the web API.
 
