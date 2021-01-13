@@ -91,10 +91,6 @@
           {
             "key": "clientSecret",
             "value": ".AppKey"
-          },
-          {
-            "key": "Enter_the_Web_Api_Scope_Here",
-            "value": "DownstreamAPI.Scope"
           }
         ]
       },

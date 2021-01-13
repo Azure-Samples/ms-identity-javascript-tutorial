@@ -463,7 +463,7 @@ Function ConfigureApplications
    # Update config file for 'MiddletierAPI'
    $configFile = $pwd.Path + "\..\MiddletierAPI\config.json"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$DownstreamAPIAadApplication.AppId+"/access_downstream_api_as_user") };
+   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$DownstreamAPIAadApplication.AppId+"/.default") };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'spa'

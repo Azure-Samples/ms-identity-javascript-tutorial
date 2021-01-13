@@ -3,9 +3,6 @@ const morgan = require("morgan");
 const passport = require("passport");
 const config = require('./config');
 
-// this is the API scope you've exposed during app registration
-const EXPOSED_SCOPES = [ "access_downstream_api_as_user" ]
-
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
 const options = {
@@ -16,7 +13,6 @@ const options = {
     validateIssuer: config.settings.validateIssuer,
     passReqToCallback: config.settings.passReqToCallback,
     loggingLevel: config.settings.loggingLevel,
-    scope: EXPOSED_SCOPES
 };
 
 const bearerStrategy = new BearerStrategy(options, (token, done) => {

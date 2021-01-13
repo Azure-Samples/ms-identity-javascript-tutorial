@@ -128,7 +128,20 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `clientID` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-c3s1-api` app copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of `ms-identity-javascript-c3s1-api` copied from the Azure portal.
-1. Find the key `downstreamAPI.resourceScopes` and replace the existing value with the scope you have exposed during the registration of DownstreamAPI project e.g. `api://<DownstreamAPI_Application_Id>/access_downstream_api_as_user`.
+1. Find the key `downstreamAPI.resourceScopes` and replace the existing value with the scope you have exposed during the registration of **DownstreamAPI** project using the `.default` form e.g. `api://<DownstreamAPI_Application_Id>/.default`.
+
+#### Configure Known Client Applications for the downstream web API (ms-identity-javascript-c4s2-downstream)
+
+1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-c4s2-downstream` app registration, and select **Manifest** section.
+1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ms-identity-javascript-c3s1-api`) as an element of the array.
+
+    For instance:
+
+    ```json
+        "knownClientApplications": ["ca8dca8d-f828-4f08-82f5-325e1a1c6428"],
+    ```
+
+1. **Save** the changes to the manifest.
 
 ### Update the SPA app registration (ms-identity-javascript-c1s1-spa)
 

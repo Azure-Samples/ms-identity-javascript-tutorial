@@ -218,7 +218,20 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `clientID` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s2-middletier` app copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of `ms-identity-javascript-tutorial-c4s2-middletier` copied from the Azure portal.
-1. Find the key `downstreamAPI.resourceScopes` and replace the existing value with the scope you have exposed during the registration of DownstreamAPI project e.g. `api://<DownstreamAPI_Application_Id>/access_downstream_api_as_user`.
+1. Find the key `downstreamAPI.resourceScopes` and replace the existing value with the scope you have exposed during the registration of **DownstreamAPI** project using the `.default` form e.g. `api://<DownstreamAPI_Application_Id>/.default`.
+
+#### Configure Known Client Applications for the downstream web API (ms-identity-javascript-tutorial-c4s2-downstream)
+
+1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-tutorial-c4s2-downstream` app registration, and select **Manifest** section.
+1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ms-identity-javascript-tutorial-c4s2-middletier`) as an element of the array.
+
+    For instance:
+
+    ```json
+    "knownClientApplications": ["ca8dca8d-f828-4f08-82f5-325e1a1c6428"],
+    ```
+
+1. **Save** the changes to the manifest.
 
 ### Register the SPA app (ms-identity-javascript-tutorial-c4s2-spa)
 
@@ -253,10 +266,6 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scope for `ms-identity-javascript-tutorial-c4s2-middletier` using the `.default` form e.g. `api://<Enter_Web_API_Application_Id>/.default`.
 
 #### Configure Known Client Applications for the middle-tier web API (ms-identity-javascript-tutorial-c4s2-middletier)
-
-For a middle-tier web API (`ms-identity-javascript-tutorial-c4s2-middletier`) to be able to call a downstream web API, the middle-tier app needs to be granted the required permissions as well. However, since the middle-tier cannot interact with the signed-in user, it needs to be explicitly bound to the client app in its **Azure AD** registration. This binding merges the permissions required by both the client and the middle-tier web API and presents it to the end user in a single consent dialog. The user then consent to this combined set of permissions.
-
-To achieve this, you need to add the **Application Id** of the client app, in the Manifest of the web API in the `knownClientApplications` property. Here's how:
 
 1. In the [Azure portal](https://portal.azure.com), navigate to your `ms-identity-javascript-tutorial-c4s2-middletier` app registration, and select **Manifest** section.
 1. In the manifest editor, change the `"knownClientApplications": []` line so that the array contains the Client ID of the client application (`ms-identity-javascript-tutorial-c4s2-spa`) as an element of the array.
