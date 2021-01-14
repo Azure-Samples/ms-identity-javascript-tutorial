@@ -1,0 +1,64 @@
+{
+	"Sample": {
+		"Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory",
+		"Level": 100,
+		"Client": "Vanilla JavaScript SPA",
+		"RepositoryUrl": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial",
+		"Endpoint": "AAD v2.0"
+	},
+	"AADApps": [
+		{
+			"Id": "spa",
+			"Name": "DomainTestSPA",
+			"Kind" :  "SinglePageApplication",
+			"Audience": "AzureADMyOrg",
+			"HomePage": "https://example.com:3000",
+			"ReplyUrls":"https://example.com:3000",
+			"ManualSteps": [
+				{
+				"Comment": "Navigate to the Manifest page, find the entry for 'replyUrlsWithType' and change the value to 'Spa'"
+				}
+			]
+	  	}
+	],
+	"CodeConfiguration": [
+	  	{
+			"App": "spa",
+			"SettingKind": "Replace",
+			"SettingFile": "\\..\\SPA1\\App\\authConfig.js",
+			"Mappings": [
+				{
+					"key": "Enter_the_Application_Id_Here",
+					"value": ".AppId"
+				},
+				{
+					"key": "Enter_the_Tenant_Info_Here",
+					"value": "$tenantId"
+				},
+				{
+					"key": "Enter_the_Redirect_Uri_Here",
+					"value": ".ReplyUrls"
+				}
+			]
+	  	},
+	  	{
+			"App": "spa",
+			"SettingKind": "Replace",
+			"SettingFile": "\\..\\SPA2\\App\\authConfig.js",
+			"Mappings": [
+				{
+					"key": "Enter_the_Application_Id_Here",
+					"value": ".AppId"
+				},
+				{
+					"key": "Enter_the_Tenant_Info_Here",
+					"value": "$tenantId"
+				},
+				{
+					"key": "Enter_the_Redirect_Uri_Here",
+					"value": ".ReplyUrls"
+				}
+			]
+		}
+	]
+}
