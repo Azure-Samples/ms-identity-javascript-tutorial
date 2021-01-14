@@ -53,7 +53,7 @@ function handleResponse(response) {
             originInState = decodedUrlInState.split('"origin":"')[1].split('"')[0];
             nonceInState = decodedUrlInState.split('"nonce":"')[1].split('"')[0];
 
-            if (isGuid(nonceInState) && window.sessionStorage.getItem('nonce') === nonceInState) {
+            if (originInState === window.location.origin && isGuid(nonceInState) && window.sessionStorage.getItem('nonce') === nonceInState) {
                 username = response.account.username;
                 welcomeUser(username);
                 updateTable();
@@ -75,7 +75,7 @@ function signIn() {
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
      * https://docs.microsoft.com/azure/active-directory/develop/msal-js-pass-custom-state-authentication-request
      */
-
+    
     window.sessionStorage.setItem('nonce', myMSALObj.browserCrypto.guidGenerator.generateGuid());
 
     loginRequest.state = myMSALObj.browserCrypto.base64Encode(
