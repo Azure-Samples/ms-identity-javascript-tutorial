@@ -22,7 +22,8 @@ function callApi(endpoint, token) {
         if (response['error_codes']) {
 
           /**
-           * Conditional access MFA requirement generates AADSTS50076 error.
+           * Conditional access MFA requirement throws an AADSTS50076 error.
+           * If the user has not enrolled in MFA, an AADSTS50079 error will be thrown instead.
            * If this occurs, sample middle-tier API will propagate this to client
            * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
            */
@@ -30,6 +31,15 @@ function callApi(endpoint, token) {
 
             // attach the stringified JSON claims challenge to token request 
             tokenRequest.claims = response['claims'];
+
+            // calls the MSAL.js acquireToken* API
+            passTokenToApi();
+
+            /**
+             * If the user has not consented to required scopes, 
+             * an AADSTS65001 error will be thrown.
+             */  
+          } else if (response['error_codes'].includes(65001)) {
 
             // calls the MSAL.js acquireToken* API
             passTokenToApi();
