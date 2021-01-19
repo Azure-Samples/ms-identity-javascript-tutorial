@@ -52,17 +52,11 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
                 /**
                  * Conditional access MFA requirement throws an AADSTS50076 error.
                  * If the user has not enrolled in MFA, an AADSTS50079 error will be thrown instead.
-                 * If this occurs, sample middle-tier API will propagate this to client
+                 * If the user has not consented to required scopes, an AADSTS65001 error will be thrown instead.
+                 * In either case, sample middle-tier API will propagate the error back to the client
                  * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
                  */
-                if (tokenObj['error_codes'].includes(50076) || tokenObj['error_codes'].includes(50079)) {
-                    return res.status(403).json(tokenObj);
-
-                /**
-                 * If the user has not consented to required scopes, 
-                 * an AADSTS65001 error will be thrown.
-                 */  
-                } else if (tokenObj['error_codes'].includes(65001)) {
+                if (tokenObj['error_codes'].includes(50076) || tokenObj['error_codes'].includes(50079) || tokenObj['error_codes'].includes(65001)) {
                     return res.status(403).json(tokenObj);
                 }
             }
