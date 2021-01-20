@@ -17,6 +17,9 @@
           "ManualSteps": [
             {
               "Comment": "Navigate to the Manifest and set 'accessTokenAcceptedVersion' to '2' instead of 'null'"
+            },
+            {
+              "Comment": "Create a new conditional access policy as described in the sample's readme"
             }
           ]
       },

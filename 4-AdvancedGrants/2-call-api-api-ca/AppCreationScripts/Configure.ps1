@@ -482,7 +482,8 @@ Function ConfigureApplications
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":
    Write-Host "- For 'DownstreamAPI'"
    Write-Host "  - Navigate to '$DownstreamAPIPortalUrl'"
-   Write-Host "  - Navigate to the Manifest and set 'accessTokenAcceptedVersion' to '2' instead of 'null'" -ForegroundColor Red 
+   Write-Host "  - Navigate to the Manifest and set 'accessTokenAcceptedVersion' to '2' instead of 'null'" -ForegroundColor Red
+   Write-Host "  - Create a new conditional access policy as described in the sample's readme" -ForegroundColor Red 
    Write-Host "- For 'MiddletierAPI'"
    Write-Host "  - Navigate to '$MiddletierAPIPortalUrl'"
    Write-Host "  - Navigate to the Manifest and set 'accessTokenAcceptedVersion' to '2' instead of 'null'" -ForegroundColor Red 
