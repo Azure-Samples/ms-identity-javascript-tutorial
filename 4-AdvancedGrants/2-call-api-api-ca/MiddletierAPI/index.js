@@ -42,18 +42,20 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
 
         // the access token the user sent
         const userToken = req.get('authorization');
-        
+        let tokenObj;
+
         try {
             // request new token and use it to call resource API on user's behalf
-            let tokenObj = await getNewAccessToken(userToken);
-            
+            tokenObj = await getNewAccessToken(userToken);
+
+            // check for errors
             if (tokenObj['error_codes']) {
                 
                 /**
                  * Conditional access MFA requirement throws an AADSTS50076 error.
                  * If the user has not enrolled in MFA, an AADSTS50079 error will be thrown instead.
                  * If the user has not consented to required scopes, an AADSTS65001 error will be thrown instead.
-                 * In either case, sample middle-tier API will propagate the error back to the client
+                 * In either case, sample middle-tier API will propagate the error back to the client.
                  * For more, visit: https://docs.microsoft.com/azure/active-directory/develop/v2-conditional-access-dev-guide
                  */
                 if (tokenObj['error_codes'].includes(50076) || tokenObj['error_codes'].includes(50079) || tokenObj['error_codes'].includes(65001)) {
@@ -61,13 +63,18 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
                 }
             }
 
-            // access the resource with the token
-            let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resources.downstreamAPI.resourceUri)
-
-            res.status(200).json(apiResponse);
+            try {
+                // access the resource with the token
+                let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resources.downstreamAPI.resourceUri);
+                return res.status(200).json(apiResponse);
+            } catch (error) {
+                console.log(error);
+                return res.status(403).json(error);
+            }
+            
         } catch (error) {
-            console.log(error)
-            return res.status(500).json(error);
+            console.log(error);
+            return res.status(403).json(error);
         }
     }
 );
