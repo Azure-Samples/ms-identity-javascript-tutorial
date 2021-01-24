@@ -41,7 +41,7 @@
           },
           {
             "Resource": "service",
-            "DelegatedPermissions": [ "user_impersonation" ]
+            "DelegatedPermissions": [ "access_as_user" ]
           }
         ],
         "ManualSteps": [
@@ -98,10 +98,6 @@
           {
             "key": "tenantID",
             "value": "$tenantId"
-          },
-          {
-            "key": "audience",
-            "value": ".AppId"
           },
           {
             "key": "clientSecret",

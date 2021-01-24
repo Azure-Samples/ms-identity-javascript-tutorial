@@ -5,6 +5,9 @@ const config = require('./config.json');
 
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
+// this is the API scope you've exposed during app registration
+const EXPOSED_SCOPES = [ "demo.read" ]
+
 const options = {
     identityMetadata: `https://${config.metadata.b2cDomain}/${config.credentials.tenantName}/${config.policies.policyName}/${config.metadata.version}/${config.metadata.discovery}`,
     clientID: config.credentials.clientID,
@@ -12,7 +15,8 @@ const options = {
     isB2C: config.settings.isB2C,
     validateIssuer: config.settings.validateIssuer,
     loggingLevel: config.settings.loggingLevel,
-    passReqToCallback: config.settings.passReqToCallback
+    passReqToCallback: config.settings.passReqToCallback,
+    scope: EXPOSED_SCOPES
 }
 
 const bearerStrategy = new BearerStrategy(options, (token, done) => {

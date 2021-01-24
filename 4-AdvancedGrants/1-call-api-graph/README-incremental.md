@@ -53,7 +53,7 @@ Locate the sample folder `SPA`, then type:
 
 ## Registration
 
-### Register the service app
+### Update the service app registration (ms-identity-javascript-c3s1-api)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then find and select the service app that you have registered in the previous tutorial (`ms-identity-javascript-c3s1-api`).
@@ -67,22 +67,12 @@ Locate the sample folder `SPA`, then type:
    - Click the **Add a permission** button and then,
    - Ensure that the **Microsoft APIs** tab is selected.
    - In the *Commonly used Microsoft APIs* section, click on **Microsoft Graph**
-   - In the **Delegated permissions** section, select the **offline_access**, **user.read** in the list. Use the search box if necessary.
+   - In the **Delegated permissions** section, select the **offline_access**, **User.Read** in the list. Use the search box if necessary.
    - Click on the **Add permissions** button at the bottom.
 1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) for.
 The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this Api. To declare an resource URI, follow the following steps:
    - Click `Set` next to the **Application ID URI** to generate a URI that is unique for this app.
-   - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
-1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
-   - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `user_impersonation`.
-        - Select **Admins and users** options for **Who can consent?**
-        - For **Admin consent display name** type `Access ms-identity-javascript-c3s1-api`
-        - For **Admin consent description** type `Allows the app to access ms-identity-javascript-c3s1-api as the signed-in user.`
-        - For **User consent display name** type `Access ms-identity-javascript-c3s1-api`
-        - For **User consent description** type `Allow the application to access ms-identity-javascript-c3s1-api on your behalf.`
-        - Keep **State** as **Enabled**
-        - Click on the **Add scope** button on the bottom to save this scope.
+   - For this sample, accept the proposed Application ID URI (`api://{clientId}`) by selecting **Save**.
 
 #### Configure the service app to use your app registration
 
@@ -93,25 +83,17 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Open the `API\config.json` file.
 1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-api` application copied from the Azure portal.
 1. Find the key `clientSecret` and replace the existing value with the key you saved during the creation of the `ms-identity-javascript-c3s1-api` app in the Azure portal.
 
-### Update the client app's registration
+### Update the client app registration (ms-identity-javascript-c1s1-spa)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then find and select the client app that you have registered in the previous tutorial (`ms-identity-javascript-c1s1-spa`).
 1. In the app's registration screen, click on the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs.
     - Click the **Add a permission** button and then:
-
-    - Ensure that the **Microsoft APIs** tab is selected.
-       - In the *Commonly used Microsoft APIs* section, click on **Microsoft Graph**
-       - In the **Delegated permissions** section, select the **User.Read** in the list. Use the search box if necessary.
-       - Click on the **Add permissions** button at the bottom.
-
-    - Click the **Add a permission** button and then:
        - Ensure that the **My APIs** tab is selected.
        - In the list of APIs, select the API `ms-identity-javascript-c3s1-api`.
-       - In the **Delegated permissions** section, select the **user_impersonation** in the list. Use the search box if necessary.
+       - In the **Delegated permissions** section, select the **access_as_user** in the list. Use the search box if necessary.
        - Click on the **Add permissions** button at the bottom.
 
 #### Configure the client app to use your app registration
@@ -177,7 +159,7 @@ Were we successful in addressing your learning objective? Consider taking a mome
 
 ### /.default scope and combined consent
 
-Notice that we have set the scope in the **client** app as `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`, instead of `api://cd96451f-9709-4a95-b1f5-79da05cf8502/user_impersonation`. The [/.default](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope) scope is a built-in scope for every application that refers to the static list of permissions configured on the application registration in **Azure Portal**. Basically, it bundles all the permissions from the web API and MS Graph in one call, thus allowing you to grant combined consent to both the **client** app and the **web API**.
+Notice that we have set the scope in the **client** app as `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`, instead of `api://cd96451f-9709-4a95-b1f5-79da05cf8502/access_as_user`. The [/.default](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope) scope is a built-in scope for every application that refers to the static list of permissions configured on the application registration in **Azure Portal**. Basically, it bundles all the permissions from the web API and MS Graph in one call, thus allowing you to grant combined consent to both the **client** app and the **web API**.
 
 Furthermore, we had configured the `knownClientApplications` attribute in **application manifest**. This attribute is used for bundling consent if you have a solution that contains two (or more) parts: a **client** app and a custom **web API**. If you enter the appID (clientID) of the client app into this array, the user will only have to consent once to the client app. **Azure AD** will know that consenting to the client means implicitly consenting to the web API.
 
@@ -196,7 +178,7 @@ Clients, on the other hand, should treat access tokens as opaque strings, as the
 
 ## Next Tutorial
 
-Continue with the next tutorial: [Deploy your app to Azure](../../5-Deployment/README-incremental.md).
+Either continue with the next tutorial [Call a protected web API that calls another web API using conditional access](../../4-AdvancedGrants/2-call-api-api-ca/README-incremental.md) or skip to learn how to [Deploy your apps to Azure](../../5-Deployment/README-incremental.md).
 
 ## More information
 

@@ -377,7 +377,7 @@ Function ConfigureApplications
    # Add Required Resources Access (from 'spa' to 'service')
    Write-Host "Getting access from 'spa' to 'service'"
    $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-javascript-tutorial-c4s1-api" `
-                                                -requiredDelegatedPermissions "user_impersonation" `
+                                                -requiredDelegatedPermissions "access_as_user" `
 
    $requiredResourcesAccess.Add($requiredPermissions)
 
@@ -408,7 +408,7 @@ Function ConfigureApplications
    # Update config file for 'service'
    $configFile = $pwd.Path + "\..\API\config.json"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "clientID" = $serviceAadApplication.AppId;"tenantID" = $tenantId;"audience" = $serviceAadApplication.AppId;"clientSecret" = $serviceAppKey };
+   $dictionary = @{ "clientID" = $serviceAadApplication.AppId;"tenantID" = $tenantId;"clientSecret" = $serviceAppKey };
    UpdateTextFile -configFilePath $configFile -dictionary $dictionary
    Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 

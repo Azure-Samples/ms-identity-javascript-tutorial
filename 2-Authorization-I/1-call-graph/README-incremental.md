@@ -45,7 +45,7 @@ Locate the sample folder, then type:
 
 ## Registration
 
-### Update app registration
+### Update the client app registration (ms-identity-javascript-c1s1-spa)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then find and select the application that you have registered in the previous tutorial (`ms-identity-javascript-c1s1-spa`).
@@ -56,7 +56,7 @@ Locate the sample folder, then type:
    - In the **Delegated permissions** section, select the **User.Read** in the list. Use the search box if necessary.
    - Click on the **Add permissions** button at the bottom.
 
-### Configure the app to use your app registration
+### Configure the client app to use your app registration
 
 1. Open the `App\authConfig.js` file.
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
