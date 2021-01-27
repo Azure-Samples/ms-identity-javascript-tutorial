@@ -21,12 +21,10 @@ This sample demonstrates how a JavaScript single-page application (SPA) calling 
 
 1. The client app uses the **MSAL.js** to sign-in a user and obtain a **JWT** [Access Token](https://aka.ms/access-tokens) from **Azure AD** for the middle-tier web API.
 1. The access token is used as a *bearer token* to authorize the user to call the **middle-tier web API** protected by the **Microsoft identity platform**.
-1. The **middle-tier web API** uses the access token sent from the client app to **Azure AD** to receive a new access token using the [on-behalf-of flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow) for the downstream web API.
-1. The **middle-tier web API** uses this new access token to call the **downstream web API**.
-1. The **Downstream web API** generates a **claims challenge** if the user hasn't satisfied the MFA and sends the challenge back to the **middle-tier web API**.
+1. The **middle-tier web API** uses the access token sent from the client app to **Azure AD** to receive a new access token using the [on-behalf-of flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow) for the downstream web API. If the user hasn't satisfied the MFA, Azure AD generates a **claims challenge** and sends the challenge back to the **middle-tier web API**.
 1. The **middle-tier web API** propagates the **claims challenge** back to client app, which then initiates an **interactive** token request again with the Microsoft identity platform to get the user to perform MFA as well.
 1. Once the user successfully conducts MFA, a new access token for is provided to client app for the **middle-tier web API**.
-1. Steps **3** and **4** are repeated, and this time the call to **downstream web API** succeeds.
+1. Steps **2** and **3** are repeated, and this time the call to **downstream web API** succeeds.
 
 ![Overview](./ReadmeFiles/topology.png)
 
@@ -347,7 +345,7 @@ Were we successful in addressing your learning objective? Consider taking a mome
 
 ### Handling conditional access claims challenge
 
-If the conditional access policy is not satisfied when calling the downstream web API, Azure AD will throw an error together with a claims challenge. In our middle-tier web API, we are to catch this error coming from the downstream web API, and send it to the client SPA. This is illustrated in the middle-tier web API [index.js](./MiddletierAPI/index.js) file:
+If the conditional access policy is not satisfied when calling the downstream web API, Azure AD will throw an error together with a claims challenge. In our middle-tier web API, we are to catch this and send it to the client SPA. This is illustrated in the middle-tier web API [index.js](./MiddletierAPI/index.js) file:
 
 ```javascript
    try {
