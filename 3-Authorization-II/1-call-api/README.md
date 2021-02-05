@@ -191,7 +191,7 @@ Open the `App\authConfig.js` file. Then:
 
 After you configured your web API, open the `App\apiConfig.js` file. Then:
 
-1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000`).
+1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000/api`).
 1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scopes for your web API, like `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`. You can copy this from the **Expose an API** blade of the web APIs registration.
 
 ## Running the sample
