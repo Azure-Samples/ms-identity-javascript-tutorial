@@ -105,7 +105,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 Open the `App\authConfig.js` file. Then:
 
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
-1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
+1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with your tenant ID copied from the Azure portal.
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the ms-identity-javascript-signin project (by default `http://localhost:3000`).
 
 Open the `SPA\App\apiConfig.js` file. Then:

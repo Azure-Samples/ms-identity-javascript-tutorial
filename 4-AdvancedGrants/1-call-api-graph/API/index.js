@@ -40,16 +40,40 @@ app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
     async (req, res) => {
         console.log('Validated claims: ', JSON.stringify(req.authInfo));
 
+        
         // the access token the user sent
         const userToken = req.get('authorization');
+        let tokenObj;
 
-        // request new token and use it to call resource API on user's behalf
-        let tokenObj = await getNewAccessToken(userToken);
+        try {
+            // request new token and use it to call resource API on user's behalf
+            tokenObj = await getNewAccessToken(userToken);
 
-        // access the resource with token
-        let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resources.resourceUri)
+            // check for errors
+            if (tokenObj['error_codes']) {
+                
+                /**
+                 * If the user has not consented to required scopes, an AADSTS65001 error will be thrown instead.
+                 * In that case, propagate the error back to the client.
+                 */
+                if (tokenObj['error_codes'].includes(65001)) {
+                    return res.status(403).json(tokenObj);
+                }
+            }
 
-        res.status(200).json(apiResponse);
+            try {
+                // access the resource with the token
+                let apiResponse = await callResourceAPI(tokenObj['access_token'], config.resources.graphAPI.resourceUri);
+                return res.status(200).json(apiResponse);
+            } catch (error) {
+                console.log(error);
+                return res.status(403).json(error);
+            }
+            
+        } catch (error) {
+            console.log(error);
+            return res.status(403).json(error);
+        }
     }
 );
 
@@ -66,7 +90,7 @@ async function getNewAccessToken(userToken) {
     urlencoded.append('client_id', config.credentials.clientID);
     urlencoded.append('client_secret', config.credentials.clientSecret);
     urlencoded.append('assertion', tokenValue);
-    urlencoded.append('scope', ...config.resources.resourceScope);
+    urlencoded.append('scope', ...config.resources.graphAPI.resourceScopes);
     urlencoded.append('requested_token_use', 'on_behalf_of');
 
     let options = {
