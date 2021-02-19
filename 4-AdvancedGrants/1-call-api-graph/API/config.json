@@ -2,7 +2,7 @@
     "credentials": {
         "tenantID": "Enter_the_Tenant_ID",
         "clientID": "Enter_the_Client_ID",
-        "clientSecret": "Enter_the_Client_Secret",
+        "clientSecret": "Enter_the_Client_Secret"
     },
     "resources": {
         "graphAPI": {
