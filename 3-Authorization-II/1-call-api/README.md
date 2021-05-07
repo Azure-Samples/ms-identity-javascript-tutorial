@@ -154,7 +154,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `config.js` file.
+1. Open the `config.json` file.
 1. Find the key `clientID` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s1-api` application copied from the Azure portal.
 1. Find the key `tenantID` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `audience` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s1-api` application copied from the Azure portal.
