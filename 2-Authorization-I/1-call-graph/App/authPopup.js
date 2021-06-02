@@ -12,6 +12,7 @@ function selectAccount() {
      */
 
     const currentAccounts = myMSALObj.getAllAccounts();
+
     if (currentAccounts === null) {
         return;
     } else if (currentAccounts.length > 1) {
@@ -58,9 +59,6 @@ function signOut() {
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
      */
-
-    // Choose which account to logout from by passing a username.
-
     const logoutRequest = {
         account: myMSALObj.getAccountByUsername(username)
     };
@@ -68,47 +66,31 @@ function signOut() {
     myMSALObj.logout(logoutRequest);
 }
 
-function getTokenPopup(request) {
-
-    /**
-     * See here for more info on account retrieval: 
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-     */
-    request.account = myMSALObj.getAccountByUsername(username);
-    
-    return myMSALObj.acquireTokenSilent(request)
-        .catch(error => {
-            console.warn("silent token acquisition fails. acquiring token using popup");
-            if (error instanceof msal.InteractionRequiredAuthError) {
-                // fallback to interaction when silent call fails
-                return myMSALObj.acquireTokenPopup(request)
-                    .then(tokenResponse => {
-                        console.log(tokenResponse);
-                        return tokenResponse;
-                    }).catch(error => {
-                        console.error(error);
-                    });
-            } else {
-                console.warn(error);   
-            }
-    });
-}
-
 function seeProfile() {
-    getTokenPopup(loginRequest)
-        .then(response => {
-            callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-        }).catch(error => {
-            console.error(error);
+
+    getGraphClient({
+        account: myMSALObj.getAccountByUsername(username),
+        scopes: graphConfig.graphMeEndpoint.scopes,
+        interactionType: msal.InteractionType.Popup
+    }).api('/me').get()
+        .then((response) => {
+            return updateUI(response, graphConfig.graphMeEndpoint.uri);
+        }).catch((error) => {
+            console.log(error);
         });
 }
 
 function readMail() {
-    getTokenPopup(tokenRequest)
-        .then(response => {
-            callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
-        }).catch(error => {
-            console.error(error);
+
+    getGraphClient({
+        account: myMSALObj.getAccountByUsername(username),
+        scopes: graphConfig.graphMailEndpoint.scopes,
+        interactionType: msal.InteractionType.Popup
+    }).api('/me/messages').get()
+        .then((response) => {
+            return updateUI(response, graphConfig.graphMailEndpoint.uri);
+        }).catch((error) => {
+            console.log(error);
         });
 }
 

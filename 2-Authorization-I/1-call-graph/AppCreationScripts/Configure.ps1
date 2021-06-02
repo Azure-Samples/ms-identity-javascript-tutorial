@@ -76,42 +76,6 @@ Function GetRequiredPermissions([string] $applicationDisplayName, [string] $requ
 }
 
 
-Function UpdateLine([string] $line, [string] $value)
-{
-    $index = $line.IndexOf('=')
-    $delimiter = ';'
-    if ($index -eq -1)
-    {
-        $index = $line.IndexOf(':')
-        $delimiter = ','
-    }
-    if ($index -ige 0)
-    {
-        $line = $line.Substring(0, $index+1) + " "+'"'+$value+'"'+$delimiter
-    }
-    return $line
-}
-
-Function UpdateTextFile([string] $configFilePath, [System.Collections.HashTable] $dictionary)
-{
-    $lines = Get-Content $configFilePath
-    $index = 0
-    while($index -lt $lines.Length)
-    {
-        $line = $lines[$index]
-        foreach($key in $dictionary.Keys)
-        {
-            if ($line.Contains($key))
-            {
-                $lines[$index] = UpdateLine $line $dictionary[$key]
-            }
-        }
-        $index++
-    }
-
-    Set-Content -Path $configFilePath -Value $lines -Force
-}
-
 Function ReplaceInLine([string] $line, [string] $key, [string] $value)
 {
     $index = $line.IndexOf($key)
@@ -202,7 +166,6 @@ Function ConfigureApplications
    $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-javascript-c2s1" `
                                                -HomePage "http://localhost:3000/" `
                                                -ReplyUrls "http://localhost:3000/" `
-                                               -IdentifierUris "https://$tenantName/ms-identity-javascript-c2s1" `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -241,29 +204,28 @@ Function ConfigureApplications
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\App\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantName;"Enter_the_Redirect_Uri_Here" = $spaAadApplication.ReplyUrls };
+   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Tenant_Info_Here" = $tenantId };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
-
-   # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\App\graphConfig.js"
-   Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "graphMeEndpoint" = 'https://graph.microsoft.com/v1.0/me/';"graphMailEndpoint" = 'https://graph.microsoft.com/v1.0/me/messages/' };
-   UpdateTextFile -configFilePath $configFile -dictionary $dictionary
-   Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":
-   Write-Host "- For 'spa'"
-   Write-Host "  - Navigate to '$spaPortalUrl'"
-   Write-Host "  - Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'Spa'" -ForegroundColor Red 
+   Write-Host "- For spa"
+   Write-Host "  - Navigate to $spaPortalUrl"
+   Write-Host "  - Navigate to Azure portal and set the 'replyUrlsWithType' to 'Spa' in the application manifest" -ForegroundColor Red 
 
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
-     
+      if($isOpenSSL -eq 'Y')
+   {
+        Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
+        Write-Host "You have generated certificate using OpenSSL so follow below steps: "
+        Write-Host "Install the certificate on your system from current folder."
+        Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
+   }
    Add-Content -Value "</tbody></table></body></html>" -Path createdApps.html  
 }
 
 # Pre-requisites
 if ((Get-Module -ListAvailable -Name "AzureAD") -eq $null) { 
-    Install-Module "AzureAD" -Scope CurrentUser 
+    Install-Module "AzureAD" -Scope CurrentUser
 }
 
 Import-Module AzureAD

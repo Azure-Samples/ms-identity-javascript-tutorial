@@ -69,39 +69,28 @@ function signOut() {
     myMSALObj.logout(logoutRequest);
 }
 
-function getTokenRedirect(request) {
-    /**
-     * See here for more info on account retrieval: 
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-     */
-    request.account = myMSALObj.getAccountByUsername(username);
-
-    return myMSALObj.acquireTokenSilent(request)
-        .catch(error => {
-            console.warn("silent token acquisition fails. acquiring token using redirect");
-            if (error instanceof msal.InteractionRequiredAuthError) {
-                // fallback to interaction when silent call fails
-                return myMSALObj.acquireTokenRedirect(request);
-            } else {
-                console.warn(error);   
-            }
-        });
-}
-
 function seeProfile() {
-    getTokenRedirect(loginRequest)
-        .then(response => {
-            callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-        }).catch(error => {
-            console.error(error);
+    getGraphClient({
+        account: myMSALObj.getAccountByUsername(username),
+        scopes: graphConfig.graphMeEndpoint.scopes,
+        interactionType: msal.InteractionType.Redirect
+    }).api('/me').get()
+        .then((response) => {
+            return updateUI(response, graphConfig.graphMeEndpoint.uri);
+        }).catch((error) => {
+            console.log(error);
         });
 }
 
 function readMail() {
-    getTokenRedirect(tokenRequest)
-        .then(response => {
-            callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
-        }).catch(error => {
-            console.error(error);
+    getGraphClient({
+        account: myMSALObj.getAccountByUsername(username),
+        scopes: graphConfig.graphMailEndpoint.scopes,
+        interactionType: msal.InteractionType.Redirect
+    }).api('/me/messages').get()
+        .then((response) => {
+            return updateUI(response, graphConfig.graphMailEndpoint.uri);
+        }).catch((error) => {
+            console.log(error);
         });
 }

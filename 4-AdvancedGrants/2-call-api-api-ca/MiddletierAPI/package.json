@@ -15,8 +15,8 @@
     "express": "^4.14.0",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
-    "passport": "^0.3.2",
-    "passport-azure-ad": "^4.2.1"
+    "passport": "^0.4.1",
+    "passport-azure-ad": "^4.3.0"
   },
   "main": "index.js",
   "repository": {
