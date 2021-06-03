@@ -18,7 +18,7 @@ function showWelcomeMessage(username) {
 function updateUI(data, endpoint) {
     console.log('Graph API responded at: ' + new Date().toString());
 
-    if (endpoint === graphConfig.graphMeEndpoint) {
+    if (endpoint === graphConfig.graphMeEndpoint.uri) {
         profileDiv.innerHTML = '';
         const title = document.createElement('p');
         title.innerHTML = "<strong>Title: </strong>" + data.jobTitle;
@@ -33,7 +33,7 @@ function updateUI(data, endpoint) {
         profileDiv.appendChild(phone);
         profileDiv.appendChild(address);
 
-    } else if (endpoint === graphConfig.graphMailEndpoint) {
+    } else if (endpoint === graphConfig.graphMailEndpoint.uri) {
         if (data.value.length < 1) {
             alert("Your mailbox is empty!")
         } else {

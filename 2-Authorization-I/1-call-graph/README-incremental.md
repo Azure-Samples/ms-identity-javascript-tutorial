@@ -15,6 +15,8 @@
 
 This sample demonstrates a Vanilla JavaScript single-page application that lets users authenticate against [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) using the [Microsoft Authentication Library for JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js), then acquires an **Access Token** for Microsoft Graph and calls the [Microsoft Graph API](https://docs.microsoft.com/graph/overview). In doing so, it also illustrates various authorization concepts, such as [Access Tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens), [Authorization Code Grant](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow), [Dynamic Scopes and Incremental Consent](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent), **silent requests** and more.
 
+In addition, this sample also demonstrates how to use the [Microsoft Graph JavaScript SDK](https://github.com/microsoftgraph/msgraph-sdk-javascript) client with MSAL as a custom authentication provider to query the Graph API.
+
 ## Scenario
 
 1. The client application uses the **MSAL.js** to sign-in a user and obtain a JWT **Access Token** from **Azure AD**:
@@ -25,15 +27,15 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 
 ## Contents
 
-| File/folder           | Description                                |
-|-----------------------|--------------------------------------------|
-| `AppCreationScripts/` | Contains Powershell scripts to automate app registration. |
-| `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
+| File/folder           | Description                                                               |
+|-----------------------|---------------------------------------------------------------------------|
+| `AppCreationScripts/` | Contains Powershell scripts to automate app registration.                 |
+| `App/authPopup.js`    | Main authentication logic resides here (using Popup flow).                |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
-| `App/authConfig.js`   | Contains configuration parameters for the sample. |
-| `App/graphConfig.js`   | Contains coordinates of the web API to be called. |
-| `App/ui.js`           | Contains UI logic.                         |
-| `server.js`           | Simple Node server for `index.html`.        |
+| `App/authConfig.js`   | Contains configuration parameters for the sample.                         |
+| `App/graph.js`        | Implements custom authentication provider for Graph SDK.                  |
+| `App/ui.js`           | Contains UI logic.                                                        |
+| `server.js`           | Simple Express server for `index.html`.                                   |
 
 ## Setup
 
@@ -60,8 +62,8 @@ Locate the sample folder, then type:
 
 1. Open the `App\authConfig.js` file.
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
-1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the ms-identity-javascript-signin project (by default `http://localhost:3000`).
+1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `ms-identity-javascript-c1s1` project (by default `http://localhost:3000`).
 
 ## Running the sample
 
@@ -159,6 +161,69 @@ The **MSAL.js** exposes the `acquireTokenSilent()` API which is meant to retriev
 ### Access Token validation
 
 Clients should treat access tokens as opaque strings, as the contents of the token are intended for the **resource only** (such as a web API or Microsoft Graph). For validation and debugging purposes, developers can decode **JWT**s (*JSON Web Tokens*) using a site like [jwt.ms](https://jwt.ms).
+
+### Calling the Microsoft Graph API
+
+[Microsoft Graph JavaScript SDK](https://github.com/microsoftgraph/msgraph-sdk-javascript) provides various utility methods to query the Graph API. While the SDK has a default authentication provider that can be used in basic scenarios, it can also be extended to use with a custom authentication provider such as MSAL. To do so, we will initialize the Graph SDK client with [clientOptions](https://github.com/microsoftgraph/msgraph-sdk-javascript/blob/dev/docs/CreatingClientInstance.md) method, which contains an `authProvider` object of class **MyAuthenticationProvider** that handles the token acquisition process for the client.
+
+```javascript
+const getGraphClient = () => {
+    let clientOptions = {
+        authProvider: new MyAuthenticationProvider(),
+    };
+
+    const graphClient = Client.initWithMiddleware(clientOptions);
+
+    return graphClient;
+}
+```
+
+**MyAuthenticationProvider** needs to implement the [IAuthenticationProvider](https://github.com/microsoftgraph/msgraph-sdk-javascript/blob/dev/src/IAuthenticationProvider.ts) interface, which can be done as shown below:
+
+```javascript
+class MyAuthenticationProvider {
+
+    /**
+     * This method will get called before every request to the ms graph server
+     * This should return a Promise that resolves to an accessToken (in case of success) or rejects with error (in case of failure)
+     * Basically this method will contain the implementation for getting and refreshing accessTokens
+     */
+    getAccessToken() {
+        return new Promise(async (resolve, reject) => {
+            let response;
+
+            response = await msalInstance.acquireTokenSilent({
+                account: account,
+                scopes: scopes
+            });
+
+            if (response.accessToken) {
+                resolve(response.accessToken);
+            } else {
+                reject(Error('Failed to acquire an access token'));
+            }
+        });
+    }
+}
+```
+
+See [graph.js](./App/graph.js). The Graph client then can be used as shown below:
+
+```javascript
+function readMail() {
+
+    getGraphClient({
+        account: myMSALObj.getAccountByUsername(username),
+        scopes: graphConfig.graphMailEndpoint.scopes,
+        interactionType: msal.InteractionType.Popup
+    }).api('/me/messages').get()
+        .then((response) => {
+            return updateUI(response, graphConfig.graphMailEndpoint.uri);
+        }).catch((error) => {
+            console.log(error);
+        });
+}
+```
 
 ## Next Tutorial
 

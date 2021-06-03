@@ -7,12 +7,15 @@
     <link rel="SHORTCUT ICON" href="./favicon.svg" type="image/x-icon">
     
     <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
-    <script src="https://alcdn.msauth.net/browser/2.7.0/js/msal-browser.js" integrity="sha384-5Fqyq1ncNYhL2mXCdWAFXkf2wWtKeA0mXYp++ryAX1lowD0ctAHFdity37L/ULXh" crossorigin="anonymous"></script>
+    <script src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.js" integrity="sha384-SeRoSpLefUsASd6PTJsFeKDwITzOJ6gxSmsl+Z9Fl/hY2PAn/rKcw3WzoaBGc4my" crossorigin="anonymous"></script>
 
     <!-- To help ensure reliability, Microsoft provides a second CDN -->
     <script type="text/javascript">
-      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.7.0/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
+      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.14.2/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
     </script>
+
+    <!-- adding Graph SDK via CDN-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
 
     <!-- adding Bootstrap 4 for UI components  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
