@@ -29,7 +29,7 @@ We recommend following the chapters in successive order. However, the code sampl
 - [Node.js](https://nodejs.org/en/download/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [VS Code Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
-- A modern web browser -while **MSAL.js** supports **IE11**, samples here use **ES6** conventions and will not run on **Internet Explorer**
+- A modern web browser
 
 Please refer to each sample's README for sample-specific prerequisites.
 
