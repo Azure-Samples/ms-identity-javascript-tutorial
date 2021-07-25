@@ -8,7 +8,7 @@
   <link rel="SHORTCUT ICON" href="./favicon.svg" type="image/x-icon">
 
   <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
-  <script src="https://alcdn.msauth.net/browser/2.15.0/js/msal-browser.js"
+  <script id="load-msal" src="https://alcdn.msauth.net/browser/2.15.0/js/msal-browser.js"
     integrity="sha384-dFzMiVGB5HpWZ+5w5VSif6jhWfNeplSw9ACYmQKZcY2azuT9kCxVWVI9HyfGdkHV"
     crossorigin="anonymous"></script>
 
@@ -59,7 +59,6 @@
     crossorigin="anonymous"></script>
 
   <!-- importing app scripts (load order is important) -->
-  <script type="text/javascript" src="./apiConfig.js"></script>
   <script type="text/javascript" src="./policies.js"></script>
   <script type="text/javascript" src="./authConfig.js"></script>
   <script type="text/javascript" src="./ui.js"></script>

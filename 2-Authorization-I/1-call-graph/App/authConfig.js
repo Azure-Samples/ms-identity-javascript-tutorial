@@ -8,11 +8,23 @@ const msalConfig = {
         clientId: "Enter_the_Application_Id_Here", // This is the ONLY mandatory field that you need to supply.
         authority: "https://login.microsoftonline.com/Enter_the_Tenant_Info_Here", // Defaults to "https://login.microsoftonline.com/common"
         redirectUri: "/", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.href
-      },
+    },
     cache: {
         cacheLocation: "localStorage", // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
+};
+
+// Add here the endpoints for MS Graph API services you would like to use.
+const graphConfig = {
+    graphMeEndpoint: {
+        uri: "https://graph.microsoft.com/v1.0/me",
+        scopes: ["User.Read"]
+    },
+    graphMailEndpoint: {
+        uri: "https://graph.microsoft.com/v1.0/me/messages",
+        scopes: ["Mail.Read"]
+    }
 };
 
 /**
@@ -24,3 +36,10 @@ const msalConfig = {
 const loginRequest = {
     scopes: ["User.Read"]
 };
+
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+    module.exports = {
+        msalConfig: msalConfig,
+    };
+}

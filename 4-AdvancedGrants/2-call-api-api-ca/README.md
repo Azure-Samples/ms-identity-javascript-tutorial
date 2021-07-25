@@ -36,7 +36,6 @@ This sample demonstrates how a JavaScript single-page application (SPA) calling 
 | `SPA/App/authPopup.js`    | Main authentication logic resides here (using popup flow). |
 | `SPA/App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `SPA/App/authConfig.js`   | Contains configuration parameters for the SPA.   |
-| `SPA/App/apiConfig.js`   | Contains configuration parameters for the SPA.    |
 | `MiddletierAPI/config.json`| Contains authentication parameters for the middle-tier API. |
 | `DownstreamAPI/config.json`| Contains authentication parameters for the downstream API. |
 
@@ -259,8 +258,6 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-tutorial-c4s2-spa` app copied from the Azure portal.
 1. Find the key `https://login.microsoftonline.com/Enter_the_Tenant_Info_Here` and replace the existing value with your tenant ID copied from Azure portal.
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for `ms-identity-javascript-tutorial-c4s2-spa`. (by default `http://localhost:3000/`).
-
-1. Open the `SPA\App\apiConfig.js` file.
 1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scope for `ms-identity-javascript-tutorial-c4s2-middletier` using the `.default` form e.g. `api://<Enter_Web_API_Application_Id>/.default`.
 
 #### Configure Known Client Applications for the middle-tier web API (ms-identity-javascript-tutorial-c4s2-middletier)

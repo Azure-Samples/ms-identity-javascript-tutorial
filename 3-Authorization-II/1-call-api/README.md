@@ -34,7 +34,6 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 | `App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `App/authConfig.js`   | Contains configuration parameters for the sample. |
-| `App/apiConfig.js`   | Contains coordinates of the web API to be called. |
 | `SPA/server.js`           | Simple Node server for `index.html`.        |
 | `API/process.json`   | Contains configuration parameters for logging via Morgan.  |
 | `API/index.js`   | Main application logic resides here.                     |
@@ -188,9 +187,6 @@ Open the `App\authConfig.js` file. Then:
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c3s1-spa` application copied from the Azure portal.
 1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c3s1-spa` application (by default `http://localhost:3000`).
-
-After you configured your web API, open the `App\apiConfig.js` file. Then:
-
 1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000/api`).
 1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the scopes for your web API, like `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`. You can copy this from the **Expose an API** blade of the web APIs registration.
 
