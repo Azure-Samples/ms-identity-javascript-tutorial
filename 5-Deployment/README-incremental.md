@@ -134,11 +134,8 @@ Now you need to update your authentication configuration files in the client pro
 
 Open `authConfig.js`. Then:
 
-1. Find the key `redirectUri` and replace the existing value with your static webpage's URI that you have just registered, e.g. `https://javascriptspa1.z22.web.core.windows.net/`
-
-Open `apiConfig.js`. Then:
-
-1. Find the key `uri` and replace the existing value with your published web API's endpoint, e.g. `https://node-webapi-1.azurewebsites.net/api`
+1. Find the key `msalConfig.auth.redirectUri` and replace the existing value with your static webpage's URI that you have just registered e.g. `https://javascriptspa1.z22.web.core.windows.net/`
+1. Find the key `apiConfig.uri` and replace the existing value with your published web API's endpoint, e.g. `https://node-webapi-1.azurewebsites.net/api`
 
 ## Explore the sample
 

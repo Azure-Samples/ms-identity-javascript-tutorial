@@ -33,7 +33,6 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 | `SPA/App/authPopup.js`    | Main authentication logic resides here (using Popup flow). |
 | `SPA/App/authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow. |
 | `SPA/App/authConfig.js`   | Contains configuration parameters for the sample. |
-| `SPA/App/apiConfig.js`   | Contains Web API scopes and coordinates. |
 | `SPA/App/policies.js`     | Contains B2C custom policies and user-flows.  |
 | `API/process.json`   | Contains configuration parameters for logging via Morgan.  |
 | `API/index.js`   | Main application logic resides here.                     |
@@ -149,18 +148,18 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `App\authConfig.js` file.
-1. Find the key `clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s2-spa` application copied from the Azure portal.
-1. Find the key `redirectUri` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c3s2-spa` app (by default `http://localhost:6420`).
+Open the `App\authConfig.js` file:
 
-1. Open the `App\policies.js` file.
-1. Find the key `policies.names` and replace it with the names (IDs) of your policies/user-flows e.g. `b2c_1_susi`.
-1. Find the key `policies.authorities` abd replace it with the authority strings of your policies/user-flows e.g. `https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/b2c_1_susi`.
-1. Find the key `policies.authorityDomain` abd replace it with the domain of your authority e.g. `fabrikamb2c.b2clogin.com`.
+1. Find the key `msalConfig.auth.clientId` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-tutorial-c3s2-spa` application copied from the Azure portal.
+1. Find the key `msalConfig.auth.redirectUri` and replace the existing value with the base address of the `ms-identity-javascript-tutorial-c3s2-spa` app (by default `http://localhost:6420`).
+1. Find the key `apiConfig.scopes` and replace the existing value with the scope of your web API (e.g. `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`).
+1. Find the key `apiConfig.uri` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000`).
 
-1. Open the `App\apiConfig.js` file.
-1. Find the key `scopes` and replace the existing value with the scope of your web API (e.g. `api://e767d418-b80b-4568-9754-557f40697fc5/access_as_user`).
-1. Find the key `uri` and replace the existing value with the coordinates of your web API (by default `http://localhost:5000`).
+Open the `App\policies.js` file:
+
+1. Find the key `b2cPolicies.names` and replace it with the names (IDs) of your policies/user-flows e.g. `b2c_1_susi`.
+1. Find the key `b2cPolicies.authorities` abd replace it with the authority strings of your policies/user-flows e.g. `https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/b2c_1_susi`.
+1. Find the key `b2cPolicies.authorityDomain` abd replace it with the domain of your authority e.g. `fabrikamb2c.b2clogin.com`.
 
 ## Running the sample
 

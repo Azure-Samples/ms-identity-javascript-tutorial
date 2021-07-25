@@ -1,37 +1,45 @@
-# Registering sample apps with the Microsoft identity platform and updating the configuration files using PowerShell
+# Registering the sample apps with the Microsoft identity platform and updating the configuration files using PowerShell
 
 ## Overview
 
 ### Quick summary
 
-1. On Windows, run PowerShell as **Administrator** and navigate to the root of the cloned directory
+1. On Windows run PowerShell as **Administrator** and navigate to the root of the cloned directory
 1. In PowerShell run:
 
    ```PowerShell
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
    ```
 
-1. Run the script to create your Azure AD application and configure the code of the sample application accordingly.
+1. Run the script to create your Azure AD application and configure the code of the sample application accordingly. (Other ways of running the scripts are described below)
 
    ```PowerShell
    cd .\AppCreationScripts\
    .\Configure.ps1
    ```
 
+1. Open the Visual Studio solution and click start
+
 ### More details
 
-- [Goal of the provided scripts](#goal-of-the-provided-scripts)
-  - [Presentation of the scripts](#presentation-of-the-scripts)
-  - [Usage pattern for tests and DevOps scenarios](#usage-pattern-for-tests-and-DevOps-scenarios)
-- [How to use the app creation scripts?](#how-to-use-the-app-creation-scripts)
-  - [Pre-requisites](#pre-requisites)
-  - [Run the script and start running](#run-the-script-and-start-running)
-  - [Four ways to run the script](#four-ways-to-run-the-script)
-    - [Option 1 (interactive)](#option-1-interactive)
-    - [Option 2 (non-interactive)](#option-2-non-interactive)
-    - [Option 3 (Interactive, but create apps in a specified tenant)](#option-3-Interactive-but-create-apps-in-a-specified-tenant)
-    - [Option 4 (non-interactive, and create apps in a specified tenant)](#option-4-non-interactive-and-create-apps-in-a-specified-tenant)
-  - [Running the script on Azure Sovereign clouds](#running-the-script-on-Azure-Sovereign-clouds)
+The following paragraphs:
+
+- [Registering the sample apps with the Microsoft identity platform and updating the configuration files using PowerShell](#registering-the-sample-apps-with-the-Microsoft-identity-platform-and-updating-the-configuration-files-using-PowerShell)
+  - [Overview](#overview)
+    - [Quick summary](#quick-summary)
+    - [More details](#more-details)
+  - [Goal of the provided scripts](#goal-of-the-provided-scripts)
+    - [Presentation of the scripts](#presentation-of-the-scripts)
+    - [Usage pattern for tests and DevOps scenarios](#usage-pattern-for-tests-and-DevOps-scenarios)
+  - [How to use the app creation scripts?](#how-to-use-the-app-creation-scripts)
+    - [Pre-requisites](#pre-requisites)
+    - [Run the script and start running](#run-the-script-and-start-running)
+    - [Four ways to run the script](#four-ways-to-run-the-script)
+      - [Option 1 (interactive)](#option-1-interactive)
+      - [Option 2 (non-interactive)](#option-2-non-interactive)
+      - [Option 3 (Interactive, but create apps in a specified tenant)](#option-3-Interactive-but-create-apps-in-a-specified-tenant)
+      - [Option 4 (non-interactive, and create apps in a specified tenant)](#option-4-non-interactive-and-create-apps-in-a-specified-tenant)
+    - [Running the script on Azure Sovereign clouds](#running-the-script-on-Azure-Sovereign-clouds)
 
 ## Goal of the provided scripts
 
@@ -43,13 +51,13 @@ These scripts are:
 
 - `Configure.ps1` which:
   - creates Azure AD applications and their related objects (permissions, dependencies, secrets),
-  - changes the configuration files in the sample projects.
+  - changes the configuration files in the C# and JavaScript projects.
   - creates a summary file named `createdApps.html` in the folder from which you ran the script, and containing, for each Azure AD application it created:
     - the identifier of the application
     - the AppId of the application
     - the url of its registration in the [Azure portal](https://portal.azure.com).
 
-- `Cleanup.ps1` which cleans-up the Azure AD objects created by `Configure.ps1`. Note that this script does not revert the changes done in the configuration files, though. You will need to undo the change from source control (from Visual Studio, or from the command line using, for instance, `git reset`).
+- `Cleanup.ps1` which cleans-up the Azure AD objects created by `Configure.ps1`. Note that this script does not revert the changes done in the configuration files, though. You will need to undo the change from source control (from Visual Studio, or from the command line using, for instance, git reset).
 
 ### Usage pattern for tests and DevOps scenarios
 
@@ -67,13 +75,12 @@ The `Configure.ps1` will stop if it tries to create an Azure AD application whic
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
     ```
 
-### (Optionally) install AzureAD PowerShell modules
+1. ### (Optionally) install AzureAD PowerShell modules
 
 The scripts install the required PowerShell module (AzureAD) for the current user if needed. However, if you want to install if for all users on the machine, you can follow the following steps:
 
 1. If you have never done it already, in the PowerShell window, install the AzureAD PowerShell modules. For this:
-
-   1. Open PowerShell as admin (On Windows, Search Powershell in the search bar, right click on it and select **Run as administrator**).
+   1. Open PowerShell as admin (On Windows, Search Powershell in the search bar, right click on it and select Run as administrator).
    2. Type:
 
       ```PowerShell
@@ -98,7 +105,7 @@ The scripts install the required PowerShell module (AzureAD) for the current use
 1. Open the Visual Studio solution, and in the solution's context menu, choose **Set Startup Projects**.
 1. select **Start** for the projects
 
-You're done!
+You're done. this just works!
 
 ### Four ways to run the script
 
@@ -106,14 +113,14 @@ We advise four ways of running the script:
 
 - Interactive: you will be prompted for credentials, and the scripts decide in which tenant to create the objects,
 - non-interactive: you will provide credentials, and the scripts decide in which tenant to create the objects,
-- Interactive in specific tenant: you will provide the tenant in which you want to create the objects and then you will be prompted for credentials, and the scripts will create the objects,
-- non-interactive in specific tenant: you will provide the tenant in which you want to create the objects and credentials, and the scripts will create the objects.
+- Interactive in specific tenant:  you will provide the tenant in which you want to create the objects and then you will be prompted for credentials, and the scripts will create the objects,
+- non-interactive in specific tenant: you will provide tenant in which you want to create the objects and credentials, and the scripts will create the objects.
 
 Here are the details on how to do this.
 
 #### Option 1 (interactive)
 
-- Just run ``.\Configure.ps1``, and you will be prompted to sign-in (email address, password, and if needed MFA).
+- Just run ``. .\Configure.ps1``, and you will be prompted to sign-in (email address, password, and if needed MFA).
 - The script will be run as the signed-in user and will use the tenant in which the user is defined.
 
 Note that the script will choose the tenant in which to create the applications, based on the user. Also to run the `Cleanup.ps1` script, you will need to re-sign-in.
@@ -129,13 +136,13 @@ $mycreds = New-Object System.Management.Automation.PSCredential ("[login@tenantN
 . .\Configure.ps1 -Credential $mycreds
 ```
 
-Of course, in real life, you might already get the password as a `SecureString`. You might also want to get the password from **Azure Key Vault**.
+Of course, in real life, you might already get the password as a `SecureString`. You might also want to get the password from KeyVault.
 
 #### Option 3 (Interactive, but create apps in a specified tenant)
 
   if you want to create the apps in a particular tenant, you can use the following option:
   
-- Open the [Azure portal](https://portal.azure.com)
+- open the [Azure portal](https://portal.azure.com)
 - Select the Azure Active directory you are interested in (in the combo-box below your name on the top right of the browser window)
 - Find the "Active Directory" object in this tenant
 - Go to **Properties** and copy the content of the **Directory Id** property
@@ -161,7 +168,7 @@ $tenantId = "yourTenantIdGuid"
 
 ### Running the script on Azure Sovereign clouds
 
-All the four options listed above can be used on any Azure Sovereign clouds. By default, the script targets `AzureCloud`, but it can be changed using the parameter `-AzureEnvironmentName`.
+All the four options listed above, can be used on any Azure Sovereign clouds. By default, the script targets `AzureCloud`, but it can be changed using the parameter `-AzureEnvironmentName`.
 
 The acceptable values for this parameter are:
 

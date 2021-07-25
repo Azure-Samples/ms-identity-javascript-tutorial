@@ -15,6 +15,12 @@ const msalConfig = {
     },
 };
 
+// Add here the endpoints and scopes for the web API you would like to use.
+const apiConfig = {
+    uri: "Enter_the_Web_Api_Uri_Here", // e.g. http://localhost:5000/api
+    scopes: [ "Enter_the_Web_Api_Scope_Here" ] // e.g. [ api://<API_CLIENT_ID>/.default]
+};
+
 /**
  * Scopes you add here will be prompted for user consent during sign-in.
  * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
@@ -33,3 +39,10 @@ const loginRequest = {
 const tokenRequest = {
     scopes: [...apiConfig.scopes],
 };
+
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+    module.exports = {
+        msalConfig: msalConfig,
+    };
+}

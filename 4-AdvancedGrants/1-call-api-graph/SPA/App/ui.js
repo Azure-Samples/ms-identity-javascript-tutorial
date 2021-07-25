@@ -19,7 +19,6 @@ function welcomeUser(username) {
     callApiButton.classList.remove('d-none');
 }
 
-
 function logMessage(s) {
     response.appendChild(document.createTextNode('\n' + s + '\n'));
 }

@@ -107,10 +107,8 @@ Open the `App\authConfig.js` file. Then:
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
 1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with your tenant ID copied from the Azure portal.
 1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the ms-identity-javascript-signin project (by default `http://localhost:3000`).
-
-Open the `SPA\App\apiConfig.js` file. Then:
-
-1. Find the key `scope` and replace the existing value with the application ID (clientId) of the, e.g. `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`
+1. Find the key `Enter_the_Web_Api_Uri_Here` and replace the existing value with the URL of the exposed web api endpoint, e.g. `http://localhost:5000/api`
+1. Find the key `Enter_the_Web_Api_Scope_Here` and replace the existing value with the application ID (clientId) of the, e.g. `api://cd96451f-9709-4a95-b1f5-79da05cf8502/.default`
 
 #### Configure knownClientApplications for the service app
 

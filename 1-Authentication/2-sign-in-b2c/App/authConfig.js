@@ -63,3 +63,10 @@ const loginRequest = {
 //   scopes: ["openid", "profile"],
 //   loginHint: "example@domain.net"
 // };
+
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+  module.exports = {
+    msalConfig: msalConfig,
+  };
+}

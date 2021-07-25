@@ -22,3 +22,10 @@ const b2cPolicies = {
     },
     authorityDomain: "fabrikamb2c.b2clogin.com"
 }
+
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+    module.exports = {
+        b2cPolicies: b2cPolicies,
+    };
+}

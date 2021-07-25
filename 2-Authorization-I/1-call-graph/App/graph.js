@@ -1,7 +1,7 @@
 /**
  * Returns a graph client object with the provided token acquisition options
- * @param {object} account: user account object to be used when attempting silent token acquisition  
- * @param {array} scopes: array of scopes required for this resource endpoint
+ * @param {Object} account: user account object to be used when attempting silent token acquisition  
+ * @param {Array} scopes: array of scopes required for this resource endpoint
  * @param {string} interactionType: type of interaction to fallback to when silent token acquisition fails 
  */
 const getGraphClient = (providerOptions) => {

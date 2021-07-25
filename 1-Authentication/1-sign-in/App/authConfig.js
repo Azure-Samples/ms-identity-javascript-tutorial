@@ -1,4 +1,3 @@
-
 /**
  * Configuration object to be passed to MSAL instance on creation. 
  * For a full list of MSAL.js configuration parameters, visit:
@@ -6,42 +5,42 @@
  */
 
 const msalConfig = {
-    auth: {
-      clientId: "Enter_the_Application_Id_Here", // This is the ONLY mandatory field that you need to supply.
-      authority: "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here", // Defaults to "https://login.microsoftonline.com/common"
-      redirectUri: "Enter_the_Redirect_Uri_Here", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.href
-      postLogoutRedirectUri: "Enter_the_Redirect_Uri_Here/signout", // Simply remove this line if you would like navigate to index page after logout.
-      navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
-    },
-    cache: {
-      cacheLocation: "localStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO.
-      storeAuthStateInCookie: false, // If you wish to store cache items in cookies as well as browser cache, set this to "true".
-    },
-    system: {
-      loggerOptions: {
-        loggerCallback: (level, message, containsPii) => {
-          if (containsPii) {
+  auth: {
+    clientId: "Enter_the_Application_Id_Here", // This is the ONLY mandatory field that you need to supply.
+    authority: "https://login.microsoftonline.com/Enter_the_Tenant_Info_Here", // Defaults to "https://login.microsoftonline.com/common"
+    redirectUri: "Enter_the_Redirect_Uri_Here", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.href
+    postLogoutRedirectUri: "Enter_the_Redirect_Uri_Here/signout", // Simply remove this line if you would like navigate to index page after logout.
+    navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
+  },
+  cache: {
+    cacheLocation: "localStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO.
+    storeAuthStateInCookie: false, // If you wish to store cache items in cookies as well as browser cache, set this to "true".
+  },
+  system: {
+    loggerOptions: {
+      loggerCallback: (level, message, containsPii) => {
+        if (containsPii) {
+          return;
+        }
+        switch (level) {
+          case msal.LogLevel.Error:
+            console.error(message);
             return;
-          }
-          switch (level) {
-            case msal.LogLevel.Error:
-              console.error(message);
-              return;
-            case msal.LogLevel.Info:
-              console.info(message);
-              return;
-            case msal.LogLevel.Verbose:
-              console.debug(message);
-              return;
-            case msal.LogLevel.Warning:
-              console.warn(message);
-              return;
-          }
+          case msal.LogLevel.Info:
+            console.info(message);
+            return;
+          case msal.LogLevel.Verbose:
+            console.debug(message);
+            return;
+          case msal.LogLevel.Warning:
+            console.warn(message);
+            return;
         }
       }
     }
-  };
-  
+  }
+};
+
 /**
  * Scopes you add here will be prompted for user consent during sign-in.
  * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
@@ -61,4 +60,10 @@ const loginRequest = {
 //   scopes: ["openid", "profile"],
 //   loginHint: "example@domain.net"
 // };
-  
+
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+  module.exports = {
+    msalConfig: msalConfig,
+  };
+}

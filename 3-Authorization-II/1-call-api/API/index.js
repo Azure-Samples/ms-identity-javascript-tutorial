@@ -1,12 +1,12 @@
-const express = require("express");
-const morgan = require("morgan");
-const passport = require("passport");
+const express = require('express');
+const morgan = require('morgan');
+const passport = require('passport');
 const config = require('./config');
 
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
 // this is the API scope you've exposed during app registration
-const EXPOSED_SCOPES = [ "access_as_user" ]
+const EXPOSED_SCOPES = [ 'access_as_user' ]
 
 const options = {
     identityMetadata: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}/${config.metadata.discovery}`,
@@ -35,13 +35,13 @@ passport.use(bearerStrategy);
 
 // enable CORS (for testing only -remove in production/deployment)
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
 
 // API endpoint exposed
-app.get("/api",
+app.get('/api',
     passport.authenticate('oauth-bearer', {session: false}),
     (req, res) => {
         console.log('Validated claims: ', req.authInfo);
@@ -59,5 +59,7 @@ app.get("/api",
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-    console.log("Listening on port " + port);
+    console.log('Listening on port ' + port);
 });
+
+module.exports = app;

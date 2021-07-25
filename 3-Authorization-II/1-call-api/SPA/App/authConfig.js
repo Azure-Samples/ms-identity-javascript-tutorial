@@ -6,13 +6,19 @@
 const msalConfig = {
     auth: {
         clientId: "Enter_the_Application_Id_Here",
-        authority: "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
+        authority: "https://login.microsoftonline.com/Enter_the_Tenant_Info_Here",
         redirectUri: "Enter_the_Redirect_Uri_Here",
     },
     cache: {
         cacheLocation: "localStorage", // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
+};
+
+// Add here the endpoints and scopes for the web API you would like to use.
+const apiConfig = {
+    uri: "Enter_the_Web_Api_Uri_Here", // e.g. http://localhost:5000/api
+    scopes: ["Enter_the_Web_Api_Scope_Here"] // e.g. ["scp1", "scp2"]
 };
 
 /**
@@ -33,3 +39,10 @@ const loginRequest = {
 const tokenRequest = {
     scopes: [...apiConfig.scopes],
 };
+
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+    module.exports = {
+        msalConfig: msalConfig,
+    };
+}
