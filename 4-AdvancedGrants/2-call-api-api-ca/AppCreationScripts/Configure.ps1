@@ -469,14 +469,9 @@ Function ConfigureApplications
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\SPA\App\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"https://login.microsoftonline.com/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantId };
+   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"https://login.microsoftonline.com/Enter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/"+$tenantId; "Enter_the_Web_Api_Scope_Here" = ("api://"+$MiddletierAPIAadApplication.AppId+"/.default") };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
-   # Update config file for 'spa'
-   $configFile = $pwd.Path + "\..\SPA\App\apiConfig.js"
-   Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Web_Api_Scope_Here" = ("api://"+$MiddletierAPIAadApplication.AppId+"/.default") };
-   ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
    Write-Host ""
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":

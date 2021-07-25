@@ -120,14 +120,7 @@
           {
             "key": "https://login.microsoftonline.com/Enter_the_Tenant_Info_Here",
             "value": "\"https://login.microsoftonline.com/\"+$tenantId"
-          }
-        ]
-      },
-      {
-        "App": "spa",
-        "SettingKind": "Replace",
-        "SettingFile": "\\..\\SPA\\App\\apiConfig.js",
-        "Mappings": [
+          },
           {
             "key": "Enter_the_Web_Api_Scope_Here",
             "value": "MiddletierAPI.Scope"

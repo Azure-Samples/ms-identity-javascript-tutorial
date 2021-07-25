@@ -68,14 +68,7 @@
           {
             "key": "Enter_the_Redirect_Uri_Here",
             "value": ".ReplyUrls"
-          }
-        ]
-      },
-      {
-        "App": "spa",
-        "SettingKind": "Replace",
-        "SettingFile": "\\..\\SPA\\App\\apiConfig.js",
-        "Mappings": [
+          },
           {
             "key": "Enter_the_Web_Api_Uri_Here",
             "value": "service.HomePage"
