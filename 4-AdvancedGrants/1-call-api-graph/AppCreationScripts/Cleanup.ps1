@@ -11,7 +11,7 @@ param(
 
 
 if ($null -eq (Get-Module -ListAvailable -Name "AzureAD")) { 
-    Install-Module "AzureAD" -Scope CurrentUser 
+    Install-Module "AzureAD" -Scope CurrentUser                                            
 } 
 Import-Module AzureAD
 $ErrorActionPreference = "Stop"
@@ -60,7 +60,14 @@ Function Cleanup
     Write-Host "Cleaning-up applications from tenant '$tenantName'"
 
     Write-Host "Removing 'service' (ms-identity-javascript-tutorial-c4s1-api) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    try
+    {
+        Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    }
+    catch
+    {
+	    Write-Host "Unable to remove the 'ms-identity-javascript-tutorial-c4s1-api' . Try deleting manually." -ForegroundColor White -BackgroundColor Red
+    }
     $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api'"
     if ($apps)
     {
@@ -73,10 +80,23 @@ Function Cleanup
         Write-Host "Removed ms-identity-javascript-tutorial-c4s1-api.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
-    
+    try
+    {
+        Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-api'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    }
+    catch
+    {
+	    Write-Host "Unable to remove ServicePrincipal 'ms-identity-javascript-tutorial-c4s1-api' . Try deleting manually from Enterprise applications." -ForegroundColor White -BackgroundColor Red
+    }
     Write-Host "Removing 'spa' (ms-identity-javascript-tutorial-c4s1-spa) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-spa'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    try
+    {
+        Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-spa'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    }
+    catch
+    {
+	    Write-Host "Unable to remove the 'ms-identity-javascript-tutorial-c4s1-spa' . Try deleting manually." -ForegroundColor White -BackgroundColor Red
+    }
     $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-spa'"
     if ($apps)
     {
@@ -89,8 +109,15 @@ Function Cleanup
         Write-Host "Removed ms-identity-javascript-tutorial-c4s1-spa.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-spa'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
-    
+    try
+    {
+        Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-javascript-tutorial-c4s1-spa'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    }
+    catch
+    {
+	    Write-Host "Unable to remove ServicePrincipal 'ms-identity-javascript-tutorial-c4s1-spa' . Try deleting manually from Enterprise applications." -ForegroundColor White -BackgroundColor Red
+    }
 }
 
 Cleanup -Credential $Credential -tenantId $TenantId
+
