@@ -1,8 +1,13 @@
 /**
+ * The code below demonstrates how you can use MSAL as a custom authentication provider for the Microsoft Graph JavaScript SDK. 
+ * You do NOT need to implement a custom provider. Microsoft Graph JavaScript SDK v3.0 (preview) offers AuthCodeMSALBrowserAuthenticationProvider 
+ * which handles token acquisition and renewal for you automatically. For more information on how to use it, visit: 
+ * https://github.com/microsoftgraph/msgraph-sdk-javascript/blob/dev/docs/AuthCodeMSALBrowserAuthenticationProvider.md
+ */
+
+/**
  * Returns a graph client object with the provided token acquisition options
- * @param {Object} account: user account object to be used when attempting silent token acquisition  
- * @param {Array} scopes: array of scopes required for this resource endpoint
- * @param {string} interactionType: type of interaction to fallback to when silent token acquisition fails 
+ * @param {Object} providerOptions: object containing user account, required scopes and interaction type
  */
 const getGraphClient = (providerOptions) => {
 
@@ -20,14 +25,14 @@ const getGraphClient = (providerOptions) => {
 }
 
 /**
- * This class implements the IAuthenticationProvider interface, which allows a custom auth provider to be
+ * This class implements the IAuthenticationProvider interface, which allows a custom authentication provider to be
  * used with the Graph client. See: https://github.com/microsoftgraph/msgraph-sdk-javascript/blob/dev/src/IAuthenticationProvider.ts
  */
 class MsalAuthenticationProvider {
 
-    account;
-    scopes;
-    interactionType;
+    account; // user account object to be used when attempting silent token acquisition
+    scopes; // array of scopes required for this resource endpoint
+    interactionType; // type of interaction to fallback to when silent token acquisition fails
 
     constructor(providerOptions) {
         this.account = providerOptions.account;
