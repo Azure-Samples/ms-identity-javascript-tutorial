@@ -39,7 +39,6 @@ This sample demonstrates how to [manage your B2C users with Microsoft Graph](htt
 Locate the root folder of the sample in a terminal. Then:
 
 ```console
-    cd Chapter1
     npm install
 ```
 
@@ -90,7 +89,6 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 Locate the root folder of the sample in a terminal. Then:
 
 ```console
-    cd Chapter1
     npm start
 ```
 
