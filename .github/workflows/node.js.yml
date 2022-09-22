@@ -44,6 +44,12 @@ jobs:
         npm run test
 
     - run: |
+        cd 2-Authorization-I/2-call-graph-b2c/
+        npm ci
+        npm audit --production
+        npm run test
+
+    - run: |
         cd 3-Authorization-II/1-call-api/API
         npm ci
         npm audit --production
