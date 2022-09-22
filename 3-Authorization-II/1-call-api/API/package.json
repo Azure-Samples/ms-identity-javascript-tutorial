@@ -15,7 +15,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "morgan": "^1.10.0",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-azure-ad": "^4.3.0"
   },
   "main": "index.js",
