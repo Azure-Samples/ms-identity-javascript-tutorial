@@ -194,6 +194,7 @@ if($isOpenSSL -eq 'Y')
     Write-Host "You have generated certificate using OpenSSL so follow below steps: "
     Write-Host "Install the certificate on your system from current folder."
     Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
+
 }
 Add-Content -Value "</tbody></table></body></html>" -Path createdApps.html  
 } # end of ConfigureApplications function
