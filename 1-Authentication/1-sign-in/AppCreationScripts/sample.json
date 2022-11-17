@@ -1,13 +1,14 @@
 {
   "Sample": {
-      "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory",
+      "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory",
       "Level": 100,
       "Client": "Vanilla JavaScript SPA",
-      "RepositoryUrl": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial",
+      "RepositoryUrl": "ms-identity-javascript-tutorial",
       "Endpoint": "AAD v2.0",
       "Languages": ["javascript"],
-      "Description": "Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory",
-      "Products": ["azure-active-directory", "msal-js", "msal-browser"]
+      "Description": "Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory",
+      "Products": ["azure-active-directory", "msal-js", "msal-browser"],
+      "Platform": "JavaScript"
   },
   "AADApps": [
     {

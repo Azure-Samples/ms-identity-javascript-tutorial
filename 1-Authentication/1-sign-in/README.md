@@ -1,23 +1,23 @@
 ---
 page_type: sample
-name: Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory
-description: Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory
+name: Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory
+description: Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory
 languages:
  - javascript
 products:
  - azure-active-directory
  - msal-js
  - msal-browser
-urlFragment: https://github.com/Azure-Samples/ms-identity-javascript-tutorial
+urlFragment: ms-identity-javascript-tutorial
 extensions:
 - services: ms-identity
-- platform: DotNet
+- platform: JavaScript
 - endpoint: AAD v2.0
 - level: 100
 - client: Vanilla JavaScript SPA
 ---
 
-# Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory
+# Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory
 
 * [Overview](#overview)
 * [Scenario](#scenario)
@@ -61,7 +61,8 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 * A modern web browser.
 * An **Azure AD** tenant. For more information, see: [How to get an Azure AD tenant](https://docs.microsoft.com/azure/active-directory/develop/test-setup-environment#get-a-test-tenant)
 * A user account in your **Azure AD** tenant.
-  
+>This sample will not work with a **personal Microsoft account**. If you're signed in to the [Azure portal](https://portal.azure.com) with a personal Microsoft account and have not created a user account in your directory before, you will need to create one before proceeding.
+
 ## Setup the sample
 
 ### Step 1: Clone or download this repository
@@ -69,7 +70,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 From your shell or command line:
 
 ```console
-git clone https://github.com/Azure-Samples/https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
+git clone https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
 ```
 
 or download and extract the repository *.zip* file.
@@ -87,10 +88,10 @@ or download and extract the repository *.zip* file.
 
 There is one project in this sample. To register it, you can:
 
-* follow the steps below for manually register your apps
-* or use PowerShell scripts that:
-  * **automatically** creates the Azure AD applications and related objects (passwords, permissions, dependencies) for you.
-  * modify the projects' configuration files.
+- follow the steps below for manually register your apps
+- or use PowerShell scripts that:
+  - **automatically** creates the Azure AD applications and related objects (passwords, permissions, dependencies) for you.
+  - modify the projects' configuration files.
 
   <details>
    <summary>Expand this section if you want to use this automation:</summary>
@@ -175,7 +176,7 @@ Were we successful in addressing your learning objective? Consider taking a mome
 	<summary>Expand for troubleshooting info</summary>
 
 Use [Stack Overflow](http://stackoverflow.com/questions/tagged/msal) to get support from the community. Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
-Make sure that your questions or comments are tagged with [`azure-active-directory` `react` `ms-identity` `adal` `msal`].
+Make sure that your questions or comments are tagged with [`azure-active-directory` `ms-identity` `adal` `msal`].
 
 </details>
 
