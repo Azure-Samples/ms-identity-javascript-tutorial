@@ -18,7 +18,10 @@
         "Audience": "AzureADMyOrg",
         "HomePage": "http://localhost:3000",
         "SampleSubPath": "1-Authorization\\1-sign-in",
-        "ReplyUrls": "http://localhost:3000, http://localhost:3000/redirect
+        "ReplyUrls": "http://localhost:3000, http://localhost:3000/redirect",
+        "OptionalClaims": {
+            "IdTokenClaims": ["acct"]
+        }
     }
   ],
   "CodeConfiguration": [

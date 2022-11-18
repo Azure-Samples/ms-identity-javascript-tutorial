@@ -61,6 +61,7 @@ This sample demonstrates a Vanilla JavaScript single-page application (SPA) that
 * A modern web browser.
 * An **Azure AD** tenant. For more information, see: [How to get an Azure AD tenant](https://docs.microsoft.com/azure/active-directory/develop/test-setup-environment#get-a-test-tenant)
 * A user account in your **Azure AD** tenant.
+
 >This sample will not work with a **personal Microsoft account**. If you're signed in to the [Azure portal](https://portal.azure.com) with a personal Microsoft account and have not created a user account in your directory before, you will need to create one before proceeding.
 
 ## Setup the sample
@@ -88,10 +89,10 @@ or download and extract the repository *.zip* file.
 
 There is one project in this sample. To register it, you can:
 
-- follow the steps below for manually register your apps
-- or use PowerShell scripts that:
-  - **automatically** creates the Azure AD applications and related objects (passwords, permissions, dependencies) for you.
-  - modify the projects' configuration files.
+* follow the steps below for manually register your apps
+* or use PowerShell scripts that:
+  * **automatically** creates the Azure AD applications and related objects (passwords, permissions, dependencies) for you.
+  * modify the projects' configuration files.
 
   <details>
    <summary>Expand this section if you want to use this automation:</summary>
@@ -139,6 +140,15 @@ To manually register the apps, as a first step you'll need to:
         1. `http://localhost:3000`
         1. `http://localhost:3000/redirect`
     1. Click **Save** to save your changes.
+
+##### Configure Optional Claims
+
+1. Still on the same app registration, select the **Token configuration** blade to the left.
+1. Select **Add optional claim**:
+    1. Select **optional claim type**, then choose **ID**.
+    1. Select the optional claim **acct**.
+    > Provides user's account status in tenant. If the user is a **member** of the tenant, the value is *0*. If they're a **guest**, the value is *1*.
+    1. Select **Add** to save your changes.
 
 ##### Configure the client app (ms-identity-javascript-c1s1) to use your app registration
 
