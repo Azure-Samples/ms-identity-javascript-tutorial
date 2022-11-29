@@ -41,7 +41,7 @@ app.get('/signout', (req, res) => {
 });
 
 app.get('/redirect', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/redirect.html'));
+    res.sendFile(path.join(__dirname + '/App/redirect.html'));
 });
 
 // Set up a route for index.html
