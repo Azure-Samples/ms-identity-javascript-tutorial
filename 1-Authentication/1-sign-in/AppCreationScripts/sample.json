@@ -1,29 +1,32 @@
 {
   "Sample": {
-    "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users against Azure Active Directory",
-    "Level": 100,
-    "Client": "Vanilla JavaScript SPA",
-    "RepositoryUrl": "ms-identity-javascript-tutorial/1-Authentication/1-sign-in",
-    "Endpoint": "AAD v2.0"
+      "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory",
+      "Level": 100,
+      "Client": "Vanilla JavaScript SPA",
+      "RepositoryUrl": "ms-identity-javascript-tutorial",
+      "Endpoint": "AAD v2.0",
+      "Languages": ["javascript"],
+      "Description": "Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory",
+      "Products": ["azure-active-directory", "msal-js", "msal-browser"],
+      "Platform": "JavaScript"
   },
   "AADApps": [
     {
-      "Id": "spa",
-      "Name": "ms-identity-javascript-c1s1",
-      "Kind": "SinglePageApplication",
-      "Audience": "AzureADMyOrg",
-      "HomePage": "http://localhost:3000",
-      "ReplyUrls": "http://localhost:3000",
-      "ManualSteps": [
-        {
-          "Comment": "Navigate to the Manifest page, find the entry for 'replyUrlsWithType' and change the value to 'Spa'"
+        "Id": "client",
+        "Name": "ms-identity-javascript-c1s1",
+        "Kind": "SinglePageApplication",
+        "Audience": "AzureADMyOrg",
+        "HomePage": "http://localhost:3000",
+        "SampleSubPath": "1-Authorization\\1-sign-in",
+        "ReplyUrls": "http://localhost:3000, http://localhost:3000/redirect",
+        "OptionalClaims": {
+            "IdTokenClaims": ["acct"]
         }
-      ]
     }
   ],
   "CodeConfiguration": [
     {
-      "App": "spa",
+      "App": "client",
       "SettingKind": "Replace",
       "SettingFile": "\\..\\App\\authConfig.js",
       "Mappings": [
@@ -32,12 +35,8 @@
           "value": ".AppId"
         },
         {
-          "key": "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
-          "value": "\"https://login.microsoftonline.com/\"+$tenantName"
-        },
-        {
-          "key": "Enter_the_Redirect_Uri_Here",
-          "value": ".ReplyUrls"
+          "key": "Enter_the_Tenant_Info_Here",
+          "value": "$tenantId"
         }
       ]
     }
