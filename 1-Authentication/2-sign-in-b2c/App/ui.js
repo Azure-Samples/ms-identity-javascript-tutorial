@@ -20,15 +20,15 @@ function welcomeUser(username) {
 function updateTable(idTokenClaims) {
     tableDiv.classList.remove('d-none');
     footerDiv.classList.remove('d-none');
-
-    Object.entries(idTokenClaims).forEach(claim => {
-
-        if (claim[0] === "name" || claim[0] === "oid") {
+    const tokenClaims = createClaimsTable(idTokenClaims);
+    Object.keys(tokenClaims).forEach((key) => {
             let row = tableBody.insertRow(0);
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
-            cell1.innerHTML = claim[0];
-            cell2.innerHTML = claim[1];
-        }
-    });
+            let cell3 = row.insertCell(2);
+            cell1.innerHTML = tokenClaims[key][0];
+            cell2.innerHTML = tokenClaims[key][1];
+            cell3.innerHTML = tokenClaims[key][2];
+    })
+     
 }
