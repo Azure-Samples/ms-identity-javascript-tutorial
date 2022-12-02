@@ -15,7 +15,6 @@ extensions:
 - endpoint: AAD v2.0
 - level: 100
 - client: Vanilla JavaScript SPA
-- service: 
 ---
 
 # Vanilla JavaScript single-page application (SPA) using MSAL.js to authenticate users against Azure AD B2C
@@ -123,8 +122,8 @@ Please refer to: [Tutorial: Add identity providers to your applications in Azure
 1. If you don't have a platform added, select **Add a platform** and select the **Single-page application** option.
     1. In the **Redirect URI** section enter the following redirect URIs:
         1. `http://localhost:6420`
-        1. `http://localhost:6420/redirect.html`
-    1. Click **Save** to save your changes.
+        2. `http://localhost:6420/redirect`
+    2. Click **Save** to save your changes.
 
 ##### Configure the client app (ms-identity-javascript-c1s2) to use your app registration
 
@@ -255,6 +254,15 @@ The sign-out clears the user's single sign-on session with **Azure AD B2C**, but
 
 A single-page application does not benefit from validating ID tokens, since the application runs without a back-end and as such, attackers can intercept and edit the keys used for validation of the token.
 
+### Events API
+
+Using the event API, you can register an event callback that will do something when an event is emitted. When registering an event callback in a react component you will need to make sure you do 2 things.
+
+1. The callback is registered only once
+1. The callback is unregistered before the component unmounts.
+
+Here, we use the event API when integrating the B2C user-flows (discussed below).
+
 ### Integrating user-flows
 
 * **Sign-up/sign-in**
@@ -301,41 +309,58 @@ In case if you are using redirect flow, you should catch the error inside `handl
         });
 ```
 
-Then, in `handleResponse()`:
+Then, in `addEventCallback()`:
 
 ```javascript
-    function handleResponse(response) {
-        if (response !== null) {
-
-            if (response.idTokenClaims['acr'] === b2cPolicies.names.forgotPassword) {
-                window.alert("Password has been reset successfully. \nPlease sign-in with your new password.");
-
-                const logoutRequest = {
-                    account: myMSALObj.getAccountByHomeId(accountId),
-                    postLogoutRedirectUri: "http://localhost:6420"
-                };
-
-                myMSALObj.logout(logoutRequest);
-            } else if (response.idTokenClaims['acr'] === b2cPolicies.names.editProfile) {
-                window.alert("Profile has been updated successfully.");
-            } else {
-                // sign-in as usual
-            }
-        }
+    if (event.payload.idTokenClaims['tfp'] === b2cPolicies.names.forgotPassword) {
+            let signUpSignInFlowRequest = {
+                authority: b2cPolicies.authorities.signUpSignIn.authority,
+            };
+            myMSALObj.loginPopup(signUpSignInFlowRequest)
+                .then(handleResponse)
+                .catch((error) => {
+                    console.log(error)
+                })
     }
 ```
 
 * **Edit Profile**
 
-Unlike password reset, edit profile user-flow does not require users to sign-out and sign-in again. Instead, **MSAL.js** will handle
-switching back to the authority string of the default user-flow automatically.
+hen a user selects the **Edit Profile** button on the navigation bar, we simply initiate a sign-in flow. Like password reset, edit profile user-flow requires users to sign-out and sign-in again.
 
 ```javascript
-    myMSALObj.loginPopup(b2cPolicies.authorities.editProfile)
-        .then(response => {
-            console.log(response);
-            // your logic here
-        });
+    /**
+         * For the purpose of setting an active account for UI update, we want to consider only the auth
+         * response resulting from SUSI flow. "tfp" claim in the id token tells us the policy (NOTE: legacy
+         * policies may use "acr" instead of "tfp"). To learn more about B2C tokens, visit:
+         * https://docs.microsoft.com/en-us/azure/active-directory-b2c/tokens-overview
+         */
+
+        if (event.payload.idTokenClaims['tfp'] === b2cPolicies.names.editProfile) {
+            const originalSignInAccount = myMSALObj
+                .getAllAccounts()
+                .find(
+                    (account) =>
+                        account.idTokenClaims.oid === event.payload.idTokenClaims.oid &&
+                        account.idTokenClaims.sub === event.payload.idTokenClaims.sub &&
+                        account.idTokenClaims['tfp'] === b2cPolicies.names.signUpSignIn
+                );
+
+            let signUpSignInFlowRequest = {
+                authority: b2cPolicies.authorities.signUpSignIn.authority,
+                account: originalSignInAccount,
+            };
+
+            // silently login again with the signUpSignIn policy
+            myMSALObj.ssoSilent(signUpSignInFlowRequest).catch((error) => {
+                console.log(error);
+                if (error instanceof msal.InteractionRequiredAuthError) {
+                    myMSALObj.loginPopup({
+                        ...signUpSignInFlowRequest,
+                    });
+                }
+            });
+        }
 ```
 
 ## Next Steps
