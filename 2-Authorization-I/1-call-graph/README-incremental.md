@@ -3,10 +3,9 @@
  1. [Overview](#overview)
  1. [Scenario](#scenario)
  1. [Contents](#contents)
- 1. [Setup](#setup)
- 1. [Registration](#registration)
- 1. [Running the sample](#running-the-sample)
+ 1. [Setup the sample](#setup-the-sample)
  1. [Explore the sample](#explore-the-sample)
+ 1. [Troubleshooting](#troubleshooting)
  1. [About the code](#about-the-code)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
@@ -37,39 +36,113 @@ In addition, this sample also demonstrates how to use the [Microsoft Graph JavaS
 | `App/ui.js`           | Contains UI logic.                                                        |
 | `server.js`           | Simple Express server for `index.html`.                                   |
 
-## Setup
+## Setup the sample
 
-Locate the sample folder, then type:
+### Step 1: Clone or download this repository
+
+From your shell or command line:
 
 ```console
+git clone https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git
+```
+
+or download and extract the repository *.zip* file.
+
+> :warning: To avoid path length limitations on Windows, we recommend cloning into a directory near the root of your drive.
+
+### Step 2: Install project dependencies
+
+```console
+    cd 2-Authorization-I\1-call-graph
     npm install
 ```
 
-## Registration
+### Step 3: Register the sample application(s) in your tenant
 
-### Update the client app registration (ms-identity-javascript-c1s1-spa)
+There is one project in this sample. To register it, you can:
 
-1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
-1. Select the **App Registrations** blade on the left, then find and select the application that you have registered in the previous tutorial (`ms-identity-javascript-c1s1-spa`).
-1. In the app's registration screen, click on the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs.
-   - Click the **Add a permission** button and then,
-   - Ensure that the **Microsoft APIs** tab is selected.
-   - In the *Commonly used Microsoft APIs* section, click on **Microsoft Graph**
-   - In the **Delegated permissions** section, select the **User.Read** in the list. Use the search box if necessary.
-   - Click on the **Add permissions** button at the bottom.
+* follow the steps below for manually register your apps
+* or use PowerShell scripts that:
+  * **automatically** creates the Azure AD applications and related objects (passwords, permissions, dependencies) for you.
+  * modify the projects' configuration files.
 
-### Configure the client app to use your app registration
+  <details>
+   <summary>Expand this section if you want to use this automation:</summary>
+
+    > :warning: If you have never used **Microsoft Graph PowerShell** before, we recommend you go through the [App Creation Scripts Guide](./AppCreationScripts/AppCreationScripts.md) once to ensure that your environment is prepared correctly for this step.
+  
+    1. On Windows, run PowerShell as **Administrator** and navigate to the root of the cloned directory
+    1. In PowerShell run:
+
+       ```PowerShell
+       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+       ```
+
+    1. Run the script to create your Azure AD application and configure the code of the sample application accordingly.
+    1. For interactive process -in PowerShell, run:
+
+       ```PowerShell
+       cd .\AppCreationScripts\
+       .\Configure.ps1 -TenantId "[Optional] - your tenant id" -AzureEnvironmentName "[Optional] - Azure environment, defaults to 'Global'"
+       ```
+
+    > Other ways of running the scripts are described in [App Creation Scripts guide](./AppCreationScripts/AppCreationScripts.md). The scripts also provide a guide to automated application registration, configuration and removal which can help in your CI/CD scenarios.
+
+  </details>
+
+#### Choose the Azure AD tenant where you want to create your applications
+
+To manually register the apps, as a first step you'll need to:
+
+1. Sign in to the [Azure portal](https://portal.azure.com).
+1. If your account is present in more than one Azure AD tenant, select your profile at the top right corner in the menu on top of the page, and then **switch directory** to change your portal session to the desired Azure AD tenant.
+
+#### Register the client app (ms-identity-javascript-c2s1)
+
+1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure Active Directory** service.
+1. Select the **App Registrations** blade on the left, then select **New registration**.
+1. In the **Register an application page** that appears, enter your application's registration information:
+    1. In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ms-identity-javascript-c2s1`.
+    1. Under **Supported account types**, select **Accounts in this organizational directory only**
+    1. Select **Register** to create the application.
+1. In the **Overview** blade, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
+1. In the app's registration screen, select the **Authentication** blade to the left.
+1. If you don't have a platform added, select **Add a platform** and select the **Single-page application** option.
+    1. In the **Redirect URI** section enter the following redirect URIs:
+        1. `http://localhost:3000`
+        1. `http://localhost:3000/redirect`
+    1. Click **Save** to save your changes.
+1. Since this app signs-in users, we will now proceed to select **delegated permissions**, which is is required by apps signing-in users.
+    1. In the app's registration screen, select the **API permissions** blade in the left to open the page where we add access to the APIs that your application needs:
+    1. Select the **Add a permission** button and then:
+    1. Ensure that the **Microsoft APIs** tab is selected.
+    1. In the *Commonly used Microsoft APIs* section, select **Microsoft Graph**
+    1. In the **Delegated permissions** section, select **User.Read**, **Contacts.Read** in the list. Use the search box if necessary.
+    1. Select the **Add permissions** button at the bottom.
+
+##### Configure Optional Claims
+
+1. Still on the same app registration, select the **Token configuration** blade to the left.
+1. Select **Add optional claim**:
+    1. Select **optional claim type**, then choose **ID**.
+    1. Select the optional claim **acct**.
+    > Provides user's account status in tenant. If the user is a **member** of the tenant, the value is *0*. If they're a **guest**, the value is *1*.
+    1. Select **Add** to save your changes.
+
+##### Configure the client app (ms-identity-javascript-c2s1) to use your app registration
+
+Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
+
+> In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `App\authConfig.js` file.
-1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-c1s1` application copied from the Azure portal.
-1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `ms-identity-javascript-c1s1` project (by default `http://localhost:3000`).
+1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-c2s1` app copied from the Azure portal.
+1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with your Azure AD tenant/directory ID.
 
-## Running the sample
-
-Locate the sample folder, then type:
+### Step 4: Running the sample
 
 ```console
+    cd 2-Authorization-I\1-call-graph
     npm start
 ```
 
@@ -78,13 +151,23 @@ Locate the sample folder, then type:
 1. Open your browser and navigate to `http://localhost:3000`.
 1. Click the **sign-in** button on the top right corner.
 1. Next, click the **See my profile** button on the left. This will make a MS Graph call.
-1. Click the **Read my mails** button below to see your mails.
+1. Click the **Read my contacts** button below to see your contacts.
 
 ![Screenshot](./ReadmeFiles/screenshot.png)
+
+> :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../../issues) page.
 
 ## We'd love your feedback!
 
 Were we successful in addressing your learning objective? Consider taking a moment to [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNDVHTkg2VVhWMTNYUTZEM05YS1hSN01EOSQlQCN0PWcu).
+
+## Troubleshooting
+
+<details>
+ <summary>Expand for troubleshooting info</summary>
+
+Use [Stack Overflow](http://stackoverflow.com/questions/tagged/msal) to get support from the community. Ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
+Make sure that your questions or comments are tagged with [`azure-active-directory` `msal-js` `ms-identity` `adal` `msal`].
 
 ## About the code
 
@@ -210,19 +293,146 @@ class MyAuthenticationProvider {
 See [graph.js](./App/graph.js). The Graph client then can be used as shown below:
 
 ```javascript
-function readMail() {
-
+function readContacts() {
+    const account = myMSALObj.getAccountByUsername(username);
     getGraphClient({
-        account: myMSALObj.getAccountByUsername(username),
-        scopes: graphConfig.graphMailEndpoint.scopes,
-        interactionType: msal.InteractionType.Popup
-    }).api('/me/messages').get()
+        account: account,
+        scopes: graphConfig.graphContactsEndpoint.scopes,
+        interactionType: msal.InteractionType.Popup,
+    })
+        .api('/me/contacts')
+        .responseType('raw')
+        .get()
         .then((response) => {
-            return updateUI(response, graphConfig.graphMailEndpoint.uri);
-        }).catch((error) => {
-            console.log(error);
+            return handleClaimsChallenge(account, response, graphConfig.graphContactsEndpoint.uri);
+        })
+        .then((response) => {
+            if (response && response.error === 'claims_challenge_occurred') throw response.error;            
+            return updateUI(response, graphConfig.graphContactsEndpoint.uri);
+        })
+        .catch((error) => {
+            if (error === 'claims_challenge_occurred') {
+                const resource = new URL(graphConfig.graphContactsEndpoint.uri).hostname;
+                const claims =
+                    account &&
+                    getClaimsFromStorage(`cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`)
+                        ? window.atob(
+                              getClaimsFromStorage(
+                                  `cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`
+                              )
+                          )
+                        : undefined; // e.g {"access_token":{"xms_cc":{"values":["cp1"]}}}
+                let request = {
+                    account: account,
+                    scopes: graphConfig.graphContactsEndpoint.scopes,
+                    claims: claims,
+                    redirectUri: '/redirect',
+                };
+
+                myMSALObj.acquireTokenPopup(request).catch((error) => {
+                    console.log(error);
+                });
+            } else if (error.toString().includes('404')) {
+                return updateUI(null, graphConfig.graphContactsEndpoint.uri);
+            } else {
+                console.log(error);
+            }
         });
 }
+```
+
+### Handle Continuous Access Evaluation (CAE) challenge from Microsoft Graph
+
+Continuous access evaluation (CAE) enables applications to do just-in time token validation, for instance enforcing user session revocation in the case of password change/reset but there are other benefits. For details, see [Continuous access evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
+
+Microsoft Graph is now CAE-enabled in Preview. This means that it can ask its client apps for more claims when conditional access policies require it. Your can enable your application to be ready to consume CAE-enabled APIs by:
+
+1. Declaring that the client app is capable of handling claims challenges.
+1. Processing these challenges when they are thrown by the web API.
+
+#### Declare the CAE capability in the configuration
+
+This sample app declares that it's CAE-capable by adding the `clientCapabilities` property in the configuration in `authConfig.js`:
+
+```javascript
+    const msalConfig = {
+        auth: {
+            clientId: 'Enter_the_Application_Id_Here', 
+            authority: 'https://login.microsoftonline.com/Enter_the_Tenant_Info_Here',
+            redirectUri: "/", 
+            postLogoutRedirectUri: "/",
+            navigateToLoginRequestUrl: true, 
+            clientCapabilities: ["CP1"] // this lets the resource owner know that this client is capable of handling claims challenge.
+        }
+    }
+
+    const msalInstance = new PublicClientApplication(msalConfig);
+```
+
+#### Processing the CAE challenge from Microsoft Graph
+
+Once the client app receives the CAE claims challenge from Microsoft Graph, it needs to present the user with a prompt for satisfying the challenge via Azure AD authorization endpoint. To do so, we use MSAL's `acquireTokenRedirect` and `acquireTokenPopup` API's and provide the claims challenge as a parameter in the token request. This is shown in [fetch.js](./App/fetch.js), where we handle the response from the Microsoft Graph API with the `handleClaimsChallenge` method:
+
+```javascript
+    /**
+ * This method inspects the HTTPS response from a fetch call for the "www-authenticate header"
+ * If present, it grabs the claims challenge from the header and store it in the localStorage
+ * For more information, visit: https://docs.microsoft.com/en-us/azure/active-directory/develop/claims-challenge#claims-challenge-header-format
+ * @param {object} response
+ * @returns response
+ */
+const handleClaimsChallenge = async (account,response, apiEndpoint) => {
+    if (response.status === 200) {
+        return response.json();
+    } else if (response.status === 401) {
+        if (response.headers.get('www-authenticate')) {
+            const authenticateHeader = response.headers.get('www-authenticate');
+            const claimsChallenge = parseChallenges(authenticateHeader);
+            /**
+             * This method stores the claim challenge to the session storage in the browser to be used when acquiring a token.
+             * To ensure that we are fetching the correct claim from the storage, we are using the clientId
+             * of the application and oid (user’s object id) as the key identifier of the claim with schema
+             * cc.<clientId>.<oid>.<resource.hostname>
+             */
+            addClaimsToStorage(
+                claimsChallenge.claims,
+                `cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${new URL(apiEndpoint).hostname}`
+            );
+            return { error: 'claims_challenge_occurred', payload: claimsChallenge.claims };
+        }
+
+        throw new Error(`Unauthorized: ${response.status}`);
+    } else {
+        throw new Error(`Something went wrong with the request: ${response.status}`);
+    }
+};
+```
+
+After that, we require a new access token via the `acquireTokenPopup` and `acquireTokenRedirect` APIs, fetch the claims challenge from the browser's localStorage, and pass it to the `acquireTokenPopup` and `acquireTokenRedirect` APIs in the request parameter.
+
+```javascript
+if (error === 'claims_challenge_occurred') {
+    const resource = new URL(graphConfig.graphMeEndpoint.uri).hostname;
+    const claims =
+        account &&
+        getClaimsFromStorage(`cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`)
+        ? window.atob(
+            getClaimsFromStorage(
+                `cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`
+                )
+            )
+            : undefined; // e.g {"access_token":{"xms_cc":{"values":["cp1"]}}}
+    let request = {
+        account: account,
+        scopes: graphConfig.graphMeEndpoint.scopes,
+        claims: claims,
+        redirectUri: '/redirect',
+        };
+
+    myMSALObj.acquireTokenPopup(request).catch((error) => {
+         console.log(error);
+    });
+} 
 ```
 
 ## Next Tutorial

@@ -33,6 +33,7 @@
   "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-rate-limit": "^6.7.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
