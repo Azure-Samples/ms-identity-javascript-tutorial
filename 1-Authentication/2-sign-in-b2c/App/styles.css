@@ -6,6 +6,10 @@
     margin: .5rem .5rem;
 }
 
-.table {
+
+.table-responsive-ms {
+    overflow: scroll;
     max-height: 39rem !important;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 }
