@@ -1,18 +1,46 @@
 // Select DOM elements to work with
 const welcomeDiv = document.getElementById("WelcomeMessage");
 const signInButton = document.getElementById("SignIn");
+const dropdownButton = document.getElementById('dropdownMenuButton1');
 const cardDiv = document.getElementById("card-div");
 const mailButton = document.getElementById("readMail");
 const profileButton = document.getElementById("seeProfile");
 const profileDiv = document.getElementById("profile-div");
+const listGroup = document.getElementById('list-group');
 
-function showWelcomeMessage(username) {
+function showWelcomeMessage(username, accounts) {
     // Reconfiguring DOM elements
     cardDiv.style.display = 'initial';
+    signInButton.style.visibility = 'hidden';
     welcomeDiv.innerHTML = `Welcome ${username}`;
-    signInButton.setAttribute("onclick", "signOut();");
-    signInButton.setAttribute('class', "btn btn-success")
-    signInButton.innerHTML = "Sign Out";
+    dropdownButton.setAttribute('style', 'display:inline !important; visibility:visible');
+    dropdownButton.innerHTML = username; 
+    accounts.forEach(account => {
+        let item = document.getElementById(account.username);
+        if(!item) {
+            const listItem = document.createElement('li');
+            listItem.setAttribute('onclick', 'addAnotherAccount(event)');
+            listItem.setAttribute('id', account.username);
+            listItem.innerHTML = account.username;
+            if (account.username === username) {
+                listItem.setAttribute('class', 'list-group-item active');
+            }else {
+                listItem.setAttribute('class', 'list-group-item');
+            }
+            listGroup.appendChild(listItem);
+        }else {
+            if (account.username === username) {
+                item.setAttribute('class', 'list-group-item active');
+            } else {
+                item.setAttribute('active', 'list-group-item');
+            }
+        }
+    });
+}
+
+function closeModal() {
+    const element = document.getElementById("closeModal");
+    element.click();
 }
 
 function updateUI(data, endpoint) {

@@ -4,6 +4,23 @@ const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let username = '';
 
+
+myMSALObj.addEventCallback((event) => {
+    if (
+        (event.eventType === 'msal:loginSuccess' || event.eventType === 'msal:acquireTokenSuccess') &&
+        event.payload.account
+    ) {
+        const account = event.payload.account;
+        myMSALObj.setActiveAccount(account);
+    }
+
+    if (event.eventType === 'msal:logoutSuccess') {
+        if (myMSALObj.getAllAccounts().length > 0) {
+            myMSALObj.setActiveAccount(myMSALObj.getAllAccounts()[0]);
+        }
+    }
+});
+
 /**
  * A promise handler needs to be registered for handling the
  * response returned from redirect flow. For more information, visit:
@@ -29,16 +46,57 @@ function selectAccount() {
     } else if (currentAccounts.length > 1) {
         // Add your account choosing logic here
         console.warn('Multiple accounts detected.');
+        username = myMSALObj.getActiveAccount().username;
+        showWelcomeMessage(username, currentAccounts);
     } else if (currentAccounts.length === 1) {
-        username = currentAccounts[0].username;
-        showWelcomeMessage(username);
+        username = myMSALObj.getActiveAccount().username;
+        showWelcomeMessage(username, currentAccounts);
+    }
+}
+
+async function addAnotherAccount(event) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.innerHTML)) {
+        const username = event.target.innerHTML;
+        const account = myMSALObj.getAllAccounts().find((account) => account.username === username);
+        const activeAccount = myMSALObj.getActiveAccount();
+        if (account && activeAccount.homeAccountId != account.homeAccountId) {
+            try {
+                myMSALObj.setActiveAccount(account);
+                let res = await myMSALObj.ssoSilent({
+                    ...loginRequest,
+                    account: account,
+                });
+                handleResponse(res);
+                window.location.reload();
+            } catch (error) {
+                if (error instanceof msal.InteractionRequiredAuthError) {
+                    await instance.loginRedirect({
+                        ...loginRequest,
+                        prompt: 'login',
+                    });
+                }
+            }
+        } else {
+            closeModal();
+        }
+    } else {
+        try {
+            myMSALObj.setActiveAccount(null);
+            await myMSALObj.loginRedirect({
+                ...loginRequest,
+                prompt: 'login',
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
 function handleResponse(response) {
     if (response !== null) {
+        const accounts = myMSALObj.getAllAccounts();
         username = response.account.username;
-        showWelcomeMessage(username);
+        showWelcomeMessage(username, accounts);
     } else {
         selectAccount();
     }
