@@ -52,7 +52,7 @@ async function addAnotherAccount(event) {
                 window.location.reload();
             } catch (error) {
                 if (error instanceof msal.InteractionRequiredAuthError) {
-                    let res = await instance.loginPopup({
+                    let res = await myMSALObj.loginPopup({
                         ...loginRequest,
                         prompt: 'login',
                     });
