@@ -7,14 +7,15 @@ let username = '';
 
 myMSALObj.addEventCallback((event) => {
     if (
-        (event.eventType === 'msal:loginSuccess' || event.eventType === 'msal:acquireTokenSuccess') &&
+        (event.eventType === msal.EventType.LOGIN_SUCCESS ||
+            event.eventType === msal.EventType.ACQUIRE_TOKEN_SUCCESS) &&
         event.payload.account
     ) {
         const account = event.payload.account;
         myMSALObj.setActiveAccount(account);
     }
 
-    if (event.eventType === 'msal:logoutSuccess') {
+    if (event.eventType === msal.EventType.LOGOUT_SUCCESS) {
         if (myMSALObj.getAllAccounts().length > 0) {
             myMSALObj.setActiveAccount(myMSALObj.getAllAccounts()[0]);
         }
@@ -43,19 +44,15 @@ function selectAccount() {
 
     if (!currentAccounts) {
         return;
-    } else if (currentAccounts.length > 1) {
+    } else if (currentAccounts.length >= 1) {
         // Add your account choosing logic here
-        console.warn('Multiple accounts detected.');
         username = myMSALObj.getActiveAccount().username;
         showWelcomeMessage(username, currentAccounts);
-    } else if (currentAccounts.length === 1) {
-        username = myMSALObj.getActiveAccount().username;
-        showWelcomeMessage(username, currentAccounts);
-    }
+    } 
 }
 
 async function addAnotherAccount(event) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.innerHTML)) {
+    if (event.target.innerHTML.includes("@")) {
         const username = event.target.innerHTML;
         const account = myMSALObj.getAllAccounts().find((account) => account.username === username);
         const activeAccount = myMSALObj.getActiveAccount();
@@ -67,10 +64,11 @@ async function addAnotherAccount(event) {
                     account: account,
                 });
                 handleResponse(res);
+                closeModal();
                 window.location.reload();
             } catch (error) {
                 if (error instanceof msal.InteractionRequiredAuthError) {
-                    await instance.loginRedirect({
+                    await myMSALObj.loginRedirect({
                         ...loginRequest,
                         prompt: 'login',
                     });

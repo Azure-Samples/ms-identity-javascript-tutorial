@@ -15,6 +15,35 @@ const msalConfig = {
         cacheLocation: 'localStorage', // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
+    system: {
+        /**
+         * Below you can configure MSAL.js logs. For more information, visit:
+         * https://docs.microsoft.com/azure/active-directory/develop/msal-logging-js
+         */
+        loggerOptions: {
+            loggerCallback: (level, message, containsPii) => {
+                if (containsPii) {
+                    return;
+                }
+                switch (level) {
+                    case msal.LogLevel.Error:
+                        console.error(message);
+                        return;
+                    case msal.LogLevel.Info:
+                        console.info(message);
+                        return;
+                    case msal.LogLevel.Verbose:
+                        console.debug(message);
+                        return;
+                    case msal.LogLevel.Warning:
+                        console.warn(message);
+                        return;
+                    default:
+                        return;
+                }
+            },
+        },
+    },
 };
 
 // Add here the endpoints for MS Graph API services you would like to use.
