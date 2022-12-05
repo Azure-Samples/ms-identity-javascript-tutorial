@@ -35,14 +35,12 @@ extensions:
 
 This sample demonstrates a Vanilla JavaScript single-page application (SPA) that lets users sign-in with [Azure Active Directory B2C](https://azure.microsoft.com/services/active-directory/external-identities/b2c/) using the [Microsoft Authentication Library for JavaScript)](https://github.com/AzureAD/microsoft-authentication-library-for-js) (MSAL.js). In doing so, it also illustrates various authentication and **B2C** concepts, such as [ID tokens](https://docs.microsoft.com/azure/active-directory-b2c/tokens-overview#token-types), [external identity providers](https://docs.microsoft.com/azure/active-directory-b2c/technical-overview#external-identity-providers) , [consumer social accounts](https://docs.microsoft.com/azure/active-directory-b2c/technical-overview#consumer-accounts), [single-sign on (SSO)](https://docs.microsoft.com/azure/active-directory-b2c/session-overview), **account selection**, **silent requests** and more.
 
-![Overview](./ReadmeFiles/topology_b2c_signin.png)
-
 ## Scenario
 
 1. The client application uses **MSAL.js** to obtain an **ID Token** from **Azure AD B2C**.
 2. The **ID Token** proves that the user has successfully authenticated against **Azure AD B2C**.
 
-![Scenario Image](./ReadmeFiles/topology.png)
+![Overview](./ReadmeFiles/topology_b2c_signin.png)
 
 ## Contents
 
