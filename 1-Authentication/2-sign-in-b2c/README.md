@@ -325,7 +325,7 @@ Then, in `addEventCallback()`:
 
 * **Edit Profile**
 
-hen a user selects the **Edit Profile** button on the navigation bar, we simply initiate a sign-in flow. Like password reset, edit profile user-flow requires users to sign-out and sign-in again.
+When a user selects the **Edit Profile** button on the navigation bar, we simply initiate a sign-in flow. Like password reset, edit profile user-flow requires users to sign-out and sign-in again.
 
 ```javascript
     /**
