@@ -1,12 +1,13 @@
 {
   "Sample": {
-      "Title": "Vanilla JavaScript single-page application using MSAL.js to authorize users for calling Microsoft Graph",
+      "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users to call Microsoft Graph",
       "Level": 100,
       "Client": "Vanilla JavaScript SPA",
+      "Service": "Microsoft Graph",
       "RepositoryUrl": "ms-identity-javascript-tutorial",
       "Endpoint": "AAD v2.0",
       "Languages": ["javascript"],
-      "Description": "Vanilla JavaScript single-page application using MSAL.js to authorize users for calling Microsoft Graph",
+      "Description": "Vanilla JavaScript single-page application using MSAL.js to authenticate users and calling the Microsoft Graph API on their behalf",
       "Products": ["azure-active-directory", "msal-js", "msal-browser"],
       "Platform": "JavaScript"
   },
