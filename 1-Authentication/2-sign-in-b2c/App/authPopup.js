@@ -8,7 +8,8 @@ let username = '';
 myMSALObj.addEventCallback((event) => {
     console.log(event.eventType);
     if (
-        (event.eventType === 'msal:loginSuccess' || event.eventType === 'msal:acquireTokenSuccess') &&
+        (event.eventType === msal.EventType.LOGIN_SUCCESS ||
+            event.eventType === msal.EventType.ACQUIRE_TOKEN_SUCCESS) &&
         event.payload.account
     ) {
         /**
@@ -56,11 +57,12 @@ myMSALObj.addEventCallback((event) => {
             let signUpSignInFlowRequest = {
                 authority: b2cPolicies.authorities.signUpSignIn.authority,
             };
-            myMSALObj.loginPopup(signUpSignInFlowRequest)
+            myMSALObj
+                .loginPopup(signUpSignInFlowRequest)
                 .then(handleResponse)
                 .catch((error) => {
-                    console.log(error)
-                })
+                    console.log(error);
+                });
         }
     }
 });

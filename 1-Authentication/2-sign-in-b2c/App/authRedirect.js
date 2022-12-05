@@ -8,7 +8,8 @@ let accessToken = null;
 
 myMSALObj.addEventCallback((event) => {
     if (
-        (event.eventType === 'msal:loginSuccess' || event.eventType === 'msal:acquireTokenSuccess') &&
+        (event.eventType === msal.EventType.LOGIN_SUCCESS ||
+            event.eventType === msal.EventType.ACQUIRE_TOKEN_SUCCESS) &&
         event.payload.account
     ) {
         /**

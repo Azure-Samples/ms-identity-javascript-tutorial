@@ -7,14 +7,17 @@ const tableDiv = document.getElementById('table-div');
 const tableBody = document.getElementById('table-body-div');
 const footerDiv = document.getElementById('footer');
 const editProfileButton = document.getElementById('editProfileButton');
+const table = document.getElementById('table');
 
 function welcomeUser(username) {
+    
     signInButton.classList.add('d-none');
     signOutButton.classList.remove('d-none');
     titleDiv.classList.add('d-none');
     editProfileButton.classList.remove('d-none');
     welcomeDiv.classList.remove('d-none');
     welcomeDiv.innerHTML = `Welcome ${username}!`
+    table.style.overflow = 'scroll';
 }
 
 function updateTable(idTokenClaims) {
