@@ -20,7 +20,7 @@
             "Audience": "AzureADandPersonalMicrosoftAccount",
             "HomePage": "http://localhost:6420",
             "SampleSubPath": "1-Authentication\\2-sign-in-b2c",
-            "ReplyUrls": "http://localhost:6420, http://localhost:6420/redirect.html"
+            "ReplyUrls": "http://localhost:6420, http://localhost:6420/redirect"
         }
     ],
     "CodeConfiguration": [
