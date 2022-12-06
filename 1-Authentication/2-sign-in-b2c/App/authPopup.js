@@ -24,7 +24,6 @@ myMSALObj.addEventCallback((event) => {
                 .getAllAccounts()
                 .find(
                     (account) =>
-                        account.idTokenClaims.oid === event.payload.idTokenClaims.oid &&
                         account.idTokenClaims.sub === event.payload.idTokenClaims.sub &&
                         account.idTokenClaims['tfp'] === b2cPolicies.names.signUpSignIn
                 );
@@ -35,7 +34,10 @@ myMSALObj.addEventCallback((event) => {
             };
 
             // silently login again with the signUpSignIn policy
-            myMSALObj.ssoSilent(signUpSignInFlowRequest).catch((error) => {
+            myMSALObj.ssoSilent(signUpSignInFlowRequest)
+            .then(() => {
+                // window.location.reload();
+            }).catch((error) => {
                 console.log(error);
                 if (error instanceof msal.InteractionRequiredAuthError) {
                     myMSALObj.loginPopup({

@@ -35,7 +35,10 @@ myMSALObj.addEventCallback((event) => {
             };
 
             // silently login again with the signUpSignIn policy
-            myMSALObj.ssoSilent(signUpSignInFlowRequest).catch((error) => {
+            myMSALObj.ssoSilent(signUpSignInFlowRequest)
+            .redirect(() => {
+                window.location.reload();
+            }).catch((error) => {
                 console.log(error);
                 if (error instanceof msal.InteractionRequiredAuthError) {
                     myMSALObj.loginRedirect({
