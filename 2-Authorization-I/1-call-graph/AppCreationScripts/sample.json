@@ -1,38 +1,39 @@
 {
   "Sample": {
-    "Title": "Vanilla JavaScript single-page application using MSAL.js to authorize users for calling Microsoft Graph",
-    "Level": 100,
-    "Client": "Vanilla JavaScript SPA",
-    "Service": "Microsoft Graph",
-    "RepositoryUrl": "ms-identity-javascript-tutorial/2-Authorization-I/1-call-graph",
-    "Endpoint": "AAD v2.0"
+      "Title": "Vanilla JavaScript single-page application using MSAL.js to authenticate users to call Microsoft Graph",
+      "Level": 100,
+      "Client": "Vanilla JavaScript SPA",
+      "Service": "Microsoft Graph",
+      "RepositoryUrl": "ms-identity-javascript-tutorial",
+      "Endpoint": "AAD v2.0",
+      "Languages": ["javascript"],
+      "Description": "Vanilla JavaScript single-page application using MSAL.js to authenticate users and calling the Microsoft Graph API on their behalf",
+      "Products": ["azure-active-directory", "msal-js", "msal-browser"],
+      "Platform": "JavaScript"
   },
   "AADApps": [
     {
-      "Id": "spa",
-      "Name": "ms-identity-javascript-c2s1",
-      "Kind": "SinglePageApplication",
-      "HomePage": "http://localhost:3000/",
-      "ReplyUrls": "http://localhost:3000/",
-      "Audience": "AzureADMyOrg",
-      "RequiredResourcesAccess": [
-        {
-          "Resource": "Microsoft Graph",
-          "DelegatedPermissions": [
-            "User.Read"
-          ]
-        }
-      ],
-      "ManualSteps": [
-        {
-          "Comment": "Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'Spa'"
-        }
-      ]
+        "Id": "client",
+        "Name": "ms-identity-javascript-c2s1",
+        "Kind": "SinglePageApplication",
+        "HomePage": "http://localhost:3000/",
+        "SampleSubPath": "2-Authorization-I\\1-call-graph",
+        "ReplyUrls": "http://localhost:3000, http://localhost:3000/redirect",
+        "Audience": "AzureADMyOrg",
+        "OptionalClaims": {
+            "IdTokenClaims": ["acct", "login_hint"]
+        },
+        "RequiredResourcesAccess": [
+            {
+                "Resource": "Microsoft Graph",
+                "DelegatedPermissions": ["User.Read", "Contacts.Read"]
+            }
+        ]
     }
   ],
   "CodeConfiguration": [
     {
-      "App": "spa",
+      "App": "client",
       "SettingKind": "Replace",
       "SettingFile": "\\..\\App\\authConfig.js",
       "Mappings": [
@@ -41,7 +42,7 @@
           "value": ".AppId"
         },
         {
-          "key": "Enter_the_Tenant_Info_Here",
+          "key": "Enter_the_Tenant_Id_Here",
           "value": "$tenantId"
         }
       ]

@@ -2,96 +2,152 @@
 // configuration parameters are located at authConfig.js
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
-let username = "";
+let username = '';
+
+/**
+ * This method adds an event callback function to the MSAL object
+ * to handle the response from redirect flow. For more information, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/events.md
+ */
+myMSALObj.addEventCallback((event) => {
+    if (
+        (event.eventType === msal.EventType.LOGIN_SUCCESS ||
+        event.eventType === msal.EventType.ACQUIRE_TOKEN_SUCCESS) &&
+        event.payload.account
+    ) {
+        const account = event.payload.account;
+        myMSALObj.setActiveAccount(account);
+    }
+
+    if (event.eventType === msal.EventType.LOGOUT_SUCCESS) {
+        if (myMSALObj.getAllAccounts().length > 0) {
+            myMSALObj.setActiveAccount(myMSALObj.getAllAccounts()[0]);
+        }
+    }
+});
 
 function selectAccount() {
-
     /**
-     * See here for more info on account retrieval: 
+     * See here for more info on account retrieval:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
      */
-
     const currentAccounts = myMSALObj.getAllAccounts();
-
     if (currentAccounts === null) {
         return;
-    } else if (currentAccounts.length > 1) {
+    } else if (currentAccounts.length >= 1) {
         // Add choose account code here
-        console.warn("Multiple accounts detected.");
-    } else if (currentAccounts.length === 1) {
-        username = currentAccounts[0].username;
-        showWelcomeMessage(username);
+        username = myMSALObj.getActiveAccount().username;
+        showWelcomeMessage(username, currentAccounts);
+    }
+}
+
+async function addAnotherAccount(event) {
+    if (event.target.innerHTML.includes('@')) {
+        const username = event.target.innerHTML;
+        const account = myMSALObj.getAllAccounts().find((account) => account.username === username);
+        const activeAccount = myMSALObj.getActiveAccount();
+        if (account && activeAccount.homeAccountId != account.homeAccountId) {
+            try {
+                myMSALObj.setActiveAccount(account);
+                let res = await myMSALObj.ssoSilent({
+                    ...loginRequest,
+                    account: account,
+                });
+                closeModal();
+                handleResponse(res);
+                window.location.reload();
+            } catch (error) {
+                if (error instanceof msal.InteractionRequiredAuthError) {
+                    let res = await myMSALObj.loginPopup({
+                        ...loginRequest,
+                        prompt: 'login',
+                    });
+                    handleResponse(res);
+                    window.location.reload();
+                }
+            }
+        } else {
+            closeModal();
+        }
+    } else {
+        try {
+            myMSALObj.setActiveAccount(null);
+            const res = await myMSALObj.loginPopup({
+                ...loginRequest,
+                prompt: 'login',
+            });
+            handleResponse(res);
+            closeModal();
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
 function handleResponse(response) {
-
     /**
      * To see the full list of response object properties, visit:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#response
      */
 
     if (response !== null) {
+        const accounts = myMSALObj.getAllAccounts();
         username = response.account.username;
-        showWelcomeMessage(username);
+        showWelcomeMessage(username, accounts);
     } else {
         selectAccount();
     }
 }
 
 function signIn() {
-
     /**
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
      */
 
-    myMSALObj.loginPopup(loginRequest)
+    myMSALObj
+        .loginPopup(loginRequest)
         .then(handleResponse)
-        .catch(error => {
+        .catch((error) => {
             console.error(error);
         });
 }
 
 function signOut() {
-
     /**
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
      */
+    const account = myMSALObj.getAccountByUsername(username);
     const logoutRequest = {
-        account: myMSALObj.getAccountByUsername(username)
+        account: account,
+        mainWindowRedirectUri: '/',
     };
-
-    myMSALObj.logout(logoutRequest);
+    clearStorage(account);
+    myMSALObj.logoutPopup(logoutRequest).catch((error) => {
+        console.log(error);
+    });
 }
 
 function seeProfile() {
-
-    getGraphClient({
-        account: myMSALObj.getAccountByUsername(username),
-        scopes: graphConfig.graphMeEndpoint.scopes,
-        interactionType: msal.InteractionType.Popup
-    }).api('/me').get()
-        .then((response) => {
-            return updateUI(response, graphConfig.graphMeEndpoint.uri);
-        }).catch((error) => {
-            console.log(error);
-        });
+    callGraph(
+        username,
+        graphConfig.graphMeEndpoint.scopes,
+        graphConfig.graphMeEndpoint.uri,
+        msal.InteractionType.Popup,
+        myMSALObj
+    );
 }
 
-function readMail() {
-
-    getGraphClient({
-        account: myMSALObj.getAccountByUsername(username),
-        scopes: graphConfig.graphMailEndpoint.scopes,
-        interactionType: msal.InteractionType.Popup
-    }).api('/me/messages').get()
-        .then((response) => {
-            return updateUI(response, graphConfig.graphMailEndpoint.uri);
-        }).catch((error) => {
-            console.log(error);
-        });
+function readContacts() {
+    callGraph(
+        username,
+        graphConfig.graphContactsEndpoint.scopes,
+        graphConfig.graphContactsEndpoint.uri,
+        msal.InteractionType.Popup,
+        myMSALObj
+    );
 }
 
 selectAccount();
