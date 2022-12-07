@@ -4,7 +4,11 @@ const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let username = '';
 
-
+/**
+ * This method adds an event callback function to the MSAL object
+ * to handle the response from redirect flow. For more information, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/events.md
+ */
 myMSALObj.addEventCallback((event) => {
     if (
         (event.eventType === msal.EventType.LOGIN_SUCCESS ||
@@ -48,7 +52,7 @@ function selectAccount() {
         // Add your account choosing logic here
         username = myMSALObj.getActiveAccount().username;
         showWelcomeMessage(username, currentAccounts);
-    } 
+    }
 }
 
 async function addAnotherAccount(event) {
@@ -111,7 +115,7 @@ function signIn() {
 }
 
 function signOut() {
-    
+
     /**
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
@@ -135,7 +139,7 @@ function seeProfile() {
         graphConfig.graphMeEndpoint.uri,
         msal.InteractionType.Redirect,
         myMSALObj
-    ); 
+    );
 }
 
 function readContacts() {

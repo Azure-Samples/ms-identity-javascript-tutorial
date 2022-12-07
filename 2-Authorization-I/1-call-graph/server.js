@@ -13,7 +13,6 @@ app.use(morgan('dev'));
 // Setup app folders.
 app.use(express.static('App'));
 
-
 app.get('/redirect', (req, res) => {
     res.sendFile(path.join(__dirname + '/App/redirect.html'));
 });

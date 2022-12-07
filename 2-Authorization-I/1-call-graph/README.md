@@ -152,8 +152,7 @@ To manually register the apps, as a first step you'll need to:
     1. Select the **Add a permission** button and then:
     1. Ensure that the **Microsoft APIs** tab is selected.
     1. In the *Commonly used Microsoft APIs* section, select **Microsoft Graph**
-      * Since this app signs-in users, we will now proceed to select **delegated permissions**, which is requested by apps that signs-in users.
-      * In the **Delegated permissions** section, select **User.Read**, **Contacts.Read** in the list. Use the search box if necessary.
+    1. In the **Delegated permissions** section, select **User.Read**, **Contacts.Read** in the list. Use the search box if necessary.
     1. Select the **Add permissions** button at the bottom.
 
 ##### Configure Optional Claims

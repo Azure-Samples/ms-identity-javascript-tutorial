@@ -14,21 +14,21 @@ function showWelcomeMessage(username, accounts) {
     signInButton.style.visibility = 'hidden';
     welcomeDiv.innerHTML = `Welcome ${username}`;
     dropdownButton.setAttribute('style', 'display:inline !important; visibility:visible');
-    dropdownButton.innerHTML = username; 
+    dropdownButton.innerHTML = username;
     accounts.forEach(account => {
         let item = document.getElementById(account.username);
-        if(!item) {
+        if (!item) {
             const listItem = document.createElement('li');
             listItem.setAttribute('onclick', 'addAnotherAccount(event)');
             listItem.setAttribute('id', account.username);
             listItem.innerHTML = account.username;
             if (account.username === username) {
                 listItem.setAttribute('class', 'list-group-item active');
-            }else {
+            } else {
                 listItem.setAttribute('class', 'list-group-item');
             }
             listGroup.appendChild(listItem);
-        }else {
+        } else {
             if (account.username === username) {
                 item.setAttribute('class', 'list-group-item active');
             } else {

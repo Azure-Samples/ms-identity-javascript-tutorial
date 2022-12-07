@@ -4,10 +4,15 @@ const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let username = '';
 
+/**
+ * This method adds an event callback function to the MSAL object
+ * to handle the response from redirect flow. For more information, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/events.md
+ */
 myMSALObj.addEventCallback((event) => {
     if (
         (event.eventType === msal.EventType.LOGIN_SUCCESS ||
-            event.eventType === msal.EventType.ACQUIRE_TOKEN_SUCCESS) &&
+        event.eventType === msal.EventType.ACQUIRE_TOKEN_SUCCESS) &&
         event.payload.account
     ) {
         const account = event.payload.account;
@@ -117,7 +122,6 @@ function signOut() {
     const account = myMSALObj.getAccountByUsername(username);
     const logoutRequest = {
         account: account,
-        redirectUri: '/redirect',
         mainWindowRedirectUri: '/',
     };
     clearStorage(account);
@@ -133,7 +137,7 @@ function seeProfile() {
         graphConfig.graphMeEndpoint.uri,
         msal.InteractionType.Popup,
         myMSALObj
-    ); 
+    );
 }
 
 function readContacts() {
