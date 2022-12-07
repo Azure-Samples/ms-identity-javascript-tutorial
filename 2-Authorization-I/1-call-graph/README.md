@@ -163,6 +163,8 @@ To manually register the apps, as a first step you'll need to:
     1. Select **optional claim type**, then choose **ID**.
     1. Select the optional claim **acct**.
     > Provides user's account status in tenant. If the user is a **member** of the tenant, the value is *0*. If they're a **guest**, the value is *1*.
+    1. Select the optional claim **login_hint**.
+    > An opaque, reliable login hint claim. This claim is the best value to use for the login_hint OAuth parameter in all flows to get SSO.See $[optional claims](https://docs.microsoft.com/azure/active-directory/develop/active-directory-optional-claims) for more details on this optional claim.
     1. Select **Add** to save your changes.
 
 ##### Configure the client app (ms-identity-javascript-c2s1) to use your app registration
@@ -223,7 +225,7 @@ In **Azure AD**, the scopes (permissions) set directly on the application regist
           scopes: [ "openid", "profile", "User.Read" ]
      };
      const tokenRequest = {
-          scopes: [ "Mail.Read" ]
+          scopes: [ "Contacts.Read" ]
      };
 
      // will return an ID Token and an Access Token with scopes: "openid", "profile" and "User.Read"

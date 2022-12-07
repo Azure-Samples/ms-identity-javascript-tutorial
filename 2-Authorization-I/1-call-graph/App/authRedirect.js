@@ -121,6 +121,7 @@ function signOut() {
     const account = myMSALObj.getAccountByUsername(username);
     const logoutRequest = {
         account: account,
+        loginHint: account.idTokenClaims.login_hint,
     };
 
     clearStorage(account);
@@ -128,89 +129,21 @@ function signOut() {
 }
 
 function seeProfile() {
-    const account = myMSALObj.getAccountByUsername(username);
-
-    getGraphClient({
-        account: account,
-        scopes: graphConfig.graphMeEndpoint.scopes,
-        interactionType: msal.InteractionType.Redirect,
-    })
-        .api('/me')
-        .responseType('raw')
-        .get()
-        .then((response) => {
-            return handleClaimsChallenge(account, response, graphConfig.graphMeEndpoint.uri);
-        })
-        .then((response) => {
-            if (response && response.error === 'claims_challenge_occurred') throw response.error;
-            return updateUI(response, graphConfig.graphMeEndpoint.uri);
-        })
-        .catch((error) => {
-            if (error === 'claims_challenge_occurred') {
-                const resource = new URL(graphConfig.graphMeEndpoint.uri).hostname;
-                const claims =
-                    account &&
-                    getClaimsFromStorage(`cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`)
-                        ? window.atob(
-                              getClaimsFromStorage(
-                                  `cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`
-                              )
-                          )
-                        : undefined; // e.g {"access_token":{"xms_cc":{"values":["cp1"]}}}
-                let request = {
-                    account: account,
-                    scopes: graphConfig.graphMeEndpoint.scopes,
-                    claims: claims,
-                };
-
-                myMSALObj.acquireTokenRedirect(request);
-            } else {
-                console.log(error);
-            }
-        });
+    callGraph(
+        username,
+        graphConfig.graphMeEndpoint.scopes,
+        graphConfig.graphMeEndpoint.uri,
+        msal.InteractionType.Redirect,
+        myMSALObj
+    ); 
 }
 
 function readContacts() {
-    const account = myMSALObj.getAccountByUsername(username);
-    getGraphClient({
-        account: account,
-        scopes: graphConfig.graphContactsEndpoint.scopes,
-        interactionType: msal.InteractionType.Redirect,
-    })
-        .api('/me/contacts')
-        .responseType('raw')
-        .get()
-        .then((response) => {
-            return handleClaimsChallenge(account, response, graphConfig.graphContactsEndpoint.uri);
-        })
-        .then((response) => {
-            if (response && response.error === 'claims_challenge_occurred') throw response.error;
-            return updateUI(response, graphConfig.graphContactsEndpoint.uri);
-        })
-        .catch((error) => {
-            if (error === 'claims_challenge_occurred') {
-                const resource = new URL(graphConfig.graphContactsEndpoint.uri).hostname;
-                const claims =
-                    account &&
-                    getClaimsFromStorage(`cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`)
-                        ? window.atob(
-                              getClaimsFromStorage(
-                                  `cc.${msalConfig.auth.clientId}.${account.idTokenClaims.oid}.${resource}`
-                              )
-                          )
-                        : undefined; // e.g {"access_token":{"xms_cc":{"values":["cp1"]}}}
-
-                let request = {
-                    account: account,
-                    scopes: graphConfig.graphContactsEndpoint.scopes,
-                    claims: claims,
-                };
-
-                myMSALObj.acquireTokenRedirect(request);
-            } else if (error.toString().includes('404')) {
-                return updateUI(null, graphConfig.graphContactsEndpoint.uri);
-            } else {
-                console.log(error);
-            }
-        });
+    callGraph(
+        username,
+        graphConfig.graphContactsEndpoint.scopes,
+        graphConfig.graphContactsEndpoint.uri,
+        msal.InteractionType.Redirect,
+        myMSALObj
+    );
 }

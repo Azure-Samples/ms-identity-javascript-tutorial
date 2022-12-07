@@ -21,7 +21,7 @@
         "ReplyUrls": "http://localhost:3000, http://localhost:3000/redirect",
         "Audience": "AzureADMyOrg",
         "OptionalClaims": {
-            "IdTokenClaims": ["acct"]
+            "IdTokenClaims": ["acct", "login_hint"]
         },
         "RequiredResourcesAccess": [
             {
@@ -42,7 +42,7 @@
           "value": ".AppId"
         },
         {
-          "key": "Enter_the_Tenant_Info_Here",
+          "key": "Enter_the_Tenant_Id_Here",
           "value": "$tenantId"
         }
       ]
