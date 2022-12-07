@@ -222,9 +222,3 @@ const changeDateFormat = (date) => {
     let dateObj = new Date(date * 1000);
     return `${date} - [${dateObj.toString()}]`;
 };
-
-if (typeof exports !== 'undefined') {
-    module.exports = {
-        createClaimsTable: createClaimsTable,
-    };
-}

@@ -6,6 +6,11 @@ let accountId = '';
 let username = '';
 let accessToken = null;
 
+/**
+ * This method adds an event callback function to the MSAL object
+ * to handle the response from redirect flow. For more information, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/events.md
+ */
 myMSALObj.addEventCallback((event) => {
     if (
         (event.eventType === msal.EventType.LOGIN_SUCCESS ||
@@ -55,7 +60,6 @@ myMSALObj.addEventCallback((event) => {
          * you can replace the code below with the same pattern used for handling the return from
          * profile edit flow
          */
-
         if (event.payload.idTokenClaims['tfp'] === b2cPolicies.names.forgotPassword) {
             myMSALObj.loginRedirect(b2cPolicies.authorities.signUpSignIn).catch((error) => {
                 console.log(error);
@@ -185,7 +189,6 @@ function getTokenRedirect(request) {
             return handleResponse(response);
         })
         .catch((error) => {
-            console.log(error);
             console.log('silent token acquisition fails. acquiring token using popup');
             if (error instanceof msal.InteractionRequiredAuthError) {
                 // fallback to interaction when silent call fails

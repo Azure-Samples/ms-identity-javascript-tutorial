@@ -5,6 +5,11 @@ const myMSALObj = new msal.PublicClientApplication(msalConfig);
 let accountId = '';
 let username = '';
 
+/**
+ * This method adds an event callback function to the MSAL object
+ * to handle the response from redirect flow. For more information, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/events.md
+ */
 myMSALObj.addEventCallback((event) => {
     console.log(event.eventType);
     if (
@@ -172,7 +177,6 @@ function signOut() {
 
     const logoutRequest = {
         mainWindowRedirectUri: 'http://localhost:6420/signout',
-        redirectUri: '/redirect',
     };
 
     myMSALObj.logoutPopup(logoutRequest);
