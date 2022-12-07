@@ -1,0 +1,14 @@
+.navbarStyle {
+    padding: .5rem 1rem !important;
+}
+
+.profileButton {
+    margin: .5rem .5rem;
+}
+
+
+.table-responsive-ms {
+    max-height: 39rem !important;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}

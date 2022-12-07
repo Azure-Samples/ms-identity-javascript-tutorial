@@ -24,7 +24,6 @@ describe('Sanitize index page', () => {
 
 describe('Sanitize configuration object', () => {
     beforeAll(() => {
-        global.b2cPolicies = require('./App/policies.js').b2cPolicies;
         global.msalConfig = require('./App/authConfig.js').msalConfig;
     });
 

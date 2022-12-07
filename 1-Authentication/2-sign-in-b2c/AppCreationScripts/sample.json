@@ -1,0 +1,47 @@
+{
+    "Sample": {
+        "Title": "Vanilla JavaScript single-page application (SPA) using MSAL.js to authenticate users against Azure AD B2C",
+        "Level": 100,
+        "Client": "Vanilla JavaScript SPA",
+        "RepositoryUrl": "ms-identity-javascript-tutorial",
+        "Endpoint": "AAD v2.0",
+        "Languages": ["javascript"],
+        "Description": "Vanilla JavaScript single-page application (SPA) using MSAL.js to authenticate users against Azure AD B2C",
+        "Products": ["azure-active-directory-b2c", "msal-js", "msal-browser"],
+        "Platform": "JavaScript",
+        "Provider": "B2C"
+    },
+
+    "AADApps": [
+        {
+            "Id": "client",
+            "Name": "ms-identity-javascript-c1s2",
+            "Kind": "SinglePageApplication",
+            "Audience": "AzureADandPersonalMicrosoftAccount",
+            "HomePage": "http://localhost:6420",
+            "SampleSubPath": "1-Authentication\\2-sign-in-b2c",
+            "ReplyUrls": "http://localhost:6420, http://localhost:6420/redirect"
+        }
+    ],
+    "CodeConfiguration": [
+        {
+            "App": "client",
+            "SettingKind": "Replace",
+            "SettingFile": "\\..\\App\\src\\authConfig.js",
+            "Mappings": [
+                {
+                    "key": "Enter_the_Application_Id_Here",
+                    "value": ".AppId"
+                },
+                {
+                    "key": "policyName",
+                    "value": "Enter_The_Your_policy_Name"
+                },
+                {
+                    "key": "b2cDomain",
+                    "value": "Enter_The_Tenant_Domain_name"
+                }
+            ]
+        }
+    ]
+}
