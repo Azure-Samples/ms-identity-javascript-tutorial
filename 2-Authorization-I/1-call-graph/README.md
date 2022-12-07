@@ -175,7 +175,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 1. Open the `App\authConfig.js` file.
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of `ms-identity-javascript-c2s1` app copied from the Azure portal.
-1. Find the key `Enter_the_Tenant_Info_Here` and replace the existing value with your Azure AD tenant/directory ID.
+1. Find the key `Enter_the_Tenant_Id_Here` and replace the existing value with your Azure AD tenant/directory ID.
 
 ### Step 4: Running the sample
 
