@@ -81,7 +81,7 @@ or download and extract the repository *.zip* file.
 ### Step 2: Install project dependencies
 
 ```console
-    cd 1-Authorization\1-sign-in
+    cd 1-Authentication\1-sign-in
     npm install
 ```
 
