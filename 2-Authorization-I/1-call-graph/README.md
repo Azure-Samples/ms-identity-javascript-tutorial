@@ -480,7 +480,6 @@ if (error === 'claims_challenge_occurred') {
 Learn how to:
 
 * [Vanilla JavaScript single-page application (SPA) using MSAL.js to authorize users for calling a protected web API on Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/3-Authorization-II/1-call-api)
-* [A Node.js Web API secured by Azure AD and calling Microsoft Graph on behalf of a signed-in user](https://github.com/Azure-Samples/ms-identity-javascript-tutorial/tree/main/4-AdvancedGrants/1-call-api-graph)
 
 ## Contributing
 

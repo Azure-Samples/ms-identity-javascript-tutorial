@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -44,12 +44,6 @@ jobs:
         npm run test
 
     - run: |
-        cd 2-Authorization-I/2-call-graph-b2c/
-        npm ci
-        npm audit --production
-        npm run test
-
-    - run: |
         cd 3-Authorization-II/1-call-api/API
         npm ci
         npm audit --production
@@ -69,36 +63,6 @@ jobs:
 
     - run: |
         cd 3-Authorization-II/2-call-api-b2c/SPA
-        npm ci
-        npm audit --production
-        npm run test
-
-    - run: |
-        cd 4-AdvancedGrants/1-call-api-graph/API
-        npm ci
-        npm audit --production
-        npm run test
-
-    - run: |
-        cd 4-AdvancedGrants/1-call-api-graph/SPA
-        npm ci
-        npm audit --production
-        npm run test
-
-    - run: |
-        cd 4-AdvancedGrants/2-call-api-api-ca/DownstreamAPI
-        npm ci
-        npm audit --production
-        npm run test
-
-    - run: |
-        cd 4-AdvancedGrants/2-call-api-api-ca/MiddletierAPI
-        npm ci
-        npm audit --production
-        npm run test
-      
-    - run: |
-        cd 4-AdvancedGrants/2-call-api-api-ca/SPA
         npm ci
         npm audit --production
         npm run test
