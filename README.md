@@ -74,18 +74,11 @@ Alternatively, choose below the sample you want to review.
 | <img src="./3-Authorization-II/1-call-api/ReadmeFiles/topology_callapi.png" width="200"> | [**Protect and call a web API on Azure AD**](./3-Authorization-II/1-call-api) </br> Protect your web API with the **Azure AD**. Use a client application to sign-in a user, acquire an **Access Token** for your web API and call your protected Web API. |
 | <img src="./3-Authorization-II/2-call-api-b2c/ReadmeFiles/topology_b2c_callapi.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](./3-Authorization-II/2-call-api-b2c) </br> Protect your web API with **Azure AD B2C**. Use a client application to sign-in a user, acquire an **Access Token** for your web API and call your protected web API. |
 
-### Chapter 4: Call Microsoft Graph from your protected API on behalf-of a signed-in user
+### Chapter 4: Deploy your applications to Azure
 
 |                 |               |
 |-----------------|---------------|
-| <img src="./4-AdvancedGrants/1-call-api-graph/ReadmeFiles/topology_obo.png" width="200"> | [**Call a web API that calls Microsoft Graph on behalf of a user**](./4-AdvancedGrants/1-call-api-graph) </br> Enhance your protected web API to acquire an **Access Token** for Microsoft Graph **on-behalf-of** a user signed-in to the client app. |
-| <img src="./4-AdvancedGrants/2-call-api-api-ca/ReadmeFiles/topology.png" width="200"> | [**Call a web API that calls another web API with conditional access on behalf of a user**](./4-AdvancedGrants/2-call-api-api-ca) </br> Enhance your protected web API to acquire an **Access Token** for another web API with **MFA** requirement **on-behalf-of** a user signed-in to the client app. |
-
-### Chapter 5: Deploy your applications to Azure
-
-|                 |               |
-|-----------------|---------------|
-| <img src="./5-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Service**](./5-Deployment) </br> Prepare your app for deployment to various **Azure** services. Learn how to package and upload files, configure authentication parameters and use **Azure** services for managing your operations. |
+| <img src="./4-Deployment/ReadmeFiles/topology_dep.png" width="200"> | [**Deploy to Azure Storage and App Service**](./4-Deployment) </br> Prepare your app for deployment to various **Azure** services. Learn how to package and upload files, configure authentication parameters and use **Azure** services for managing your operations. |
 
 ## We'd love your feedback!
 
