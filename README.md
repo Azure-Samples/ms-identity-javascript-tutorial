@@ -49,11 +49,6 @@ Please refer to each sample's README for sample-specific recommendations.
 
 ## Contents
 
-- For **Azure AD**, start the tutorial from [here](./1-Authentication/1-sign-in/README-incremental.md)
-- For **Azure AD B2C**, start the tutorial from [here](./1-Authentication/2-sign-in-b2c/README-incremental.md)
-
-Alternatively, choose below the sample you want to review.
-
 ### Chapter 1: Sign-in a user to your application
 
 |               |               |

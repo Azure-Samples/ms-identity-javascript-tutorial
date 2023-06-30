@@ -10,7 +10,7 @@ const app = require('./server.js');
 
 jest.dontMock('fs');
 
-const html = fs.readFileSync(path.resolve(__dirname, './App/index.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, './public/index.html'), 'utf8');
 
 describe('Sanitize index page', () => {
     beforeAll(async() => {
@@ -24,8 +24,7 @@ describe('Sanitize index page', () => {
 
 describe('Sanitize configuration object', () => {
     beforeAll(() => {
-        global.b2cPolicies = require('./App/policies.js').b2cPolicies;
-        global.msalConfig = require('./App/authConfig.js').msalConfig;
+        global.msalConfig = require('./public/authConfig.js').msalConfig;
     });
 
     it('should define the config object', () => {
@@ -53,7 +52,7 @@ describe('Ensure pages served', () => {
         const res = await request(app)
             .get('/');
 
-        const data = await fs.promises.readFile(path.join(__dirname, './App/index.html'), 'utf8');
+        const data = await fs.promises.readFile(path.join(__dirname, './public/index.html'), 'utf8');
         expect(res.statusCode).toEqual(200);
         expect(res.text).toEqual(data);
     });
