@@ -1,42 +1,41 @@
 {
-  "name": "ms-identity-javascript-tutorial-c3s2-api",
+  "name": "ms-identity-react-c3s1",
   "version": "1.0.0",
-  "description": "---\r page_type: sample\r description: \"This sample demonstrates how to protect a Node.js web API with Azure AD B2C using the Passport.js library.\"\r languages:\r - javascript\r - nodejs\r products:\r - azure\r - azure-active-directory\r urlFragment: nodejs-web-api-azure-ad\r ---",
+  "description": "A Node.js & Express web API accepting authorized calls with Azure Active Directory",
   "author": "derisen",
-  "license": "ISC",
-  "engines": {
-    "node": ">=6.9.1"
-  },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "jest --forceExit"
   },
   "dependencies": {
-    "express": "^4.14.0",
-    "morgan": "^1.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.5.2",
+    "lowdb": "^1.0.0",
+    "morgan": "^1.10.0",
     "passport": "^0.6.0",
-    "passport-azure-ad": "^4.3.4"
+    "passport-azure-ad": "^4.3.3",
+    "uuid": "^9.0.0"
   },
-  "main": "index.js",
+  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-tutorial.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial/issues"
-  },
-  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-tutorial#readme",
-  "devDependencies": {
-    "jest": "^27.0.6",
-    "nodemon": "^2.0.20",
-    "supertest": "^6.1.4"
+    "url": "git+https://github.com/Azure-Samples/ms-identity-javascript-react-tutorial.git"
   },
   "keywords": [
-    "azure",
-    "ad",
-    "node.js",
-    "b2c",
+    "azure-ad",
+    "ms-identity",
+    "node",
     "api"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/Azure-Samples/ms-identity-javascript-react-tutorial/issues"
+  },
+  "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-react-tutorial#readme",
+  "devDependencies": {
+    "jest": "^28.1.1",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
+  }
 }

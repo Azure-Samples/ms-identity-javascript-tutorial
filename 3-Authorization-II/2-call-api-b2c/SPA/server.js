@@ -11,15 +11,20 @@ const app = express();
 app.use(morgan('dev'));
 
 // Setup app folders.
-app.use(express.static('App'));
+app.use(express.static('public'));
+
+// set up a route for redirect.html
+app.get('/redirect', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/redirect.html'));
+});
 
 // Set up a route for index.html
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.listen(DEFAULT_PORT, () => {
-    console.log(`Sample app listening on port ${DEFAULT_PORT}!`)
+    console.log(`Sample app listening on port ${DEFAULT_PORT}!`);
 });
 
 module.exports = app;
