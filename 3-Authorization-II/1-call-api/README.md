@@ -68,7 +68,7 @@ or download and extract the repository .zip file.
     cd 3-Authorization-II/1-call-api
     cd API
     npm install
-    cd..
+    cd ..
     cd SPA
     npm install
 ```
