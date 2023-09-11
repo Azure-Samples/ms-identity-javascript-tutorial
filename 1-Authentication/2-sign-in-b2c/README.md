@@ -8,13 +8,13 @@ products:
  - azure-active-directory-b2c
  - msal-js
  - msal-browser
-urlFragment: ms-identity-javascript-tutorial
+urlFragment: ms-identity-javascript-tutorial-2-sign-in-b2c
 extensions:
-- services: ms-identity
-- platform: JavaScript
-- endpoint: AAD v2.0
-- level: 100
-- client: Vanilla JavaScript SPA
+  services: ms-identity
+  platform: JavaScript
+  endpoint: AAD v2.0
+  level: 100
+  client: Vanilla JavaScript SPA
 ---
 
 # Vanilla JavaScript single-page application (SPA) using MSAL.js to authenticate users against Azure AD B2C
