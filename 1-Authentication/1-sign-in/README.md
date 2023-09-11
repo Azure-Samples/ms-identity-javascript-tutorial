@@ -8,6 +8,7 @@ products:
  - azure-active-directory
  - msal-js
  - msal-browser
+ - microsoft-identity-platform
 urlFragment: ms-identity-javascript-tutorial
 extensions:
 - services: ms-identity
