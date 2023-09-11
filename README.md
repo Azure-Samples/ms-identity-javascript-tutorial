@@ -5,13 +5,12 @@ languages:
 products:
 - msal-js
 - ms-graph
-- azure-app-services
+- azure-app-service
 - azure-storage
 - azure-key-vault
 - azure-functions
 - azure-active-directory
 - azure-active-directory-b2c
-- microsoft-identity-platform
 description: "Tutorial: Enable your JavaScript single-page application (SPA) to sign-in users and call APIs with the Microsoft identity platform"
 urlFragment: "ms-identity-javascript-tutorial"
 ---
