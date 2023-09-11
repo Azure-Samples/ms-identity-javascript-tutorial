@@ -8,14 +8,14 @@ products:
  - azure-active-directory
  - msal-js
  - msal-browser
-urlFragment: ms-identity-javascript-tutorial
+urlFragment: ms-identity-javascript-tutorial-1-call-graph
 extensions:
-- services: ms-identity
-- platform: JavaScript
-- endpoint: AAD v2.0
-- level: 100
-- client: Vanilla JavaScript SPA
-- service: Microsoft Graph
+  services: ms-identity
+  platform: JavaScript
+  endpoint: AAD v2.0
+  level: 100
+  client: Vanilla JavaScript SPA
+  service: Microsoft Graph
 ---
 
 # Vanilla JavaScript single-page application using MSAL.js to authenticate users to call Microsoft Graph
