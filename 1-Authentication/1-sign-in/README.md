@@ -173,7 +173,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Open your browser and navigate to `http://localhost:3000`.
 1. Click the **sign-in** button on the top right corner.
 
-![Screenshot](./ReadmeFiles/screenshot.png)
+![Screenshot](./ReadmeFiles/js-spa-sign-in.png)
 
 > :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../../issues) page.
 
