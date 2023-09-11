@@ -10,11 +10,11 @@ products:
  - msal-browser
 urlFragment: ms-identity-javascript-tutorial
 extensions:
-- services: ms-identity
-- platform: JavaScript
-- endpoint: AAD v2.0
-- level: 100
-- client: Vanilla JavaScript SPA
+  services: ms-identity
+  platform: JavaScript
+  endpoint: AAD v2.0
+  level: 100
+  client: Vanilla JavaScript SPA
 ---
 
 # Vanilla JavaScript single-page application using MSAL.js to authenticate users with Azure Active Directory
