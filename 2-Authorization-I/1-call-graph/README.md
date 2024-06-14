@@ -12,7 +12,7 @@ urlFragment: ms-identity-javascript-tutorial
 extensions:
 - services: ms-identity
 - platform: JavaScript
-- endpoint: Microsoft Entra ID v2.0
+- endpoint: Microsoft identity platform
 - level: 100
 - client: Vanilla JavaScript SPA
 - service: Microsoft Graph
