@@ -18,7 +18,7 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 
 ## Scenario
 
-1. The client application uses the **MSAL.js** library to sign-in a user and obtain a JWT **Access Token** from **Azure AD**.
+1. The client application uses the **MSAL.js** library to sign-in a user and obtain a JWT **Access Token** from **Microsoft Entra ID**.
 1. The **Access Token** is used as a **bearer** token to *authorize* the user to call the protected web API.
 1. The protected web API responds with the claims in the **Access Token**.
 
@@ -30,8 +30,8 @@ This sample demonstrates how to deploy a JavaScript single-page application (SPA
 - A modern web browser. This sample uses **ES6** conventions and will not run on **Internet Explorer**.
 - [Visual Studio Code](https://code.visualstudio.com/download) is recommended for running and editing this sample.
 - [VS Code Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) extension is recommended for interacting with **Azure** through VS Code interface.
-- An **Azure AD** tenant. For more information, see: [How to get an Azure AD tenant](https://azure.microsoft.com/documentation/articles/active-directory-howto-tenant/)
-- A user account in your **Azure AD** tenant.
+- An **Microsoft Entra ID** tenant. For more information, see: [How to get a Microsoft Entra tenant](https://azure.microsoft.com/documentation/articles/active-directory-howto-tenant/)
+- A user account in your **Microsoft Entra ID** tenant.
 - An **Azure subscription**. This sample uses **Azure Storage** and **Azure App Service**.
 
 ## Setup
@@ -68,7 +68,7 @@ Use the same app registration credentials that you've obtained during [**chapter
 There are basically **3** stages that you will have to go through in order to deploy your projects and enable authentication:
 
 1. Upload your project files to **Azure** services and obtain published website URIs
-1. Update **Azure AD** **App Registration** with URIs you have just obtained
+1. Update **Microsoft Entra ID** **App Registration** with URIs you have just obtained
 1. Update your configuration files with URIs you have just obtained
 
 ### Deploy the service app (Node.js web API)
@@ -129,8 +129,8 @@ Create a distributable files folder, where your `html`, `css` and `javascript` f
 
 #### Step 2: Update the client app's authentication parameters
 
-1. Navigate back to to the [Azure Portal](https://portal.azure.com).
-1. In the left-hand navigation pane, select the **Azure Active Directory** service, and then select **App registrations**.
+1. Navigate back to to the [Microsoft Entra admin center](https://entra.microsoft.com).
+1. In the left-hand navigation pane, select the **Microsoft Entra ID** service, and then select **App registrations**.
 1. In the resulting screen, select the name of your application.
 1. From the *Branding* menu, update the **Home page URL**, to the address of your service, for example [https://javascriptspa1.z22.web.core.windows.net/](https://javascriptspa1.z22.web.core.windows.net/). Save the configuration.
 1. Add the same URI in the list of values of the *Authentication -> Redirect URIs* menu. If you have multiple redirect URIs, make sure that there a new entry using the App service's URI for each redirect URI.
@@ -163,7 +163,7 @@ Were we successful in addressing your learning objective? Consider taking a mome
 - [Azure Blob Storage](https://docs.microsoft.com/azure/storage/blobs/)
 - [Azure App Services](https://docs.microsoft.com/azure/app-service/)
 
-For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://docs.microsoft.com/azure/active-directory/develop/authentication-flows-app-scenarios).
+For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Microsoft Entra ID](https://docs.microsoft.com/azure/active-directory/develop/authentication-flows-app-scenarios).
 
 ## Community Help and Support
 
